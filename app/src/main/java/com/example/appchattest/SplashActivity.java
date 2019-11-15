@@ -1,15 +1,14 @@
 package com.example.appchattest;
 
+import android.app.Activity;
 import android.content.Intent;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 
-public class MainActivity extends AppCompatActivity {
-
+public class SplashActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        startActivity(new Intent(SplashActivity.this, MainActivity.class));
+        finish();
     }
 }
