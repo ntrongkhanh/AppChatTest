@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -60,12 +61,20 @@ public class LoginActivity extends AppCompatActivity implements ValueEventListen
         mData.addValueEventListener( this );
 
 
+        textViewCreateAcc.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(LoginActivity.this, SignUpActivity.class);
+                startActivity(intent);
+            }
+        } );
+
         buttonLogin.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
 
-                if (buttonLogin.getText().toString().trim()!="ĐĂNG NHẬP"){
+                if (buttonLogin.getText().toString().trim()!="ĐĂNG NHẬP"){  //
                     //kiểm tra email
                     email=editTextLogin.getText().toString().trim();
 
@@ -118,7 +127,7 @@ public class LoginActivity extends AppCompatActivity implements ValueEventListen
 
 
 
-                    Toast.makeText(getApplicationContext(),user.getDisplayName(),Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"Đăng nhập thành công",Toast.LENGTH_SHORT).show();
 
 
 
@@ -126,7 +135,8 @@ public class LoginActivity extends AppCompatActivity implements ValueEventListen
                 }
                 else {
                     // updateUI(null);
-                    dialog.dismiss(Toast.makeText(getApplicationContext(), "Đăng nhập thất bại", Toast.LENGTH_SHORT).show();
+                    dialog.dismiss();
+                    Toast.makeText(getApplicationContext(), "Đăng nhập thất bại", Toast.LENGTH_SHORT).show();
                 }
             }
         } );
