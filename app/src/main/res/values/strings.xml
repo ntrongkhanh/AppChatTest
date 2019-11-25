@@ -3,5 +3,9 @@
     <string name="todo">TODO</string>
     <string name="email">Email</string>
     <string name="next_to_password">TIẾP THEO</string>
+    <string name="anonymous">Ẩn danh</string>
+    <string name="email_address">Địa chỉ email</string>
+    <string name="password">Mật khẩu</string>
+    <string name="confirm_pass">Nhập lại mật khẩu</string>
     <string name="create_account">Tạo tài khoản</string>
 </resources>
