@@ -49,7 +49,6 @@ public class LoginActivity extends AppCompatActivity implements ValueEventListen
         addControl();
 
 
-
         firebaseAuth=FirebaseAuth.getInstance();
 
 
