@@ -2,9 +2,9 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:drawable="@color/colorPrimaryDark"/>
     <item>
-        <bitmap android:src="@drawable/icon_small"
+        <bitmap android:src="@drawable/small_icon"
                 android:layout_width="wrap_content"
-                android:layout_height="150sp"
+                android:layout_height="150dp"
                 android:gravity="center"/>
     </item>
 </layer-list>

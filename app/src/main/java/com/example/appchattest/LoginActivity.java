@@ -1,5 +1,7 @@
 package com.example.appchattest;
 
+import android.text.InputType;
+import android.widget.*;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,10 +9,6 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.appchattest.Model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -24,14 +22,17 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.Console;
 import java.util.ArrayList;
 
 import static com.example.appchattest.R.string.next_to_password;
 
 public class LoginActivity extends AppCompatActivity implements ValueEventListener {
 
+    private ImageView topIcon;
     private Button buttonLogin;
     private EditText editTextLogin;
+    private EditText editTextLoginPass;
     private TextView textViewCreateAcc;
     private FirebaseAuth firebaseAuth;
     private ArrayList<String> listMail=new ArrayList<>();
@@ -44,21 +45,16 @@ public class LoginActivity extends AppCompatActivity implements ValueEventListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login );
 
-
-
         addControl();
-
+        //Set icon to on top
+        //topIcon.setMaxHeight(DisplayManager.getScreenHeight() / 2);
 
         firebaseAuth=FirebaseAuth.getInstance();
-
-
-
         database= FirebaseDatabase.getInstance();
         mData=  database.getReference();
         //mData.addValueEventListener(this);
 
         mData.addValueEventListener( this );
-
 
         textViewCreateAcc.setOnClickListener( new View.OnClickListener() {
             @Override
@@ -71,22 +67,17 @@ public class LoginActivity extends AppCompatActivity implements ValueEventListen
         buttonLogin.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
+                /*
                 if (buttonLogin.getText().toString().trim()!="ĐĂNG NHẬP"){  //
                     //kiểm tra email
                     email=editTextLogin.getText().toString().trim();
 
                     if (kiemtraEmail(email))
                     {
-
-
-
-
                         buttonLogin.setText("ĐĂNG NHẬP");
+                        editTextLogin.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
                         editTextLogin.setText("");
                         editTextLogin.setHint("password");
-
                     }
                     else {
                         Toast.makeText(getApplicationContext(),"Email không tồn tại",Toast.LENGTH_LONG ).show();
@@ -96,19 +87,23 @@ public class LoginActivity extends AppCompatActivity implements ValueEventListen
                     //Toast.makeText(getApplicationContext(),"else",Toast.LENGTH_SHORT).show();
                     password=editTextLogin.getText().toString().trim();
                     dangNhap(email,password);
-
-
                     buttonLogin.setText( next_to_password );
+                    buttonLogin.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
                     editTextLogin.setText("");
                     editTextLogin.setHint("email");
                 }
-
+                 */
+                email=editTextLogin.getText().toString().trim();
+                password=editTextLoginPass.getText().toString().trim();
+                if (kiemtraEmail(email))
+                {
+                    dangNhap(email,password);
+                }
+                else {
+                    Toast.makeText(getApplicationContext(),"Email không tồn tại",Toast.LENGTH_LONG ).show();
+                }
             }
         } );
-
-
-
-
     }
 
     private void dangNhap(String email, String password) {
@@ -122,15 +117,7 @@ public class LoginActivity extends AppCompatActivity implements ValueEventListen
                     dialog.dismiss();
                     FirebaseUser user=firebaseAuth.getCurrentUser();
                     //updateUI(user);
-
-
-
-
                     Toast.makeText(getApplicationContext(),"Đăng nhập thành công",Toast.LENGTH_SHORT).show();
-
-
-
-
                 }
                 else {
                     // updateUI(null);
@@ -148,15 +135,15 @@ public class LoginActivity extends AppCompatActivity implements ValueEventListen
                 return true;
             }else return false;
         }
-
-
         return false;
     }
 
     private void addControl() {
         buttonLogin=findViewById(R.id.button_login);
         editTextLogin=findViewById( R.id.editText_Login );
+        editTextLoginPass = findViewById(R.id.editText_Login_Pass);
         textViewCreateAcc=findViewById( R.id.textView_CreateAcc );
+        topIcon = findViewById(R.id.icon_major);
     }
 
 
@@ -175,15 +162,10 @@ public class LoginActivity extends AppCompatActivity implements ValueEventListen
             listMail.add( user.getEmail() );
         }
         // dialog.dismiss();
-
-
-
-
     }
 
     @Override
     public void onCancelled(@NonNull DatabaseError databaseError) {
-
     }
 }
 
