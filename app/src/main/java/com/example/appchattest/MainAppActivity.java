@@ -1,23 +1,43 @@
 package com.example.appchattest;
 
 import android.os.Bundle;
+import android.view.KeyEvent;
+import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainAppActivity extends AppCompatActivity {
+    private EditText editText_search_room;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_app);
 
+        addControl();
+
         List<ChatRoom> chatRooms = getListData();//lay du lieu
         final ListView listView = (ListView)findViewById(R.id.listView_chatroom); // lay view chatroom
         listView.setAdapter(new CustomListAdapter(this, chatRooms));//Set custom view cho listview
-    }
 
+        editText_search_room.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                if (i == EditorInfo.IME_ACTION_SEARCH)
+                {
+                    //Ham tim kieem room chat
+                    return true;
+                }
+                return false;
+            }
+        });
+
+    }
 
     private List<ChatRoom> getListData() //chi debug
     {
@@ -33,5 +53,9 @@ public class MainAppActivity extends AppCompatActivity {
         list.add(chatRoom_4);
 
         return list;
+    }
+
+    private void addControl() {
+       editText_search_room = findViewById(R.id.editText_search_chat);
     }
 }
