@@ -1,6 +1,5 @@
 package com.example.appchattest;
 
-import android.text.InputType;
 import android.widget.*;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,10 +21,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.io.Console;
 import java.util.ArrayList;
-
-import static com.example.appchattest.R.string.next_to_password;
 
 public class LoginActivity extends AppCompatActivity implements ValueEventListener {
 
@@ -118,6 +114,11 @@ public class LoginActivity extends AppCompatActivity implements ValueEventListen
                     FirebaseUser user=firebaseAuth.getCurrentUser();
                     //updateUI(user);
                     Toast.makeText(getApplicationContext(),"Đăng nhập thành công",Toast.LENGTH_SHORT).show();
+
+                    //==========================
+                    //==========================
+                    Intent intent = new Intent(LoginActivity.this, MainAppActivity.class);
+                    startActivity(intent);
                 }
                 else {
                     // updateUI(null);

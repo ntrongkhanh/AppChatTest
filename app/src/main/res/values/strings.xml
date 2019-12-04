@@ -13,4 +13,5 @@
     <string name="vnme">VNMe</string>
     <string name="string_birth">Ngày sinh</string>
     <string name="password">Password</string>
+    <string name="string_search_chat">Tìm cuộc trò chuyện</string>
 </resources>

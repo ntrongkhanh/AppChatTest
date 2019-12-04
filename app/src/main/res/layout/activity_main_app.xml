@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorPrimaryDark">
+    <TextView android:id="@+id/action_bar_chat"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:background="@drawable/action_bar_background"
+              android:text="Trò chuyện"
+              android:textColor="#fff"
+              android:gravity="center"
+              android:padding="15dp"
+              android:fontFamily="@font/reso"
+              android:textSize="20sp"
+              android:elevation="3dp"/>
+
+    <EditText android:id="@+id/editText_search_chat"
+              android:layout_width="wrap_content"
+              android:layout_marginStart="20dp"
+              android:layout_marginTop="10dp"
+              android:layout_height="wrap_content"
+              android:background="@drawable/search_background"
+              android:layout_below="@id/action_bar_chat"
+              android:layout_toStartOf="@id/image_icon_search_chat"
+              android:layout_alignParentStart="true"
+              android:hint="@string/string_search_chat"
+              android:paddingStart="18dp"
+              android:paddingTop="8dp"
+              android:paddingEnd="18dp"
+              android:paddingBottom="8dp"
+              android:elevation="2dp"
+              android:fontFamily="@font/reso"
+              android:textSize="20sp"
+              android:textColor="@color/colorPrimary"
+              android:textColorHint="@color/colorNonText"
+              android:textCursorDrawable="@null"
+              android:singleLine="true"/>
+    <ImageView android:id="@+id/image_icon_search_chat"
+               android:layout_width="wrap_content"
+               android:layout_height="36dp"
+               android:layout_alignTop="@id/editText_search_chat"
+               android:layout_alignBottom="@id/editText_search_chat"
+               android:layout_alignParentEnd="true"
+               android:layout_below="@id/action_bar_chat"
+               android:layout_marginEnd="20dp"
+               android:background="@drawable/search_icon_background"
+               android:paddingEnd="10dp"
+               android:paddingStart="7dp"
+               android:paddingTop="7dp"
+               android:paddingBottom="7dp"
+               android:src="@drawable/icon_search"/>
+    <ListView
+            android:id="@+id/listView_chatroom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/editText_search_chat"
+            android:layout_marginTop="15dp"
+            android:layout_alignParentBottom="true"/>
+
+    <LinearLayout
+            android:id="@+id/linearLayout_nav"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+    </LinearLayout>
+</RelativeLayout>
