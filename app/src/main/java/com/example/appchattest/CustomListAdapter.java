@@ -46,7 +46,7 @@ public class CustomListAdapter extends BaseAdapter{
         return position;
     }
 
-    public View getView(int position, View convertView, ViewGroup parent)
+    public View getView(int position, View convertView, ViewGroup parent)//ham nay ke duoc viet lai tu lop cha Adapter
     {
         ViewHolder holder; //su dung holder de giu lay view trong convertView
         if (convertView == null) //neu convertView = null thi tao moi view va view holder

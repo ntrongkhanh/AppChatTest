@@ -26,7 +26,7 @@ public class MainAppActivity extends AppCompatActivity {
         ChatRoom chatRoom_2 = new ChatRoom("Song luan dep trai cmnr", "no_avatar1", "Tin tao di", "newmess_chatroom");
         ChatRoom chatRoom_3 = new ChatRoom("Song luan dep trai vcl", "no_avatar2", "Chac nhu bap", "newmess_chatroom");
         ChatRoom chatRoom_4 = new ChatRoom("Song luan dep trai", "no_avatar3", "Dung roi", "normal_chatroom");
-        
+
         list.add(chatRoom_1);
         list.add(chatRoom_2);
         list.add(chatRoom_3);
