@@ -1,5 +1,7 @@
 package com.example.appchattest;
 
+import android.content.pm.ActivityInfo;
+import android.os.Handler;
 import android.widget.*;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -40,6 +42,7 @@ public class LoginActivity extends AppCompatActivity implements ValueEventListen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login );
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         addControl();
         //Set icon to on top
@@ -111,7 +114,7 @@ public class LoginActivity extends AppCompatActivity implements ValueEventListen
                 if (task.isSuccessful())
                 {
                     dialog.dismiss();
-                    FirebaseUser user=firebaseAuth.getCurrentUser();
+                    //FirebaseUser user=firebaseAuth.getCurrentUser();
                     //updateUI(user);
                     Toast.makeText(getApplicationContext(),"Đăng nhập thành công",Toast.LENGTH_SHORT).show();
 
@@ -163,6 +166,28 @@ public class LoginActivity extends AppCompatActivity implements ValueEventListen
             listMail.add( user.getEmail() );
         }
         // dialog.dismiss();
+    }
+
+    private boolean pressBack1 = false;
+    @Override
+    public void onBackPressed()
+    {
+        if (pressBack1)
+        {
+            super.onBackPressed();
+            this.finishAffinity();
+            System.exit(0);
+        }
+
+        this.pressBack1 = true;
+        Toast.makeText(this, "Nhấn Back thêm lần nữa để thoát!", Toast.LENGTH_SHORT).show();
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                pressBack1 = false;
+            }
+        }, 2000);
     }
 
     @Override

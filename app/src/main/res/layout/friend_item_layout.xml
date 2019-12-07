@@ -4,12 +4,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/normal_chatroom"
-                android:id="@+id/relativeLayout_listItem">
+                android:id="@+id/relativeLayout_listItem_friend">
     <de.hdodenhof.circleimageview.CircleImageView
             xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/imageView_avatar_chatroom"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
+            android:id="@+id/imageView_avatar_friend"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:layout_marginStart="5dp"
@@ -18,13 +18,13 @@
             app:civ_border_color="#7f000000"/>
 
     <LinearLayout android:id="@+id/linearLayout_content"
-                  android:layout_width="wrap_content"
+                  android:layout_width="match_parent"
                   android:layout_height="wrap_content"
-                  android:orientation="vertical"
+                  android:orientation="horizontal"
                   android:gravity="center_vertical"
-                  android:layout_alignTop="@id/imageView_avatar_chatroom"
-                  android:layout_alignBottom="@+id/imageView_avatar_chatroom"
-                  android:layout_toEndOf="@id/imageView_avatar_chatroom"
+                  android:layout_alignTop="@id/imageView_avatar_friend"
+                  android:layout_alignBottom="@+id/imageView_avatar_friend"
+                  android:layout_toEndOf="@id/imageView_avatar_friend"
                   android:layout_alignParentEnd="true"
                   android:paddingStart="5dp"
                   android:paddingEnd="5dp">
@@ -35,13 +35,14 @@
                 android:fontFamily="@font/reso"
                 android:textColor="@color/colorPrimaryDarkText"
                 android:textSize="20sp"
-                android:id="@+id/textView_RoomName"/>
-        <TextView android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:text="Last content"
+                android:id="@+id/textView_friendName"/>
+        <TextView android:id="@+id/textView_state_friend"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:layout_marginEnd="10dp"
+                  android:text="Online"
                   android:fontFamily="@font/reso"
-                  android:textColor="@color/colorLastContent"
-                  android:textSize="15sp"
-                  android:id="@+id/textView_LastContent"/>
+                  android:textColor="@color/color50white"
+                  android:gravity="end|center_vertical"/>
     </LinearLayout>
 </RelativeLayout>

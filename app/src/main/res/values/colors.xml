@@ -11,4 +11,6 @@
     <color name="colorSecondaryLight">#fb7134</color>
     <color name="colorLastContent">#B970E1</color>
     <color name="color50white">#7fffffff</color>
+    <color name="color25white">#3fffffff</color>
+    <color name="color30white">#4bffffff</color>
 </resources>

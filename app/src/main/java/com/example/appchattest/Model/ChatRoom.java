@@ -3,7 +3,7 @@
 //str_state trang thai co new message khong
 
 
-package com.example.appchattest;
+package com.example.appchattest.Model;
 
 public class ChatRoom {
     private String str_RoomName;

@@ -1,5 +1,6 @@
 package com.example.appchattest;
 
+import android.content.pm.ActivityInfo;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -40,6 +41,7 @@ public class SignUpActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_sign_up );
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         //editTextTuoi=findViewById( R.id.editText_tuoi_signup );
 

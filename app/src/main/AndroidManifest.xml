@@ -21,8 +21,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LoginActivity"></activity>
+        <activity android:name=".LoginActivity" android:windowSoftInputMode="stateAlwaysHidden"></activity>
         <activity android:name=".MainAppActivity" android:windowSoftInputMode="stateAlwaysHidden"></activity>
+        <activity android:name=".AccountInfoActivity"></activity>
+        <activity android:name=".FriendActivity" android:windowSoftInputMode="stateAlwaysHidden"></activity>
     </application>
 
 </manifest>

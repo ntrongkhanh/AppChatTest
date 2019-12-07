@@ -1,9 +1,7 @@
 package com.example.appchattest;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.DrawableWrapper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,7 +10,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import org.w3c.dom.Text;
+import com.example.appchattest.Model.ChatRoom;
 
 import java.util.List;
 
@@ -53,7 +51,7 @@ public class CustomListAdapter extends BaseAdapter{
         {
             convertView = layoutInflater.inflate(R.layout.chatroom_item_layout, null);//lay layout tu xml sang convertView
             holder = new ViewHolder();
-            holder.avatarView = (ImageView) convertView.findViewById(R.id.imageView_avatar);
+            holder.avatarView = (ImageView) convertView.findViewById(R.id.imageView_avatar_chatroom);
             holder.roomNameView = (TextView) convertView.findViewById(R.id.textView_RoomName);
             holder.lastContentView = (TextView) convertView.findViewById(R.id.textView_LastContent);
             holder.relativeLayout_bg = (RelativeLayout) convertView.findViewById(R.id.relativeLayout_listItem);

@@ -1,23 +1,29 @@
 package com.example.appchattest;
 
+import android.app.ActivityOptions;
+import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.KeyEvent;
+import android.view.View;
 import android.view.inputmethod.EditorInfo;
-import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.TextView;
+import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
+import com.example.appchattest.Model.ChatRoom;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainAppActivity extends AppCompatActivity {
     private EditText editText_search_room;
-
+    private ImageView imageView_friend;
+    private ImageView imageView_account_info;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_app);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         addControl();
 
@@ -34,6 +40,24 @@ public class MainAppActivity extends AppCompatActivity {
                     return true;
                 }
                 return false;
+            }
+        });
+
+        imageView_account_info.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainAppActivity.this, AccountInfoActivity.class);
+                ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(MainAppActivity.this);
+                startActivity(intent, options.toBundle());
+            }
+        });
+
+        imageView_friend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainAppActivity.this, FriendActivity.class);
+                ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(MainAppActivity.this);
+                startActivity(intent, options.toBundle());
             }
         });
 
@@ -55,7 +79,35 @@ public class MainAppActivity extends AppCompatActivity {
         return list;
     }
 
-    private void addControl() {
-       editText_search_room = findViewById(R.id.editText_search_chat);
+    private void addControl()
+    {
+        editText_search_room = findViewById(R.id.editText_search_chat);
+        imageView_friend = findViewById(R.id.img_friend_rc); //image friend roomchat
+        imageView_account_info = findViewById(R.id.img_account_info_rc);
+    }
+
+    //================================
+    //event
+    //================================
+    boolean double_tap_exit_one = false;
+    @Override
+    public void onBackPressed()
+    {
+        if (double_tap_exit_one)
+        {
+            super.onBackPressed();
+            this.finishAffinity();
+            System.exit(0);
+        }
+
+        this.double_tap_exit_one = true;
+        Toast.makeText(this, "Nhấn thêm lần nữa để thoát", Toast.LENGTH_SHORT).show();
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                double_tap_exit_one = false;
+            }
+        }, 2000);
     }
 }
