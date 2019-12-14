@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_chat"
+        android:icon="@drawable/icon_chatroom"
+        android:title="Tin nhắn" />
+    <item
+        android:id="@+id/nav_friend"
+        android:icon="@drawable/icon_friend"
+        android:title="Bạn bè" />
+    <item
+        android:id="@+id/nav_info"
+        android:icon="@drawable/icon_account_info"
+        android:title="Tài khoản" />
+</menu>
