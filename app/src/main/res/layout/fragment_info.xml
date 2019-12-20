@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark">
     <TextView android:id="@+id/action_bar_account"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -18,30 +19,37 @@
         android:layout_height="match_parent"
         android:fillViewport="true"
         android:layout_below="@id/action_bar_account"
-        android:layout_above="@id/linearLayout_nav">
+        >
         <RelativeLayout android:layout_width="match_parent"
             android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/image_xxx"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                />
             <de.hdodenhof.circleimageview.CircleImageView
                 xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/imageView_account_avatar"
+                android:id="@+id/imageView_account_avatar1"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="25dp"
+
                 android:layout_marginBottom="25dp"
-                android:src="@drawable/no_avatar2"
+
                 app:civ_border_width="2dp"
                 app:civ_border_color="@color/colorPrimaryLight"/>
             <LinearLayout android:id="@+id/linearLayout_account_overView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/imageView_account_avatar"
+                android:layout_below="@id/imageView_account_avatar1"
                 android:orientation="vertical"
                 android:background="@drawable/account_overview_background"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp">
 
                 <TextView android:layout_width="match_parent"
+                    android:id="@+id/textView_account_name"
                     android:layout_height="wrap_content"
                     android:paddingStart="10dp"
                     android:paddingEnd="10dp"
@@ -59,7 +67,8 @@
                     android:textColor="@color/colorPrimaryDark"
                     android:fontFamily="@font/reso"
                     android:paddingBottom="10dp"
-                    android:gravity="center_horizontal"/>
+                    android:gravity="center_horizontal"
+                    android:id="@+id/textView_account_email"/>
 
             </LinearLayout>
 
@@ -79,12 +88,12 @@
                     android:textSize="20sp"
                     android:fontFamily="@font/reso"
                     android:background="@color/color30white"/>
-                <TextView android:id="@+id/textView_phone_number"
+                <TextView android:id="@+id/textView_account_phone_number"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingStart="10dp"
                     android:paddingBottom="10dp"
-                    android:text="0123456789"
+
                     android:textColor="@color/colorPrimaryLight"
                     android:textSize="20sp"
                     android:fontFamily="@font/reso"
@@ -100,12 +109,12 @@
                     android:textSize="20sp"
                     android:fontFamily="@font/reso"
                     android:background="@color/color30white"/>
-                <TextView android:id="@+id/textView_sex"
+                <TextView android:id="@+id/textView_account_sex"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingStart="10dp"
                     android:paddingBottom="10dp"
-                    android:text="Nam/Nữ"
+
                     android:textColor="@color/colorPrimaryLight"
                     android:textSize="20sp"
                     android:fontFamily="@font/reso"
@@ -121,12 +130,12 @@
                     android:textSize="20sp"
                     android:fontFamily="@font/reso"
                     android:background="@color/color30white"/>
-                <TextView android:id="@+id/textView_birthday"
+                <TextView android:id="@+id/textView_account_birthday"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingStart="10dp"
                     android:paddingBottom="10dp"
-                    android:text="06/12/2019"
+
                     android:textColor="@color/colorPrimaryLight"
                     android:textSize="20sp"
                     android:fontFamily="@font/reso"
@@ -152,4 +161,5 @@
         </RelativeLayout>
     </ScrollView>
 
-</LinearLayout>
+
+</RelativeLayout>

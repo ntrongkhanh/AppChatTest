@@ -12,8 +12,9 @@ import com.example.appchattest.Fragment.FriendFragment;
 import com.example.appchattest.Fragment.InfoFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class class2 extends AppCompatActivity {
+public class MainNavigationActivity extends AppCompatActivity {
 
+    private Fragment fragment;
     BottomNavigationView bottomNavigationView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,14 +24,14 @@ public class class2 extends AppCompatActivity {
         bottomNavigationView=findViewById( R.id.Bottom_nagivition);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(navigationItemSelectedListener );
-
-
+        fragment=new ChatRoomFragment2();
+        getSupportFragmentManager().beginTransaction().replace(R.id.frament,fragment).commit();
     }
     private BottomNavigationView.OnNavigationItemSelectedListener navigationItemSelectedListener=
             new BottomNavigationView.OnNavigationItemSelectedListener() {
                 @Override
                 public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                    Fragment fragment=null;
+                     fragment=null;
 
                     switch (menuItem.getItemId())
                     {

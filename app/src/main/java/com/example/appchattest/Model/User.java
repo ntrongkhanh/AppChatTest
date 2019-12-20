@@ -1,37 +1,31 @@
 package com.example.appchattest.Model;
 
 
-import java.util.Calendar;
+import android.net.Uri;
 
-public class User {
+import com.google.firebase.database.IgnoreExtraProperties;
+
+import java.util.Calendar;
+public  class User {
     public String name;
-    public String avatar;
+
+
+
     public String email;
     public String sex;
     public String birthday;
-    private String state;
+    public String phone;
 
+    public User(String name, String email, String sex, String birthday, String phone) {
+        this.name = name;
+        this.email = email;
+        this.sex = sex;
+        this.birthday = birthday;
+        this.phone = phone;
+    }
 
     public User() {
     }
-
-    public User(String name, String email, String sex, String birthday) {
-        this.name = name;
-        this.email = email;
-        this.sex = sex;
-        this.birthday = birthday;
-    }
-
-    public User(String name, String email, String sex, String birthday, String avatar, boolean isOnline)
-    {
-        this.name = name;
-        this.email = email;
-        this.sex = sex;
-        this.birthday = birthday;
-        this.avatar = avatar;
-        this.setOnlineState(isOnline);
-    }
-
     public String getName() {
         return name;
     }
@@ -64,27 +58,63 @@ public class User {
         this.birthday = birthday;
     }
 
-    public void setOnlineState(boolean isOnline) {
-        if (isOnline)
-        {
-            state = "Online";
-        }
-        else
-        {
-            state = "Offline";
-        }
-    }
-    public String getState()
-    {
-        return state;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setAvatar(String avatar)
-    {
-        this.avatar = avatar;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
-    public String getAvatar()
-    {
-        return this.avatar;
-    }
+    // public String state;
+  //  public Uri photoUri;
+
+
+
+//    public User(String name, String email, String sex, String birthday, String avatar,Uri uri, boolean isOnline)
+//    {
+//        this.name = name;
+//        this.email = email;
+//        this.sex = sex;
+//        this.birthday = birthday;
+//        this.avatar = avatar;
+//        this.photoUri=uri;
+//        this.setOnlineState(isOnline);
+//    }
+//    public void setOnlineState(boolean isOnline) {
+//        if (isOnline)
+//        {
+//            state = "Online";
+//        }
+//        else
+//        {
+//            state = "Offline";
+//        }
+//    }
+
+
+//    public String getAvatar() {
+//        return avatar;
+//    }
+//
+//    public void setAvatar(String avatar) {
+//        this.avatar = avatar;
+//    }
+
+
+
+   // public String getState() {
+   //     return state;
+   // }
+
+   // public void setState(String state) {
+  //      this.state = state;
+  //  }
+
+  //  public Uri getPhotoUri() {
+  //      return photoUri;
+  //  }
+
+   // public void setPhotoUri(Uri photoUri) {
+   //     this.photoUri = photoUri;
+    //}
 }
