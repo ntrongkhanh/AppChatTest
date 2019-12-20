@@ -44,6 +44,7 @@ public class LoginActivity extends AppCompatActivity implements ValueEventListen
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         addControl();
+
         //Set icon to on top
         //topIcon.setMaxHeight(DisplayManager.getScreenHeight() / 2);
 
@@ -51,6 +52,13 @@ public class LoginActivity extends AppCompatActivity implements ValueEventListen
         database= FirebaseDatabase.getInstance();
         mData=  database.getReference();
         //mData.addValueEventListener(this);
+        if (firebaseAuth.getUid()!=null)
+        {
+
+            Intent intent = new Intent(LoginActivity.this, MainNavigationActivity.class);
+            startActivity(intent);
+            finish();
+        }
 
         mData.addValueEventListener( this );
 
