@@ -2,30 +2,32 @@ package com.example.appchattest.Model;
 
 
 import android.net.Uri;
+import android.util.Log;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.IgnoreExtraProperties;
+import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
+
 public  class User {
-    public String name;
-
-
-
-    public String email;
-    public String sex;
-    public String birthday;
-    public String phone;
-
-    public User(String name, String email, String sex, String birthday, String phone) {
-        this.name = name;
-        this.email = email;
-        this.sex = sex;
-        this.birthday = birthday;
-        this.phone = phone;
+    public String getUid() {
+        return uid;
     }
 
-    public User() {
+    public void setUid(String uid) {
+        this.uid = uid;
     }
+
     public String getName() {
         return name;
     }
@@ -65,6 +67,33 @@ public  class User {
     public void setPhone(String phone) {
         this.phone = phone;
     }
+
+
+
+    public String uid;
+    public String name;
+
+
+
+    public String email;
+    public String sex;
+    public String birthday;
+    public String phone;
+
+
+    public User() {
+    }
+
+    public User(String uid, String name, String email, String sex, String birthday, String phone) {
+        this.uid = uid;
+        this.name = name;
+        this.email = email;
+        this.sex = sex;
+        this.birthday = birthday;
+        this.phone = phone;
+
+    }
+
     // public String state;
   //  public Uri photoUri;
 

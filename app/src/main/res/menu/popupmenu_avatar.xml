@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:title="Xem ảnh đại diện"
+        android:id="@+id/seePhoto_popupmenu"/>
+    <item
+        android:title="Chụp ảnh mới"
+        android:id="@+id/newPhoto_popupmenu"/>
+    <item
+        android:title="Chọn ảnh có sẵn"
+        android:id="@+id/availablePhoto_popuptmenu"/>
+    <item
+        android:title="Hủy"
+        android:id="@+id/cancel_popupmenu"/>
+</menu>

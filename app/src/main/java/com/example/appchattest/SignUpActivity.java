@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.pm.ActivityInfo;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
@@ -14,14 +15,21 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.view.ContextMenu;
+import android.view.Gravity;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
+import android.widget.PopupWindow;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.Spinner;
@@ -67,10 +75,11 @@ public class SignUpActivity extends AppCompatActivity {
     private static final int CAMERA_REQUEST = 1888;
     private DatePicker datePicker;
 
-    private Button button;
+
 
     private Uri uriImage;
     private boolean flagImage=false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,20 +96,16 @@ public class SignUpActivity extends AppCompatActivity {
 
         // chọn ảnh
         imageView.setOnClickListener( new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
 
-                dispatchPickImage();
+                showPopup( v );
 
             }
         } );
 
-        button.setOnClickListener( new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dispatchTakePictureIntent();
-            }
-        } );
+
         buttonDangki.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -182,6 +187,9 @@ public class SignUpActivity extends AppCompatActivity {
             flagImage=true;
         }
     }
+
+
+
     private void dispatchTakePictureIntent() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
@@ -194,6 +202,17 @@ public class SignUpActivity extends AppCompatActivity {
         Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
         photoPickerIntent.setType("image/*");
         startActivityForResult( photoPickerIntent,PICK_IMAGE_REQUEST );
+    }
+    private void displayImage()
+    {
+        Bitmap bitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
+        byte[] data = baos.toByteArray();
+
+       Intent intent=new Intent( SignUpActivity.this,ImageAvatarActivity.class );
+        intent.putExtra( "image",data );
+        startActivity( intent );
     }
     private void uploadFile(Uri uri)
     {
@@ -239,6 +258,37 @@ public class SignUpActivity extends AppCompatActivity {
                // Toast.makeText( getApplicationContext(),"Upload that bai" ,Toast.LENGTH_LONG).show();
             }
         } );
+    }
+
+    private void showPopup(View v)
+    {
+        PopupMenu popupMenu=new PopupMenu( this,v,Gravity.BOTTOM );
+
+        popupMenu.setOnMenuItemClickListener( new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId())
+                {
+                    case R.id.seePhoto_popupmenu:
+                        displayImage();
+                        return true;
+                    case R.id.newPhoto_popupmenu:
+                        dispatchTakePictureIntent();
+                        return true;
+                    case R.id.availablePhoto_popuptmenu:
+                        dispatchPickImage();
+                        return true;
+                    case R.id.cancel_popupmenu:
+
+                        return true;
+                        default:
+                            return false;
+                }
+            }
+        } );
+        popupMenu.inflate( R.menu.popupmenu_avatar );
+
+        popupMenu.show();
     }
 
     private void signUp(final String ten, final String gioitinh, final Calendar ngaysinh, String matkhau, final String email, final String sdt) {
@@ -289,9 +339,9 @@ public class SignUpActivity extends AppCompatActivity {
     {
         FirebaseUser user=FirebaseAuth.getInstance().getCurrentUser();
         DatabaseReference mData= FirebaseDatabase.getInstance().getReference();
-        String date=ngaysinh.get( Calendar.DATE)+"/"+ngaysinh.get(Calendar.MONTH)+"/"+ngaysinh.get(Calendar.YEAR);
+        String date=ngaysinh.get( Calendar.DATE)+"/"+(ngaysinh.get(Calendar.MONTH)+1)+"/"+ngaysinh.get(Calendar.YEAR);
 
-         User user2=new User(ten,email,gioitinh,date,sdt);
+         User user2=new User(user.getUid(),ten,email,gioitinh,date,sdt);
 
 
 
@@ -328,20 +378,20 @@ public class SignUpActivity extends AppCompatActivity {
         return false;
     }
 
-    private boolean checkNgay(int ngay,int thang,int nam)
-    {
-        if(fun( thang,nam )==-1)
-        {
-            return false;
-        }else {
-            if (ngay<=fun( thang,nam ))
-            {
-                return true;
-            }
-            return false;
-        }
-
-    }
+//    private boolean checkNgay(int ngay,int thang,int nam)
+//    {
+//        if(fun( thang,nam )==-1)
+//        {
+//            return false;
+//        }else {
+//            if (ngay<=fun( thang,nam ))
+//            {
+//                return true;
+//            }
+//            return false;
+//        }
+//
+//    }
     private boolean checkPassword(String pass1,String pass2)
     {
         if (pass1.equals( pass2 ))
@@ -352,34 +402,37 @@ public class SignUpActivity extends AppCompatActivity {
         return ((nam % 4 == 0 && nam % 100 != 0) || nam % 400 == 0);
     }
 
-    private int fun(int thang, int nam) {
-        switch (thang)
-        {
-            case 1:
-            case 3:
-            case 5:
-            case 7:
-            case 8:
-            case 10:
-            case 12:
-                return 31;
-            case 4:
-            case 6:
-            case 9:
-            case 11:
-                return 30;
-            case 2:
-                if (isCheck(nam))
-                    return 29;
-                else
-                    return 28;
-            default:
-                return -1;
 
-        }
-    }
+//    private int fun(int thang, int nam) {
+//        switch (thang)
+//        {
+//            case 1:
+//            case 3:
+//            case 5:
+//            case 7:
+//            case 8:
+//            case 10:
+//            case 12:
+//                return 31;
+//            case 4:
+//            case 6:
+//            case 9:
+//            case 11:
+//                return 30;
+//            case 2:
+//                if (isCheck(nam))
+//                    return 29;
+//                else
+//                    return 28;
+//            default:
+//                return -1;
+//
+//        }
+//    }
     private void addControl() {
         imageView=findViewById( R.id.imageView_account_avatar2 );
+
+
         buttonDangki=findViewById( R.id.button_dangki_signup );
        // editTextNam=findViewById( R.id.editText_namsinh_signup );
         //editTextThang=findViewById( R.id.editText_thangsinh_signup );
@@ -392,7 +445,6 @@ public class SignUpActivity extends AppCompatActivity {
         editTextEmail=findViewById( R.id.editText_email_signup );
         editTextSDT=findViewById( R.id.editText_SDT_signup );
         datePicker=findViewById( R.id.datePicker_signup );
-        button=findViewById( R.id.button );
 
     }
 }

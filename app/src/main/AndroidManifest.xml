@@ -2,7 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.appchattest">
-<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -11,7 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".MainNavigationActivity"></activity>
+        <activity android:name=".ImageAvatarActivity"></activity>
+        <activity android:name=".FindFriendsActivity" />
+        <activity android:name=".MainNavigationActivity" />
         <activity android:name=".SignUpActivity" />
         <activity
             android:name=".SplashActivity"
