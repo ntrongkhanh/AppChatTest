@@ -2,25 +2,19 @@ package com.example.appchattest;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
-import android.app.Dialog;
-import android.app.ProgressDialog;
-import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.appchattest.Adapter.AdapterRecyclerDanhSachBan;
-import com.example.appchattest.Adapter.CustomListAdapter;
-import com.example.appchattest.Model.ChatRoom;
+import com.example.appchattest.Adapter.ListSearchFriendAdapter;
+import com.example.appchattest.Model.Contacts;
 import com.example.appchattest.Model.User;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -28,9 +22,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.List;
 
-public class FindFriendsActivity extends AppCompatActivity {
+public class FindFriendsActivity extends AppCompatActivity implements ValueEventListener {
 
     private ArrayList<User> listUser=new ArrayList<>(  );
     private FirebaseDatabase firebaseDatabase;
@@ -38,7 +31,7 @@ public class FindFriendsActivity extends AppCompatActivity {
     private ListView listView;
     private TextView textView;
     private  String textSearch="";
-
+    private ArrayList<Contacts> listContacts=new ArrayList<>(  );
     private ImageView imageView;
 
     @Override
@@ -49,11 +42,14 @@ public class FindFriendsActivity extends AppCompatActivity {
         listView=findViewById( R.id.recycler_find_friends );
         textView=findViewById( R.id.editText_search_find_friend );
         imageView=findViewById( R.id.image_icon_search_find_friends );
-        databaseReference=FirebaseDatabase.getInstance().getReference();
 
         listView = findViewById(R.id.recycler_find_friends); // lay view chatroom
-        listView.setAdapter(new CustomListAdapter(this, listUser));//Set custom view cho listview
-        final CustomListAdapter customListAdapter=new CustomListAdapter(this,listUser);
+        databaseReference=FirebaseDatabase.getInstance().getReference();
+        databaseReference.child( "contacts" ).addValueEventListener( this );
+
+
+        listView.setAdapter(new ListSearchFriendAdapter(this, listUser,listContacts));//Set custom view cho listview
+
         imageView.setOnClickListener( new View.OnClickListener() {
 
 
@@ -74,7 +70,7 @@ public class FindFriendsActivity extends AppCompatActivity {
                             if(textSearch!="")
                             {
 
-                                if (textSearch.equals( user.name ))
+                                if ( user.name.indexOf( textSearch )!=-1 && user.uid.equals( FirebaseAuth.getInstance().getUid() )==false)
                                 {
                                     listUser.add( user );
                                 }
@@ -109,6 +105,24 @@ public class FindFriendsActivity extends AppCompatActivity {
         if (null != activity.getCurrentFocus())
             imm.hideSoftInputFromWindow(activity.getCurrentFocus()
                     .getApplicationWindowToken(), 0);
+    }
+
+    @Override
+    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+        Iterable<DataSnapshot> nodechild=dataSnapshot.getChildren();
+        listContacts.clear();
+        for (DataSnapshot data:nodechild)
+        {
+
+            Contacts contact=data.getValue(Contacts.class);
+
+            listContacts.add( contact );
+        }
+    }
+
+    @Override
+    public void onCancelled(@NonNull DatabaseError databaseError) {
+
     }
 
 

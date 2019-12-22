@@ -26,7 +26,7 @@ public class AdapterRecyclerDanhSachBan extends RecyclerView.Adapter<AdapterRecy
 
         public ViewHolder(@NonNull View itemView) {
             super( itemView );
-            textView=itemView.findViewById( R.id.textView_RoomName );
+            textView=itemView.findViewById( R.id.textView_Name );
 
         }
     }

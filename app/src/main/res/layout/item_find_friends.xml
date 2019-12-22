@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/normal_chatroom"
+    android:id="@+id/relativeLayout_list_item_friend">
+    <de.hdodenhof.circleimageview.CircleImageView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/imageView_avatar_item_friend"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginStart="5dp"
+        android:src="@drawable/avatar"
+        app:civ_border_width="1dp"
+        app:civ_border_color="#7f000000"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_alignTop="@id/imageView_avatar_item_friend"
+        android:layout_alignBottom="@+id/imageView_avatar_item_friend"
+        android:layout_toEndOf="@id/imageView_avatar_item_friend"
+        android:layout_alignParentEnd="true"
+        android:paddingStart="5dp"
+        android:paddingEnd="5dp">
+       <LinearLayout
+           android:layout_width="200dp"
+           android:layout_height="wrap_content"
+           android:orientation="vertical"
+           >
+
+           <TextView
+               android:id="@+id/textView_Name_item_friend"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:fontFamily="@font/reso"
+               android:text="Room Name"
+               android:textColor="@color/colorPrimaryDarkText"
+               android:textSize="20sp" />
+
+           <TextView
+               android:id="@+id/textView_phone_number_item_friend"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:fontFamily="@font/reso"
+               android:text="Số điện thoại: "
+               android:textColor="@color/colorLastContent"
+               android:textSize="15sp" />
+       </LinearLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/button_ketban_item_friend"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/round_button"
+                android:textSize="10dp"
+                android:text="Kết bạn"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
+
+</RelativeLayout>

@@ -35,7 +35,7 @@
                 android:fontFamily="@font/reso"
                 android:textColor="@color/colorPrimaryDarkText"
                 android:textSize="20sp"
-                android:id="@+id/textView_RoomName"/>
+                android:id="@+id/textView_Name"/>
         <TextView android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
                   android:text="Last content"

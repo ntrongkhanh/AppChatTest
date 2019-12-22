@@ -3,30 +3,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimaryDark">
-    <TextView android:id="@+id/action_bar_account"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/action_bar_background"
-        android:text="Tài khoản"
-        android:textColor="#fff"
-        android:gravity="center"
-        android:padding="15dp"
-        android:fontFamily="@font/reso"
-        android:textSize="20sp"
-        android:elevation="3dp"/>
+
     <ScrollView android:id="@+id/scrollView_account_info"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true"
-        android:layout_below="@id/action_bar_account"
+
         >
         <RelativeLayout android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <ImageView
-                android:id="@+id/image_xxx"
-                android:layout_width="120dp"
-                android:layout_height="120dp"
-                />
+
             <de.hdodenhof.circleimageview.CircleImageView
                 xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/imageView_account_avatar1"

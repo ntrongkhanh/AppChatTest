@@ -11,7 +11,6 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.appchattest.Adapter.CustomListAdapter;
 import com.example.appchattest.Model.ChatRoom;
 
 import java.util.ArrayList;
@@ -31,7 +30,7 @@ public class MainAppActivity extends AppCompatActivity {
 
 //        List<ChatRoom> chatRooms = getListData();//lay du lieu
 //        final ListView listView = (ListView)findViewById(R.id.listView_chatroom); // lay view chatroom
-//        listView.setAdapter(new CustomListAdapter(this, chatRooms));//Set custom view cho listview
+//        listView.setAdapter(new ListSearchFriendAdapter(this, chatRooms));//Set custom view cho listview
 
         editText_search_room.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override

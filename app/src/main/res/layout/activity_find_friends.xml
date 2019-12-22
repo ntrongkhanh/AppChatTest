@@ -61,6 +61,10 @@
         android:layout_marginTop="15dp"
 
         android:divider="#00000000"
-        android:dividerHeight="10dp"/>
+        android:dividerHeight="10dp">
+
+
+    </ListView>
+
 
 </RelativeLayout>
