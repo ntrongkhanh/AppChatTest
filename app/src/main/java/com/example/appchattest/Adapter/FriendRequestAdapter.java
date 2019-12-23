@@ -89,8 +89,7 @@ public class FriendRequestAdapter extends BaseAdapter {
             holder.lastContentView = (TextView) convertView.findViewById(R.id.textView_phone_number_item_loimoiketban);
             holder.buttonChapNhap=convertView.findViewById( R.id.button_dongy_ketban_item_loimoiketban);
             holder.buttonTuchoi=convertView.findViewById( R.id.button_tuchoi_item_loimoiketban );
-            holder.buttonTuchoi.setVisibility( View.VISIBLE );
-            holder.buttonChapNhap.setVisibility( View.VISIBLE );
+
 
             holder.relativeLayout_bg = (RelativeLayout) convertView.findViewById(R.id.relativeLayout_list_item_loimoiketban);
             convertView.setTag(holder);// set convert view la holder
@@ -99,7 +98,8 @@ public class FriendRequestAdapter extends BaseAdapter {
         {
             holder = (ViewHolder) convertView.getTag();
         }
-
+        holder.buttonTuchoi.setVisibility( View.VISIBLE );
+        holder.buttonChapNhap.setVisibility( View.VISIBLE );
 
 
         final User chatRoom = this.listRoom.get(position);//lay phan tu trong mang
@@ -119,7 +119,6 @@ public class FriendRequestAdapter extends BaseAdapter {
                 databaseReference.child( "contacts" ).addValueEventListener( new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
                         Iterable<DataSnapshot> nodechild=dataSnapshot.getChildren();
                         for (DataSnapshot data:nodechild)
                         {
@@ -127,7 +126,8 @@ public class FriendRequestAdapter extends BaseAdapter {
                             String key=data.getKey();
                             if(contact.contactID.equals(FirebaseAuth.getInstance().getUid()) && contact.userID.equals( chatRoom.getUid() ))
                             {
-                               contact.setStatus( true );
+
+                                contact.setStatus( true );
                                 databaseReference.child( "contacts" ).child( key ).setValue( contact );
                             }
                         }
@@ -138,6 +138,7 @@ public class FriendRequestAdapter extends BaseAdapter {
 
                     }
                 } );
+
             }
         } );
         holder.buttonTuchoi.setOnClickListener( new View.OnClickListener() {

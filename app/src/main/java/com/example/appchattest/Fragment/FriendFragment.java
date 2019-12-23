@@ -35,7 +35,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class FriendFragment extends Fragment  {
+public class FriendFragment extends Fragment implements ValueEventListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 
@@ -47,23 +47,22 @@ public class FriendFragment extends Fragment  {
     private ArrayList<String> listContacts=new ArrayList<>(  );
     private FirebaseUser user;
     private int x=0;
+
+    public FriendFragment() {
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate( R.layout.fragment_friend, container, false );
-    }
+        View rootView=inflater.inflate( R.layout.fragment_friend, container, false );
+        addControls(rootView);
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated( view, savedInstanceState );
-        addControls(view);
         imageViewFindFriend.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               Intent intent=new Intent( getActivity(), FindFriendsActivity.class );
-               startActivity( intent );
-
+                Intent intent=new Intent( getActivity(), FindFriendsActivity.class );
+                startActivity( intent );
             }
         } );
         user=FirebaseAuth.getInstance().getCurrentUser();
@@ -75,69 +74,71 @@ public class FriendFragment extends Fragment  {
             }
         } );
         databaseReference=FirebaseDatabase.getInstance().getReference();
-
-
         // Vấn đề nan giải
-        listView.setAdapter(new ListFriendsAdapter(getActivity(),listUser ));
 
-
+        databaseReference.addValueEventListener( this);
         //
-        databaseReference.addValueEventListener( new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                listContacts.clear();
-                listUser.clear();
-                Iterable<DataSnapshot> nodechild=dataSnapshot.child( "contacts" ).getChildren();
-                for (DataSnapshot data: nodechild)
-                {
-                    Contacts contact=data.getValue(Contacts.class);
-                    if (contact.isStatus()==true)
-                    {
-                        if ((contact.userID.equals(user.getUid())))
-                        {
-                            listContacts.add( contact.contactID );
-                        }
-                        else if (contact.contactID.equals( user.getUid() ))
-                        {
-                            listContacts.add( contact.userID );
-                        }
-                    }
-
-                }
-                Iterable<DataSnapshot> nodechild1=dataSnapshot.child( "users" ).getChildren();
-                for (DataSnapshot data:nodechild1)
-                {
-                    User user=data.getValue(User.class);
-
-
-                    for (String c: listContacts)
-                    {
-                        if (c.equals( user.getUid() ))
-                        {
-                             listUser.add( user );
-                        }
-                    }
-
-                }
-
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        } );
-       // databaseReference= FirebaseDatabase.getInstance().getReference();
-        //databaseReference.addValueEventListener( this );
-        //listView.setAdapter( new ListFriendsAdapter(getActivity(),listUser) );
+//        databaseReference.addValueEventListener( new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//
+//            }
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//            }
+//        } );
+        return rootView;
     }
+
+
 
     private void addControls(View view) {
         imageViewFindFriend=view.findViewById( R.id.imageView_addfriend );
-        textView=view.findViewById( R.id.textView_item_loimoiketban );
+        textView=view.findViewById( R.id.button_item_Loimoiketban );
         listView=view.findViewById( R.id.listView_friend );
     }
 
+    @Override
+    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+        listContacts.clear();
+        listUser.clear();
+        Iterable<DataSnapshot> nodechild=dataSnapshot.child( "contacts" ).getChildren();
+        for (DataSnapshot data: nodechild)
+        {
+            Contacts contact=data.getValue(Contacts.class);
+            if (contact.isStatus()==true)
+            {
+                if ((contact.userID.equals(user.getUid())))
+                {
+                    listContacts.add( contact.contactID );
+                }
+                else if (contact.contactID.equals( user.getUid() ))
+                {
+                    listContacts.add( contact.userID );
+                }
+            }
 
+        }
+        Iterable<DataSnapshot> nodechild1=dataSnapshot.child( "users" ).getChildren();
+        for (DataSnapshot data:nodechild1)
+        {
+            User user=data.getValue(User.class);
+
+
+            for (String c: listContacts)
+            {
+                if (c.equals( user.getUid() ))
+                {
+                    listUser.add( user );
+                }
+            }
+        }
+        listView.setAdapter( new ListFriendsAdapter(getActivity().getApplicationContext(),listUser ) );
+    }
+
+    @Override
+    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+    }
 }

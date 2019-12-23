@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 
 import com.example.appchattest.Model.Contacts;
 import com.example.appchattest.Model.User;
@@ -50,7 +51,7 @@ public class ListFriendsAdapter extends BaseAdapter {
 
 
 
-        layoutInflater  = LayoutInflater.from(aContext);//?
+        layoutInflater  = LayoutInflater.from( context );
         databaseReference=FirebaseDatabase.getInstance().getReference();
     }
 
@@ -93,24 +94,22 @@ public class ListFriendsAdapter extends BaseAdapter {
 
 
         holder.roomNameView.setText(friend.getName());
-//        StorageReference flieRef=FirebaseStorage.getInstance().getReference().child("avatar/"+friend.uid+"/avatar.png");
-//        long megabyte=1024*1024;
-//        flieRef.getBytes( megabyte ).addOnSuccessListener( new OnSuccessListener<byte[]>() {
-//            @Override
-//            public void onSuccess(byte[] bytes) {
-//                Bitmap bitmap= BitmapFactory.decodeByteArray( bytes,0,bytes.length );
-//                holder.avatarView.setImageBitmap( bitmap );
-//            }
-//        } ).addOnFailureListener( new OnFailureListener() {
-//            @Override
-//            public void onFailure(@NonNull Exception e) {
-//
-//            }
-//        } );
+        StorageReference flieRef=FirebaseStorage.getInstance().getReference().child("avatar/"+friend.uid+"/avatar.png");
+        long megabyte=1024*1024;
+        flieRef.getBytes( megabyte ).addOnSuccessListener( new OnSuccessListener<byte[]>() {
+            @Override
+            public void onSuccess(byte[] bytes) {
+                Bitmap bitmap= BitmapFactory.decodeByteArray( bytes,0,bytes.length );
+                holder.avatarView.setImageBitmap( bitmap );
+            }
+        } ).addOnFailureListener( new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
 
+            }
+        } );
         return convertView;
     }
-
     //Tim ID cua anh avatar
     public int getResIdByName(String resName)//can chinh sua de phu hop voi database
     {

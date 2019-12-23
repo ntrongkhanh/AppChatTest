@@ -60,9 +60,7 @@ public class FindFriendsActivity extends AppCompatActivity implements ValueEvent
                 databaseReference.addValueEventListener( new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
                         listUser.clear();
-
                         Iterable<DataSnapshot> nodechild=dataSnapshot.child( "users" ).getChildren();
                         for (DataSnapshot data:nodechild)
                         {
@@ -70,7 +68,7 @@ public class FindFriendsActivity extends AppCompatActivity implements ValueEvent
                             if(textSearch!="")
                             {
 
-                                if ( user.name.indexOf( textSearch )!=-1 && user.uid.equals( FirebaseAuth.getInstance().getUid() )==false)
+                                if ( (user.name.toUpperCase()).indexOf( textSearch.toUpperCase() )!=-1 && user.uid.equals( FirebaseAuth.getInstance().getUid() )==false)
                                 {
                                     listUser.add( user );
                                 }
@@ -78,27 +76,15 @@ public class FindFriendsActivity extends AppCompatActivity implements ValueEvent
                                 {
                                     listUser.add( user );
                                 }
-
                             }
-
-
-
                         }
-
                     }
-
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {
-
                     }
                 } );
-
             }
         } );
-
-
-
-
     }
     public void dismissKeyboard(Activity activity) {
         InputMethodManager imm = (InputMethodManager) activity.getSystemService(getApplication().INPUT_METHOD_SERVICE);

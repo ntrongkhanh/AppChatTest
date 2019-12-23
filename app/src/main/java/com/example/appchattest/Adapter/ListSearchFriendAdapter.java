@@ -88,8 +88,6 @@ public class ListSearchFriendAdapter extends BaseAdapter{
             holder.roomNameView = (TextView) convertView.findViewById(R.id.textView_Name_item_friend);
             holder.lastContentView = (TextView) convertView.findViewById(R.id.textView_phone_number_item_friend);
             holder.buttonKB=convertView.findViewById( R.id.button_ketban_item_friend );
-            holder.buttonKB.setEnabled( true );
-            holder.buttonKB.setText( "Kết bạn" );
 
             holder.relativeLayout_bg = (RelativeLayout) convertView.findViewById(R.id.relativeLayout_list_item_friend);
             convertView.setTag(holder);// set convert view la holder
@@ -98,7 +96,8 @@ public class ListSearchFriendAdapter extends BaseAdapter{
         {
             holder = (ViewHolder) convertView.getTag();
         }
-
+        holder.buttonKB.setEnabled( true );
+        holder.buttonKB.setText( "Kết bạn" );
 
 
         final User chatRoom = this.listRoom.get(position);//lay phan tu trong mang
@@ -113,6 +112,7 @@ public class ListSearchFriendAdapter extends BaseAdapter{
                 childUpdates.put("/contacts/" + key, postValues);
                 databaseReference.updateChildren( childUpdates );
                 holder.buttonKB.setEnabled( false );
+
             }
         } );
 

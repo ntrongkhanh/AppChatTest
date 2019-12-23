@@ -271,11 +271,11 @@ public class InfoFragment extends Fragment implements ValueEventListener {
 
     private void logout()
     {
-        FirebaseAuth firebaseAuth=FirebaseAuth.getInstance();
-        firebaseAuth.signOut();
-        Intent intent = new Intent( getActivity(),LoginActivity.class );
-        startActivity(intent);
-        getActivity().finish();
+       FirebaseAuth.getInstance().signOut();
+
+       Intent intent = new Intent( getActivity(),LoginActivity.class );
+       startActivity(intent);
+
 
     }
 }
