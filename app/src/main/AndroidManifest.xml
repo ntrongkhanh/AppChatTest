@@ -18,6 +18,7 @@
         <activity android:name=".FindFriendsActivity" />
         <activity android:name=".MainNavigationActivity" />
         <activity android:name=".SignUpActivity" />
+        <activity android:name=".ChatActivity"/>
         <activity
             android:name=".SplashActivity"
             android:theme="@style/SplashTheme">
