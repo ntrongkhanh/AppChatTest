@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorPrimaryDark">
+    <TextView android:id="@+id/action_bar_account"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:background="@drawable/action_bar_background"
+              android:text="Tài khoản"
+              android:textColor="#fff"
+              android:gravity="center"
+              android:padding="15dp"
+              android:fontFamily="@font/reso"
+              android:textSize="20sp"
+              android:elevation="3dp"/>
+    <ScrollView android:id="@+id/scrollView_account_info"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fillViewport="true"
+                android:layout_below="@id/action_bar_account"
+                android:layout_above="@id/linearLayout_nav">
+        <RelativeLayout android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+            <de.hdodenhof.circleimageview.CircleImageView
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/imageView_account_avatar"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginBottom="25dp"
+                    android:src="@drawable/no_avatar2"
+                    app:civ_border_width="2dp"
+                    app:civ_border_color="@color/colorPrimaryLight"/>
+            <LinearLayout android:id="@+id/linearLayout_account_overView"
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:layout_below="@id/imageView_account_avatar"
+                          android:orientation="vertical"
+                          android:background="@drawable/account_overview_background"
+                          android:layout_marginStart="10dp"
+                          android:layout_marginEnd="10dp">
+
+                <TextView android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:paddingStart="10dp"
+                          android:paddingEnd="10dp"
+                          android:paddingTop="5dp"
+                          android:paddingBottom="5dp"
+                          android:gravity="center_horizontal"
+                          android:text="Account Name"
+                          android:textSize="20sp"
+                          android:textColor="@color/colorPrimaryDarkText"
+                          android:fontFamily="@font/reso"/>
+                <TextView android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:text="email@vnme.com"
+                          android:textSize="18sp"
+                          android:textColor="@color/colorPrimaryDark"
+                          android:fontFamily="@font/reso"
+                          android:paddingBottom="10dp"
+                          android:gravity="center_horizontal"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/linearLayout_details"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_below="@id/linearLayout_account_overView">
+                <TextView android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:layout_marginTop="15dp"
+                          android:paddingStart="10dp"
+                          android:paddingTop="10dp"
+                          android:text="@string/phone_number_title"
+                          android:textColor="@color/colorPrimaryDarkText"
+                          android:textSize="20sp"
+                          android:fontFamily="@font/reso"
+                          android:background="@color/color30white"/>
+                <TextView android:id="@+id/textView_phone_number"
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:paddingStart="10dp"
+                          android:paddingBottom="10dp"
+                          android:text="0123456789"
+                          android:textColor="@color/colorPrimaryLight"
+                          android:textSize="20sp"
+                          android:fontFamily="@font/reso"
+                          android:background="@color/color30white"/>
+
+                <TextView android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:layout_marginTop="1dp"
+                          android:paddingStart="10dp"
+                          android:paddingTop="10dp"
+                          android:text="Giới tính:"
+                          android:textColor="@color/colorPrimaryDarkText"
+                          android:textSize="20sp"
+                          android:fontFamily="@font/reso"
+                          android:background="@color/color30white"/>
+                <TextView android:id="@+id/textView_sex"
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:paddingStart="10dp"
+                          android:paddingBottom="10dp"
+                          android:text="Nam/Nữ"
+                          android:textColor="@color/colorPrimaryLight"
+                          android:textSize="20sp"
+                          android:fontFamily="@font/reso"
+                          android:background="@color/color30white"/>
+
+                <TextView android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:layout_marginTop="1dp"
+                          android:paddingStart="10dp"
+                          android:paddingTop="10dp"
+                          android:text="Ngày sinh:"
+                          android:textColor="@color/colorPrimaryDarkText"
+                          android:textSize="20sp"
+                          android:fontFamily="@font/reso"
+                          android:background="@color/color30white"/>
+                <TextView android:id="@+id/textView_birthday"
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:paddingStart="10dp"
+                          android:paddingBottom="10dp"
+                          android:text="06/12/2019"
+                          android:textColor="@color/colorPrimaryLight"
+                          android:textSize="20sp"
+                          android:fontFamily="@font/reso"
+                          android:background="@color/color30white"/>
+
+                <Button android:id="@+id/button_logout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:paddingStart="10dp"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
+                        android:text="Đăng xuất"
+                        android:gravity="start|center_vertical"
+                        android:textAllCaps="false"
+                        android:textColor="@color/colorPrimaryDarkText"
+                        android:textSize="20sp"
+                        android:fontFamily="@font/reso"
+                        android:background="@color/color30white"/>
+
+            </LinearLayout>
+        </RelativeLayout>
+    </ScrollView>
+
+    <LinearLayout
+            android:id="@+id/linearLayout_nav"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:orientation="horizontal"
+            android:layout_alignParentBottom="true">
+        <ImageView android:id="@+id/img_chatroom_ac"
+                   android:layout_width="0dp"
+                   android:layout_height="match_parent"
+                   android:src="@drawable/icon_chatroom"
+                   android:layout_gravity="center"
+                   android:padding="15dp"
+                   android:layout_weight="1"
+                   android:background="@color/color25white"
+                   android:transitionName="chatroom"/>
+        <ImageView android:id="@+id/img_friend_ac"
+                   android:layout_width="0dp"
+                   android:layout_height="match_parent"
+                   android:src="@drawable/icon_friend"
+                   android:layout_gravity="center"
+                   android:layout_weight="1"
+                   android:padding="15dp"
+                   android:background="@color/color25white"
+                   android:transitionName="friend"/>
+        <ImageView android:id="@+id/img_account_info_ac"
+                   android:layout_width="0dp"
+                   android:layout_height="match_parent"
+                   android:src="@drawable/icon_account_info"
+                   android:layout_gravity="center"
+                   android:layout_weight="1"
+                   android:padding="15dp"
+                   android:tint="@color/colorPrimaryLight"
+                   android:transitionName="account_info"/>
+    </LinearLayout>
+</RelativeLayout>

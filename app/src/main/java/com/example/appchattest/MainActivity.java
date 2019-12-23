@@ -1,15 +1,15 @@
 package com.example.appchattest;
 
+import android.content.Intent;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class ChatActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity {
 
-    private String uidContact;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate( savedInstanceState );
-        setContentView( R.layout.activity_chat );
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
     }
 }

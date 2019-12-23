@@ -141,7 +141,8 @@ public class SignUpActivity extends AppCompatActivity {
 
                         }
                         else {
-                            Toast.makeText( getApplicationContext(),"Mật khẩu không trùng khớp",Toast.LENGTH_LONG ).show();
+                            Toast.makeText( getApplicationContext(),pass1
+                                    +" "+pass2,Toast.LENGTH_LONG ).show();
 
                         }
 
