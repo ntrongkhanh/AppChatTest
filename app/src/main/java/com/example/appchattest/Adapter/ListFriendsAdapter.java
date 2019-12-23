@@ -9,26 +9,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-
 import com.example.appchattest.Model.Contacts;
 import com.example.appchattest.Model.User;
 import com.example.appchattest.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -82,8 +72,8 @@ public class ListFriendsAdapter extends BaseAdapter {
             convertView = layoutInflater.inflate( R.layout.friend_item_layout, null);//lay layout tu xml sang convertView
             holder = new ViewHolder();
             holder.avatarView = (ImageView) convertView.findViewById(R.id.imageView_avatar_friend);
-            holder.roomNameView = (TextView) convertView.findViewById(R.id.textView_friendName);
-            holder.relativeLayout_bg = (RelativeLayout) convertView.findViewById(R.id.relativeLayout_listItem_friend);
+            holder.friendName = (TextView) convertView.findViewById(R.id.textView_friendName);
+            holder.status = (TextView) convertView.findViewById(R.id.textView_state_friend);
             convertView.setTag(holder);// set convert view la holder
         }
         else
@@ -92,8 +82,7 @@ public class ListFriendsAdapter extends BaseAdapter {
         }
         final User friend = this.listUser.get(position);//lay phan tu trong mang
 
-
-        holder.roomNameView.setText(friend.getName());
+        holder.friendName.setText(friend.getName());
         StorageReference flieRef=FirebaseStorage.getInstance().getReference().child("avatar/"+friend.uid+"/avatar.png");
         long megabyte=1024*1024;
         flieRef.getBytes( megabyte ).addOnSuccessListener( new OnSuccessListener<byte[]>() {
@@ -105,7 +94,6 @@ public class ListFriendsAdapter extends BaseAdapter {
         } ).addOnFailureListener( new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-
             }
         } );
         return convertView;
@@ -129,18 +117,10 @@ public class ListFriendsAdapter extends BaseAdapter {
         return context.getResources().getDrawable(resourceId, null);
     }
 
-
-
-
-
-
     static class ViewHolder
     {
-
         ImageView avatarView;
-        TextView roomNameView;
-
-        RelativeLayout relativeLayout_bg;
+        TextView friendName;
+        TextView status;
     }
-
 }

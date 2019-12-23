@@ -1,46 +1,27 @@
 package com.example.appchattest.Adapter;
 
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
-import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
-import android.widget.Toast;
-
+import android.widget.*;
 import androidx.annotation.NonNull;
-
-import com.example.appchattest.Model.ChatRoom;
 import com.example.appchattest.Model.Contacts;
 import com.example.appchattest.Model.User;
 import com.example.appchattest.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.database.*;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class FriendRequestAdapter extends BaseAdapter {
     private List<User> listRoom;
@@ -126,7 +107,6 @@ public class FriendRequestAdapter extends BaseAdapter {
                             String key=data.getKey();
                             if(contact.contactID.equals(FirebaseAuth.getInstance().getUid()) && contact.userID.equals( chatRoom.getUid() ))
                             {
-
                                 contact.setStatus( true );
                                 databaseReference.child( "contacts" ).child( key ).setValue( contact );
                             }

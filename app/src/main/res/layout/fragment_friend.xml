@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical" android:layout_width="match_parent"
+                xmlns:tools="http://schemas.android.com/tools" android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimaryDark">
 
@@ -11,7 +11,6 @@
         android:layout_marginTop="10dp"
         android:layout_height="wrap_content"
         android:background="@drawable/search_background"
-
         android:layout_alignParentStart="true"
         android:layout_toStartOf="@id/image_icon_search_friend"
         android:hint="@string/search_friend"
@@ -35,7 +34,6 @@
         android:layout_height="36dp"
         android:layout_alignTop="@id/editText_search_friend"
         android:layout_alignBottom="@id/editText_search_friend"
-
         android:layout_toStartOf="@id/imageView_addfriend"
         android:background="@drawable/search_icon_background"
         android:paddingEnd="10dp"
@@ -48,7 +46,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/icon_add_friend"
-
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="5dp"
         android:layout_alignTop="@id/editText_search_friend"
@@ -68,17 +65,20 @@
             android:layout_height="wrap_content">
 
             <Button
-                android:id="@+id/button_item_Loimoiketban"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:background="@drawable/round_button"
-                android:drawableLeft="@drawable/icon_friends"
-                android:gravity="center_vertical"
-                android:text="      Lời mời kết bạn"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                    android:id="@+id/button_item_Loimoiketban"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:paddingStart="15dp"
+                    android:background="@color/colorPrimary"
+                    android:drawableStart="@drawable/friend_request_icon_left"
+                    android:drawablePadding="5dp"
+                    android:gravity="center_vertical"
+                    android:text="@string/string_friendRequest"
+                    android:fontFamily="@font/reso"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
 
 
             <ListView
@@ -93,13 +93,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@id/button_item_Loimoiketban" />
-
-
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-
     </ScrollView>
-
-
-
 </RelativeLayout>

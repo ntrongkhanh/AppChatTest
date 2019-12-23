@@ -36,13 +36,15 @@
                 android:textColor="@color/colorPrimaryDarkText"
                 android:textSize="20sp"
                 android:id="@+id/textView_friendName"/>
-        <TextView android:id="@+id/textView_state_friend"
-                  android:layout_width="match_parent"
-                  android:layout_height="match_parent"
-                  android:layout_marginEnd="10dp"
-                  android:text=""
-                  android:fontFamily="@font/reso"
-                  android:textColor="@color/color50white"
-                  android:gravity="end|center_vertical"/>
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingEnd="10dp"
+                android:text="Status"
+                android:fontFamily="@font/reso"
+                android:textColor="@color/color50white"
+                android:textSize="18sp"
+                android:gravity="end|center_vertical"
+                android:id="@+id/textView_state_friend"/>
     </LinearLayout>
 </RelativeLayout>

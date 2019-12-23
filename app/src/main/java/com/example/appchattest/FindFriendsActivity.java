@@ -1,5 +1,7 @@
 package com.example.appchattest;
 
+import android.view.KeyEvent;
+import android.view.inputmethod.EditorInfo;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -50,42 +52,60 @@ public class FindFriendsActivity extends AppCompatActivity implements ValueEvent
 
         listView.setAdapter(new ListSearchFriendAdapter(this, listUser,listContacts));//Set custom view cho listview
 
+        //onClick::imageView icon search nhan vao de tim kiem
         imageView.setOnClickListener( new View.OnClickListener() {
-
-
             @Override
             public void onClick(View v) {
-                textSearch=textView.getText().toString();
-               dismissKeyboard( FindFriendsActivity.this );
-                databaseReference.addValueEventListener( new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        listUser.clear();
-                        Iterable<DataSnapshot> nodechild=dataSnapshot.child( "users" ).getChildren();
-                        for (DataSnapshot data:nodechild)
-                        {
-                            User user=data.getValue(User.class);
-                            if(textSearch!="")
-                            {
+                searchFriend();
+            }
+        } );
 
-                                if ( (user.name.toUpperCase()).indexOf( textSearch.toUpperCase() )!=-1 && user.uid.equals( FirebaseAuth.getInstance().getUid() )==false)
-                                {
-                                    listUser.add( user );
-                                }
-                                else if(textSearch.equals( user.phone ))
-                                {
-                                    listUser.add( user );
-                                }
-                            }
+        //onClick::textView nhap ten ban be can tim kiem
+        textView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                if (i == EditorInfo.IME_ACTION_SEARCH)
+                {
+                    searchFriend();
+                    return true;
+                }
+                return false;
+            }
+        });
+    }
+
+    public void searchFriend()
+    {
+        textSearch=textView.getText().toString();
+        dismissKeyboard( FindFriendsActivity.this );
+        databaseReference.addValueEventListener( new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                listUser.clear();
+                Iterable<DataSnapshot> nodechild=dataSnapshot.child( "users" ).getChildren();
+                for (DataSnapshot data:nodechild)
+                {
+                    User user=data.getValue(User.class);
+                    if(textSearch != "")
+                    {
+
+                        if ((user.name.toUpperCase()).contains(textSearch.toUpperCase()) && !user.uid.equals(FirebaseAuth.getInstance().getUid()))
+                        {
+                            listUser.add( user );
+                        }
+                        else if(textSearch.equals( user.phone ))
+                        {
+                            listUser.add( user );
                         }
                     }
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-                    }
-                } );
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
             }
         } );
     }
+
     public void dismissKeyboard(Activity activity) {
         InputMethodManager imm = (InputMethodManager) activity.getSystemService(getApplication().INPUT_METHOD_SERVICE);
         if (null != activity.getCurrentFocus())
