@@ -13,6 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".ChatActivity"></activity>
         <activity android:name=".FriendRequestActivity" />
         <activity android:name=".ImageAvatarActivity" />
         <activity android:name=".FindFriendsActivity" />
