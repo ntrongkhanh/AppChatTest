@@ -113,7 +113,7 @@ public class InfoFragment extends Fragment implements ValueEventListener {
         } ).addOnFailureListener( new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText( getContext(),"load thất bại",Toast.LENGTH_LONG ).show();
+
             }
         } );
 

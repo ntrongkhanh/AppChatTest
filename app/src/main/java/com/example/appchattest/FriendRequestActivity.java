@@ -37,7 +37,7 @@ public class FriendRequestActivity extends AppCompatActivity {
 
 
 
-        listView.setAdapter(new FriendRequestAdapter(this, listUser));
+
         databaseReference.addValueEventListener( new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -62,29 +62,9 @@ public class FriendRequestActivity extends AppCompatActivity {
                             listUser.add( user );
                     }
                 }
-//                databaseReference.child( "users" ).addValueEventListener( new ValueEventListener() {
-//                    @Override
-//                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                        listUser.clear();
-//                        Iterable<DataSnapshot> nodechild=dataSnapshot.getChildren();
-//                        for (DataSnapshot data:nodechild)
-//                        {
-//                            User user=data.getValue(User.class);
-//                            for (Contacts c:listContacts)
-//                            {
-//                                if (c.userID.equals( user.getUid() ))
-//                                    listUser.add( user );
-//                            }
-//                        }
-//
-//                    }
-//
-//
-//                    @Override
-//                    public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//                    }
-//                } );
+                listView.setAdapter(new FriendRequestAdapter(getApplicationContext(), listUser));
+
+
             }
 
             @Override
