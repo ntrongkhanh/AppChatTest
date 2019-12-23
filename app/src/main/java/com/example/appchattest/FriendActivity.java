@@ -3,18 +3,9 @@ import android.app.ActivityOptions;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-
-import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.ListView;
 import androidx.appcompat.app.AppCompatActivity;
-import com.example.appchattest.Model.ChatRoom;
-import com.example.appchattest.Model.User;
-import com.example.appchattest.R;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class FriendActivity extends AppCompatActivity{
     private ImageView imageView_chatroom;
@@ -100,5 +91,4 @@ public class FriendActivity extends AppCompatActivity{
         ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(FriendActivity.this);
         startActivity(intent, options.toBundle());
     }
-
 }

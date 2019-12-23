@@ -11,7 +11,6 @@
         android:layout_marginTop="10dp"
         android:layout_height="wrap_content"
         android:background="@drawable/search_background"
-
         android:layout_alignParentStart="true"
         android:layout_toStartOf="@id/image_icon_search_friend"
         android:hint="@string/search_friend"
@@ -71,21 +70,24 @@
                 android:id="@+id/textView_item_loimoiketban"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/icon_friends"
+                android:drawableStart="@drawable/icon_friends"
+                android:drawablePadding="10dp"
+                android:drawableTint="#ffffff"
                 android:gravity="center_vertical"
                 android:padding="10dp"
                 android:text="Lời mời kết bạn"
-                android:textSize="24dp"
+                android:fontFamily="@font/reso"
+                android:textSize="20sp"
                 />
 
             <ListView
-                android:id="@+id/listView_friend"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:divider="#00000000"
-                android:dividerHeight="1dp"
-                android:layout_below="@id/textView_item_loimoiketban"
-                android:background="@color/cardview_shadow_start_color"/>
+                    android:id="@+id/listView_friend"
+                    android:layout_width="match_parent"
+                    android:layout_height="826dp"
+                    android:divider="#00000000"
+                    android:dividerHeight="1dp"
+                    android:layout_below="@id/textView_item_loimoiketban"
+                    android:background="@color/cardview_shadow_start_color"/>
 
 
         </RelativeLayout>

@@ -15,7 +15,8 @@
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".FriendRequestActivity"></activity>
         <activity android:name=".ImageAvatarActivity" />
-        <activity android:name=".FindFriendsActivity" />
+        <activity android:name=".FindFriendsActivity"
+                  android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity android:name=".MainNavigationActivity" />
         <activity android:name=".SignUpActivity" />
         <activity
