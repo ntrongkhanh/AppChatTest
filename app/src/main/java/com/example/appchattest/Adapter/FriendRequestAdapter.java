@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.provider.ContactsContract;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -172,34 +173,24 @@ public class FriendRequestAdapter extends BaseAdapter {
         //databaseReference.child( "contacts" ).addValueEventListener(  this );
         holder.roomNameView.setText(chatRoom.getName());
         holder.lastContentView.setText( chatRoom.getPhone() );
-        StorageReference flieRef=FirebaseStorage.getInstance().getReference().child("avatar/"+chatRoom.uid+"/avatar.png");
-        long megabyte=1024*1024;
-        flieRef.getBytes( megabyte ).addOnSuccessListener( new OnSuccessListener<byte[]>() {
-            @Override
-            public void onSuccess(byte[] bytes) {
-                Bitmap bitmap= BitmapFactory.decodeByteArray( bytes,0,bytes.length );
-                holder.avatarView.setImageBitmap( bitmap );
-            }
-        } ).addOnFailureListener( new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-
-            }
-        } );
-//        holder.buttonKB.setEnabled( true );
-//        for (Contacts c:listContacts)
-//        {
-//
-//            if((c.userID.equals( chatRoom.getUid())&& c.contactID.equals( FirebaseAuth.getInstance().getUid() ))||(c.contactID.equals( chatRoom.getUid())&& c.userID.equals( FirebaseAuth.getInstance().getUid()))) {
-//                holder.buttonKB.setEnabled( false );
-//                if (c.status==false)
-//                    holder.buttonKB.setText( "Đã gửi lời mời kết bạn" );
-//                else holder.buttonKB.setText( "Bạn bè" );
+//        StorageReference flieRef=FirebaseStorage.getInstance().getReference().child("avatar/"+chatRoom.uid+"/avatar.png");
+//        long megabyte=1024*1024;
+//        flieRef.getBytes( megabyte ).addOnSuccessListener( new OnSuccessListener<byte[]>() {
+//            @Override
+//            public void onSuccess(byte[] bytes) {
+//                Bitmap bitmap= BitmapFactory.decodeByteArray( bytes,0,bytes.length );
+//                holder.avatarView.setImageBitmap( bitmap );
+//            }
+//        } ).addOnFailureListener( new OnFailureListener() {
+//            @Override
+//            public void onFailure(@NonNull Exception e) {
 //
 //            }
-//
-//
-//        }
+//        } );
+        byte[] a= Base64.decode( chatRoom.avatar,Base64.DEFAULT );
+        Bitmap bitmap1= BitmapFactory.decodeByteArray( a,0,a.length );
+        holder.avatarView.setImageBitmap( bitmap1 );
+
         return convertView;
     }
 

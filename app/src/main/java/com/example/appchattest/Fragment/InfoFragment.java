@@ -1,18 +1,16 @@
 package com.example.appchattest.Fragment;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
+import android.os.Handler;
 import android.provider.MediaStore;
-import android.util.Log;
+import android.util.Base64;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -21,13 +19,18 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
+import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.loader.content.AsyncTaskLoader;
+
+import android.os.AsyncTask;
+
 import com.example.appchattest.ImageAvatarActivity;
 import com.example.appchattest.LoginActivity;
-import com.example.appchattest.MainNavigationActivity;
 import com.example.appchattest.Model.User;
 import com.example.appchattest.R;
 import com.example.appchattest.SignUpActivity;
@@ -40,13 +43,14 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.Charset;
 
 
 public class InfoFragment extends Fragment implements ValueEventListener {
@@ -70,29 +74,12 @@ public class InfoFragment extends Fragment implements ValueEventListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-      View view=  inflater.inflate( R.layout.fragment_info, container, false );
+        View view=  inflater.inflate( R.layout.fragment_info, container, false );
         addControls(view);
         firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         mData=  FirebaseDatabase.getInstance().getReference().child( "users" ).child( user.getUid() );
         mData.addValueEventListener( this );
-        textViewEmail.setText(user.getEmail() );
-        textViewName.setText( user.getDisplayName() );
-        StorageReference flieRef=FirebaseStorage.getInstance().getReference().child("avatar/"+user.getUid()+"/avatar.png");
-        long megabyte=1024*1024;
-        flieRef.getBytes( megabyte ).addOnSuccessListener( new OnSuccessListener<byte[]>() {
-            @Override
-            public void onSuccess(byte[] bytes) {
-                Bitmap bitmap= BitmapFactory.decodeByteArray( bytes,0,bytes.length );
-                imageViewAvatar.setImageBitmap( bitmap );
-            }
-        } ).addOnFailureListener( new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-
-            }
-        } );
-
         imageViewAvatar.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -143,10 +130,6 @@ public class InfoFragment extends Fragment implements ValueEventListener {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated( view, savedInstanceState );
-
-
-
-
     }
 
     private void addControls(View view) {
@@ -166,6 +149,12 @@ public class InfoFragment extends Fragment implements ValueEventListener {
         textViewNgaySinh.setText( userInfo.birthday );
         textViewGioiTinh.setText( userInfo.sex );
         textViewSDT.setText( userInfo.phone );
+        textViewName.setText( userInfo.name );
+        textViewEmail.setText( userInfo.email );
+        // lấy ảnh về
+        byte[] a= Base64.decode( userInfo.avatar,Base64.DEFAULT );
+        Bitmap bitmap1= BitmapFactory.decodeByteArray( a,0,a.length );
+        imageViewAvatar.setImageBitmap( bitmap1 );
     }
 
     @Override
@@ -176,26 +165,29 @@ public class InfoFragment extends Fragment implements ValueEventListener {
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult( requestCode, resultCode, data );
+
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == getActivity().RESULT_OK && data != null && data.getData() != null) {
-          Uri  uriImage = data.getData();
+            Uri uriImage = data.getData();
+
+
             try {
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), uriImage);
+                final Bitmap photo = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), uriImage);
                 // Log.d(TAG, String.valueOf(bitmap));
-
-
-                imageViewAvatar.setImageBitmap(bitmap);
-
-                // uploadFile(uri);
+                        imageViewAvatar.setImageBitmap(photo);
 
                 uploadAvatar();
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
+
         if (requestCode == CAMERA_REQUEST && resultCode == getActivity().RESULT_OK )
         {
-            Bitmap photo = (Bitmap) data.getExtras().get("data");
-            imageViewAvatar.setImageBitmap(photo);
+            final Bitmap photo = (Bitmap) data.getExtras().get("data");
+
+
+                    imageViewAvatar.setImageBitmap(photo);
+
             uploadAvatar();
 
         }
@@ -204,34 +196,26 @@ public class InfoFragment extends Fragment implements ValueEventListener {
 
     private void uploadAvatar()
     {
-        FirebaseUser user=FirebaseAuth.getInstance().getCurrentUser();
-        String key=user.getUid();
-        StorageReference fileRef=FirebaseStorage.getInstance().getReference().child( "avatar/"+key ).child("avatar.png");
 
         Bitmap bitmap = ((BitmapDrawable) imageViewAvatar.getDrawable()).getBitmap();
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
+        bitmap.compress( Bitmap.CompressFormat.PNG, 100, baos);
         byte[] data = baos.toByteArray();
-        UploadTask uploadTask=fileRef.putBytes( data );
-        uploadTask.addOnSuccessListener( new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                //   Toast.makeText( getApplicationContext(),"Upload thanhf coong" ,Toast.LENGTH_LONG).show();
-            }
-        } ).addOnFailureListener( new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                // Toast.makeText( getApplicationContext(),"Upload that bai" ,Toast.LENGTH_LONG).show();
-            }
-        } );
+        String avatar = null;
+        try {
+            avatar = new String( Base64.encode(data,Base64.DEFAULT), "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        userInfo.avatar=avatar;
+
+        DatabaseReference databaseReference=FirebaseDatabase.getInstance().getReference().child( "users" );
+        databaseReference.child( userInfo.uid).setValue( userInfo);
     }
     //chọn ảnh
 
-
-
-
     private void dispatchTakePictureIntent() {
-        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        Intent takePictureIntent = new Intent( MediaStore.ACTION_IMAGE_CAPTURE);
         if (takePictureIntent.resolveActivity(getActivity().getPackageManager()) != null) {
             startActivityForResult(takePictureIntent, CAMERA_REQUEST);
         }
@@ -239,7 +223,7 @@ public class InfoFragment extends Fragment implements ValueEventListener {
 
     private  void dispatchPickImage()
     {
-        Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
+        Intent photoPickerIntent = new Intent( Intent.ACTION_PICK);
         photoPickerIntent.setType("image/*");
         startActivityForResult( photoPickerIntent,PICK_IMAGE_REQUEST );
     }
@@ -247,10 +231,10 @@ public class InfoFragment extends Fragment implements ValueEventListener {
     {
         Bitmap bitmap = ((BitmapDrawable) imageViewAvatar.getDrawable()).getBitmap();
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
+        bitmap.compress( Bitmap.CompressFormat.PNG, 100, baos);
         byte[] data = baos.toByteArray();
 
-        Intent intent=new Intent(getActivity(),ImageAvatarActivity.class);
+        Intent intent=new Intent(getActivity(), ImageAvatarActivity.class);
         intent.putExtra( "image",data );
         startActivity( intent );
     }
@@ -259,9 +243,9 @@ public class InfoFragment extends Fragment implements ValueEventListener {
 
     private void logout()
     {
-       FirebaseAuth.getInstance().signOut();
-       Intent intent = new Intent( getActivity(),LoginActivity.class );
-       startActivity(intent);
+        FirebaseAuth.getInstance().signOut();
+        Intent intent = new Intent( getActivity(), LoginActivity.class );
+        startActivity(intent);
 
 
     }

@@ -18,6 +18,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Base64;
 import android.view.ContextMenu;
 import android.view.Gravity;
 import android.view.MenuInflater;
@@ -56,6 +57,7 @@ import com.google.firebase.storage.UploadTask;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Calendar;
@@ -238,26 +240,26 @@ public class SignUpActivity extends AppCompatActivity {
     }
     private void uploadAvatar()
     {
-        FirebaseUser user=FirebaseAuth.getInstance().getCurrentUser();
-        String key=user.getUid();
-        StorageReference fileRef=firebaseStorage.child( "avatar/"+key ).child("avatar.png");
-
-        Bitmap bitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
-        byte[] data = baos.toByteArray();
-        UploadTask uploadTask=fileRef.putBytes( data );
-        uploadTask.addOnSuccessListener( new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                 //   Toast.makeText( getApplicationContext(),"Upload thanhf coong" ,Toast.LENGTH_LONG).show();
-            }
-        } ).addOnFailureListener( new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-               // Toast.makeText( getApplicationContext(),"Upload that bai" ,Toast.LENGTH_LONG).show();
-            }
-        } );
+//        FirebaseUser user=FirebaseAuth.getInstance().getCurrentUser();
+//        String key=user.getUid();
+//        StorageReference fileRef=firebaseStorage.child( "avatar/"+key ).child("avatar.png");
+//
+//        Bitmap bitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
+//        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+//        bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
+//        byte[] data = baos.toByteArray();
+//        UploadTask uploadTask=fileRef.putBytes( data );
+//        uploadTask.addOnSuccessListener( new OnSuccessListener<UploadTask.TaskSnapshot>() {
+//            @Override
+//            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+//                 //   Toast.makeText( getApplicationContext(),"Upload thanhf coong" ,Toast.LENGTH_LONG).show();
+//            }
+//        } ).addOnFailureListener( new OnFailureListener() {
+//            @Override
+//            public void onFailure(@NonNull Exception e) {
+//               // Toast.makeText( getApplicationContext(),"Upload that bai" ,Toast.LENGTH_LONG).show();
+//            }
+//        } );
     }
 
     private void showPopup(View v)
@@ -306,7 +308,7 @@ public class SignUpActivity extends AppCompatActivity {
                             .setDisplayName(ten).build();
                     user.updateProfile(profileUpdates);
 
-                    uploadAvatar();
+                    //uploadAvatar();
 //
 
                     writeUser(ten,email,gioitinh,ngaysinh,sdt);
@@ -340,21 +342,22 @@ public class SignUpActivity extends AppCompatActivity {
         FirebaseUser user=FirebaseAuth.getInstance().getCurrentUser();
         DatabaseReference mData= FirebaseDatabase.getInstance().getReference();
         String date=ngaysinh.get( Calendar.DATE)+"/"+(ngaysinh.get(Calendar.MONTH)+1)+"/"+ngaysinh.get(Calendar.YEAR);
-
-         User user2=new User(user.getUid(),ten,email,gioitinh,date,sdt);
-
-
-
-
-
-
+        Bitmap bitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress( Bitmap.CompressFormat.PNG, 100, baos);
+        byte[] data = baos.toByteArray();
+        String avatar = null;
+        try {
+            avatar = new String( Base64.encode(data,Base64.DEFAULT), "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        ten=vietHoa( ten );
+        User user2=new User(user.getUid(),ten,email,gioitinh,date,sdt,avatar);
         mData.child("users").child( user.getUid()).setValue( user2).addOnSuccessListener( new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
                Toast.makeText(getApplicationContext(),"Đăng kí thành công...........",Toast.LENGTH_LONG).show();
-
-
-
             }
         } ).addOnFailureListener( new OnFailureListener() {
             @Override
@@ -362,8 +365,6 @@ public class SignUpActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(),"Đăng kí thất bại...............",Toast.LENGTH_LONG).show();
             }
         } );
-
-
     }
 
     private boolean validateForm() {
@@ -378,57 +379,34 @@ public class SignUpActivity extends AppCompatActivity {
         return false;
     }
 
-//    private boolean checkNgay(int ngay,int thang,int nam)
-//    {
-//        if(fun( thang,nam )==-1)
-//        {
-//            return false;
-//        }else {
-//            if (ngay<=fun( thang,nam ))
-//            {
-//                return true;
-//            }
-//            return false;
-//        }
-//
-//    }
     private boolean checkPassword(String pass1,String pass2)
     {
         if (pass1.equals( pass2 ))
             return true;
         return false;
     }
-    private boolean isCheck(int nam) {
-        return ((nam % 4 == 0 && nam % 100 != 0) || nam % 400 == 0);
+    private String vietHoa(String str)
+    {
+        String kq = "";
+        str = str.toLowerCase();//
+        for (int i = 0; i < str.length(); i++)
+        {
+            if (i == 0)
+
+                kq += (str.charAt(i)+"").toUpperCase();
+            else
+                kq += str.charAt( i );
+            if (str.charAt( i ) == ' ')
+            {
+                while (str.charAt( i ) == ' ')
+                {
+                    i++;
+                }
+                kq += (str.charAt( i )+"").toUpperCase();
+            }
+        }
+        return kq;
     }
-
-
-//    private int fun(int thang, int nam) {
-//        switch (thang)
-//        {
-//            case 1:
-//            case 3:
-//            case 5:
-//            case 7:
-//            case 8:
-//            case 10:
-//            case 12:
-//                return 31;
-//            case 4:
-//            case 6:
-//            case 9:
-//            case 11:
-//                return 30;
-//            case 2:
-//                if (isCheck(nam))
-//                    return 29;
-//                else
-//                    return 28;
-//            default:
-//                return -1;
-//
-//        }
-//    }
     private void addControl() {
         imageView=findViewById( R.id.imageView_account_avatar2 );
 

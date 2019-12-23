@@ -20,6 +20,27 @@ import java.util.Calendar;
 import java.util.List;
 
 public  class User {
+    public String uid;
+    public String name;
+    public String email;
+    public String sex;
+    public String birthday;
+    public String phone;
+    public String avatar;
+
+    public User() {
+    }
+
+    public User(String uid, String name, String email, String sex, String birthday, String phone, String avatar) {
+        this.uid = uid;
+        this.name = name;
+        this.email = email;
+        this.sex = sex;
+        this.birthday = birthday;
+        this.phone = phone;
+        this.avatar = avatar;
+    }
+
     public String getUid() {
         return uid;
     }
@@ -68,82 +89,11 @@ public  class User {
         this.phone = phone;
     }
 
-
-
-    public String uid;
-    public String name;
-
-
-
-    public String email;
-    public String sex;
-    public String birthday;
-    public String phone;
-
-
-    public User() {
+    public String getAvatar() {
+        return avatar;
     }
 
-    public User(String uid, String name, String email, String sex, String birthday, String phone) {
-        this.uid = uid;
-        this.name = name;
-        this.email = email;
-        this.sex = sex;
-        this.birthday = birthday;
-        this.phone = phone;
-
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
-
-    // public String state;
-  //  public Uri photoUri;
-
-
-
-//    public User(String name, String email, String sex, String birthday, String avatar,Uri uri, boolean isOnline)
-//    {
-//        this.name = name;
-//        this.email = email;
-//        this.sex = sex;
-//        this.birthday = birthday;
-//        this.avatar = avatar;
-//        this.photoUri=uri;
-//        this.setOnlineState(isOnline);
-//    }
-//    public void setOnlineState(boolean isOnline) {
-//        if (isOnline)
-//        {
-//            state = "Online";
-//        }
-//        else
-//        {
-//            state = "Offline";
-//        }
-//    }
-
-
-//    public String getAvatar() {
-//        return avatar;
-//    }
-//
-//    public void setAvatar(String avatar) {
-//        this.avatar = avatar;
-//    }
-
-
-
-   // public String getState() {
-   //     return state;
-   // }
-
-   // public void setState(String state) {
-  //      this.state = state;
-  //  }
-
-  //  public Uri getPhotoUri() {
-  //      return photoUri;
-  //  }
-
-   // public void setPhotoUri(Uri photoUri) {
-   //     this.photoUri = photoUri;
-    //}
 }

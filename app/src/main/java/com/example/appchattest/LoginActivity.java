@@ -54,7 +54,6 @@ public class LoginActivity extends AppCompatActivity implements ValueEventListen
         //mData.addValueEventListener(this);
         if (firebaseAuth.getUid()!=null)
         {
-
             Intent intent = new Intent(LoginActivity.this, MainNavigationActivity.class);
             startActivity(intent);
             finish();
