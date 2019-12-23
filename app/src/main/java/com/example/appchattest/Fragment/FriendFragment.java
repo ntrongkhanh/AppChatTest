@@ -123,7 +123,7 @@ public class FriendFragment extends Fragment implements ValueEventListener {
                 }
             }
         }
-        listView.setAdapter( new ListFriendsAdapter(getActivity().getApplicationContext(),listUser ) );
+        listView.setAdapter( new ListFriendsAdapter(getActivity(),listUser ) );
     }
 
     @Override
