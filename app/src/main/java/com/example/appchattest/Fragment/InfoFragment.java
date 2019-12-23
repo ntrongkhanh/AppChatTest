@@ -70,38 +70,14 @@ public class InfoFragment extends Fragment implements ValueEventListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-
-        return inflater.inflate( R.layout.fragment_info, container, false );
-
-    }
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate( savedInstanceState );
-
-
-
-
-
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated( view, savedInstanceState );
-
-
+      View view=  inflater.inflate( R.layout.fragment_info, container, false );
         addControls(view);
-         firebaseAuth = FirebaseAuth.getInstance();
-
-
+        firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         mData=  FirebaseDatabase.getInstance().getReference().child( "users" ).child( user.getUid() );
-        //mData.addValueEventListener(this);
-
         mData.addValueEventListener( this );
         textViewEmail.setText(user.getEmail() );
         textViewName.setText( user.getDisplayName() );
-
         StorageReference flieRef=FirebaseStorage.getInstance().getReference().child("avatar/"+user.getUid()+"/avatar.png");
         long megabyte=1024*1024;
         flieRef.getBytes( megabyte ).addOnSuccessListener( new OnSuccessListener<byte[]>() {
@@ -113,7 +89,7 @@ public class InfoFragment extends Fragment implements ValueEventListener {
         } ).addOnFailureListener( new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText( getContext(),"load thất bại",Toast.LENGTH_LONG ).show();
+
             }
         } );
 
@@ -155,6 +131,21 @@ public class InfoFragment extends Fragment implements ValueEventListener {
                 logout();
             }
         } );
+        return view;
+
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate( savedInstanceState );
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated( view, savedInstanceState );
+
+
+
 
     }
 
@@ -186,10 +177,7 @@ public class InfoFragment extends Fragment implements ValueEventListener {
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult( requestCode, resultCode, data );
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == getActivity().RESULT_OK && data != null && data.getData() != null) {
-
           Uri  uriImage = data.getData();
-
-
             try {
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), uriImage);
                 // Log.d(TAG, String.valueOf(bitmap));
@@ -272,7 +260,6 @@ public class InfoFragment extends Fragment implements ValueEventListener {
     private void logout()
     {
        FirebaseAuth.getInstance().signOut();
-
        Intent intent = new Intent( getActivity(),LoginActivity.class );
        startActivity(intent);
 

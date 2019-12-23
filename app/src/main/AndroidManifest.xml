@@ -30,13 +30,6 @@
         <activity
             android:name=".LoginActivity"
             android:windowSoftInputMode="stateAlwaysHidden" />
-        <activity
-            android:name=".MainAppActivity"
-            android:windowSoftInputMode="stateAlwaysHidden" />
-        <activity android:name=".AccountInfoActivity" />
-        <activity
-            android:name=".FriendActivity"
-            android:windowSoftInputMode="stateAlwaysHidden" />
     </application>
 
 </manifest>

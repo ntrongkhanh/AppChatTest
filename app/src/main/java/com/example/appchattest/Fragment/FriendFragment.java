@@ -46,7 +46,7 @@ public class FriendFragment extends Fragment implements ValueEventListener {
     private ArrayList<User> listUser=new ArrayList<>(  );
     private ArrayList<String> listContacts=new ArrayList<>(  );
     private FirebaseUser user;
-    private int x=0;
+
 
     public FriendFragment() {
     }
@@ -75,19 +75,8 @@ public class FriendFragment extends Fragment implements ValueEventListener {
         } );
         databaseReference=FirebaseDatabase.getInstance().getReference();
         // Vấn đề nan giải
-
         databaseReference.addValueEventListener( this);
-        //
-//        databaseReference.addValueEventListener( new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//
-//            }
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//            }
-//        } );
+
         return rootView;
     }
 
