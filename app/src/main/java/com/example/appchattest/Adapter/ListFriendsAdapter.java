@@ -1,7 +1,6 @@
 package com.example.appchattest.Adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
@@ -20,7 +19,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-import com.example.appchattest.ChatActivity;
 import com.example.appchattest.Model.Contacts;
 import com.example.appchattest.Model.User;
 import com.example.appchattest.R;
@@ -114,14 +112,6 @@ public class ListFriendsAdapter extends BaseAdapter {
         byte[] a= Base64.decode( friend.avatar,Base64.DEFAULT );
         Bitmap bitmap1= BitmapFactory.decodeByteArray( a,0,a.length );
         holder.avatarView.setImageBitmap( bitmap1 );
-
-        holder.relativeLayout_bg.setOnClickListener( new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent=new Intent( context, ChatActivity.class );
-                context.startActivity( intent );
-            }
-        } );
         return convertView;
     }
     //Tim ID cua anh avatar
@@ -150,6 +140,7 @@ public class ListFriendsAdapter extends BaseAdapter {
 
     static class ViewHolder
     {
+
         ImageView avatarView;
         TextView roomNameView;
 

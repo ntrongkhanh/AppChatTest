@@ -12,7 +12,3 @@
 /captures
 .externalNativeBuild
 .cxx
-app/src/main/java/com/example/appchattest/Adapter/FriendRequestAdapter.java
-app/src/main/java/com/example/appchattest/Adapter/ListFriendsAdapter.java
-*.java
-app/src/main/java/com/example/appchattest/Adapter/ListFriendsAdapter.java
