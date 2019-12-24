@@ -181,7 +181,7 @@ public class SignUpActivity extends AppCompatActivity {
     {
         Bitmap bitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
+        bitmap.compress(Bitmap.CompressFormat.JPEG , 100, baos);
         byte[] data = baos.toByteArray();
 
        Intent intent=new Intent( SignUpActivity.this,ImageAvatarActivity.class );
@@ -316,7 +316,7 @@ public class SignUpActivity extends AppCompatActivity {
         String date=ngaysinh.get( Calendar.DATE)+"/"+(ngaysinh.get(Calendar.MONTH)+1)+"/"+ngaysinh.get(Calendar.YEAR);
         Bitmap bitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bitmap.compress( Bitmap.CompressFormat.PNG, 100, baos);
+        bitmap.compress( Bitmap.CompressFormat.JPEG , 100, baos);
         byte[] data = baos.toByteArray();
         String avatar = null;
         try {
