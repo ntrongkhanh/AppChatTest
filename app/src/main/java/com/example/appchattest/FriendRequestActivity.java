@@ -1,22 +1,15 @@
 package com.example.appchattest;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.widget.ListView;
-
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import com.example.appchattest.Adapter.FriendRequestAdapter;
-import com.example.appchattest.Adapter.ListFriendsAdapter;
 import com.example.appchattest.Model.Contacts;
 import com.example.appchattest.Model.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.database.*;
 
 import java.util.ArrayList;
 
@@ -65,9 +58,5 @@ public class FriendRequestActivity extends AppCompatActivity {
 
             }
         } );
-
-
     }
-
-
 }

@@ -2,22 +2,16 @@ package com.example.appchattest.Fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.example.appchattest.Adapter.FriendRequestAdapter;
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import com.example.appchattest.Adapter.ListFriendsAdapter;
-import com.example.appchattest.Adapter.ListSearchFriendAdapter;
 import com.example.appchattest.FindFriendsActivity;
 import com.example.appchattest.FriendRequestActivity;
 import com.example.appchattest.Model.Contacts;
@@ -25,14 +19,9 @@ import com.example.appchattest.Model.User;
 import com.example.appchattest.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.database.*;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class FriendFragment extends Fragment implements ValueEventListener {
@@ -54,6 +43,8 @@ public class FriendFragment extends Fragment implements ValueEventListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         // Inflate the layout for this fragment
         View rootView=inflater.inflate( R.layout.fragment_friend, container, false );
         addControls(rootView);

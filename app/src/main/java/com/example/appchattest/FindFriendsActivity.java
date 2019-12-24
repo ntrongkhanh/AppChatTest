@@ -1,25 +1,21 @@
 package com.example.appchattest;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import com.example.appchattest.Adapter.ListSearchFriendAdapter;
 import com.example.appchattest.Model.Contacts;
 import com.example.appchattest.Model.User;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.database.*;
 
 import java.util.ArrayList;
 
@@ -47,45 +43,60 @@ public class FindFriendsActivity extends AppCompatActivity implements ValueEvent
         databaseReference=FirebaseDatabase.getInstance().getReference();
         databaseReference.child( "contacts" ).addValueEventListener( this );
 
-
         listView.setAdapter(new ListSearchFriendAdapter(this, listUser,listContacts));//Set custom view cho listview
 
         imageView.setOnClickListener( new View.OnClickListener() {
-
-
             @Override
             public void onClick(View v) {
-                textSearch=textView.getText().toString();
-               dismissKeyboard( FindFriendsActivity.this );
-                databaseReference.addValueEventListener( new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        listUser.clear();
-                        Iterable<DataSnapshot> nodechild=dataSnapshot.child( "users" ).getChildren();
-                        for (DataSnapshot data:nodechild)
-                        {
-                            User user=data.getValue(User.class);
-                            if(textSearch!="")
-                            {
+                searchFriends();
+            }
+        } );
 
-                                if ( (user.name.toUpperCase()).indexOf( textSearch.toUpperCase() )!=-1 && user.uid.equals( FirebaseAuth.getInstance().getUid() )==false)
-                                {
-                                    listUser.add( user );
-                                }
-                                else if(textSearch.equals( user.phone ))
-                                {
-                                    listUser.add( user );
-                                }
-                            }
+        textView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                if (i == EditorInfo.IME_ACTION_SEARCH)
+                {
+                    searchFriends();
+                    return true;
+                }
+                return false;
+            }
+        });
+    }
+
+    public void searchFriends()
+    {
+        textSearch=textView.getText().toString();
+        dismissKeyboard( FindFriendsActivity.this );
+        databaseReference.addValueEventListener( new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                listUser.clear();
+                Iterable<DataSnapshot> nodechild=dataSnapshot.child( "users" ).getChildren();
+                for (DataSnapshot data:nodechild)
+                {
+                    User user=data.getValue(User.class);
+                    if(textSearch != "")
+                    {
+
+                        if ((user.name.toUpperCase()).contains(textSearch.toUpperCase()) && !user.uid.equals(FirebaseAuth.getInstance().getUid()))
+                        {
+                            listUser.add( user );
+                        }
+                        else if(textSearch.equals( user.phone ))
+                        {
+                            listUser.add( user );
                         }
                     }
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-                    }
-                } );
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
             }
         } );
     }
+
     public void dismissKeyboard(Activity activity) {
         InputMethodManager imm = (InputMethodManager) activity.getSystemService(getApplication().INPUT_METHOD_SERVICE);
         if (null != activity.getCurrentFocus())
