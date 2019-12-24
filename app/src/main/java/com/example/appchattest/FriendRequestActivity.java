@@ -33,7 +33,6 @@ public class FriendRequestActivity extends AppCompatActivity {
         listView=findViewById( R.id.listVewLoimoiketban );
         databaseReference= FirebaseDatabase.getInstance().getReference();
         user= FirebaseAuth.getInstance().getCurrentUser();
-
         databaseReference.addValueEventListener( new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

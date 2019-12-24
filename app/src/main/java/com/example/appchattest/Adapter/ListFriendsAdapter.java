@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
+import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,6 +38,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -111,14 +115,24 @@ public class ListFriendsAdapter extends BaseAdapter {
 //
 //            }
 //        } );
-        byte[] a= Base64.decode( friend.avatar,Base64.DEFAULT );
-        Bitmap bitmap1= BitmapFactory.decodeByteArray( a,0,a.length );
+        final byte[] imgage= Base64.decode( friend.avatar,Base64.DEFAULT );
+        final Bitmap bitmap1= BitmapFactory.decodeByteArray( imgage,0,imgage.length );
         holder.avatarView.setImageBitmap( bitmap1 );
-
         holder.relativeLayout_bg.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent( context,ChatActivity.class );
+
+                intent.putExtra( "nameFriend",friend.name );
+                intent.putExtra( "uidFriend",friend.uid );
+//                 Bundle bundle=new Bundle(  );
+//
+//                bundle.putString( "nameFriend",friend.name );
+//              //  bundle.putString( "x",friend.avatar );
+//
+//                bundle.putString( "uidFriend",friend.uid );
+                //intent.putExtras( bundle );
+
                 context.startActivity( intent );
             }
         } );
@@ -142,12 +156,6 @@ public class ListFriendsAdapter extends BaseAdapter {
         final int resourceId = context.getResources().getIdentifier(resName, "drawable", pkgName);
         return context.getResources().getDrawable(resourceId, null);
     }
-
-
-
-
-
-
     static class ViewHolder
     {
 
