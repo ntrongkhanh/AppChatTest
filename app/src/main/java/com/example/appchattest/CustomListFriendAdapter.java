@@ -52,7 +52,7 @@
 //
 //        if (convertView == null)
 //        {
-//            convertView = layoutInflater.inflate(R.layout.friend_item_layout, null);
+//            convertView = layoutInflater.inflate(R.layout.item_friend_layout, null);
 //            viewHolder = new ViewHolder();
 //            viewHolder.avatarFriendView = (ImageView)convertView.findViewById(R.id.imageView_avatar_friend);
 //            viewHolder.friendNameView = (TextView)convertView.findViewById(R.id.textView_friendName);

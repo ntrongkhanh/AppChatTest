@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/normal_chatroom"
+    android:id="@+id/relativeLayout_listItem_fragment_chat">
+    <de.hdodenhof.circleimageview.CircleImageView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/imageView_avatar_friend_fragment_chat"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginStart="5dp"
+        android:src="@drawable/avatar"
+        app:civ_border_width="1dp"
+        app:civ_border_color="#7f000000"/>
+
+    <LinearLayout android:id="@+id/linearLayout_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_vertical"
+        android:layout_alignTop="@id/imageView_avatar_friend_fragment_chat"
+        android:layout_alignBottom="@+id/imageView_avatar_friend_fragment_chat"
+        android:layout_toEndOf="@id/imageView_avatar_friend_fragment_chat"
+        android:layout_alignParentEnd="true"
+        android:paddingStart="5dp"
+        android:paddingEnd="5dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" Name"
+            android:fontFamily="@font/reso"
+            android:textColor="@color/colorPrimaryDarkText"
+            android:layout_marginStart="10dp"
+            android:textSize="20sp"
+            android:id="@+id/textView_friendName_fragment_chat"/>
+        <TextView android:id="@+id/textView_state_friend_fragment_chat"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="10dp"
+            android:text="Last contents"
+            android:textSize="16sp"
+            android:fontFamily="@font/reso"
+            android:textColor="@color/color50white"
+            android:gravity="start|center_vertical"/>
+    </LinearLayout>
+</RelativeLayout>

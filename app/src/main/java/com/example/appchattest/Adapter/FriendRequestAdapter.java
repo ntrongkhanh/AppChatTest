@@ -22,6 +22,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.example.appchattest.Model.Chat;
 import com.example.appchattest.Model.ChatRoom;
 import com.example.appchattest.Model.Contacts;
 import com.example.appchattest.Model.User;
@@ -45,7 +46,7 @@ import java.util.Map;
 
 public class FriendRequestAdapter extends BaseAdapter {
     private List<User> listRoom;
-
+    private FirebaseUser user;
     private LayoutInflater layoutInflater;
     private Context context;
     private DatabaseReference databaseReference;
@@ -56,6 +57,7 @@ public class FriendRequestAdapter extends BaseAdapter {
         this.context = aContext;
         this.listRoom = listRoom;
         layoutInflater  = LayoutInflater.from(aContext);//?
+        user=FirebaseAuth.getInstance().getCurrentUser();
         databaseReference=FirebaseDatabase.getInstance().getReference();
     }
 
@@ -101,10 +103,7 @@ public class FriendRequestAdapter extends BaseAdapter {
         }
         holder.buttonTuchoi.setVisibility( View.VISIBLE );
         holder.buttonChapNhap.setVisibility( View.VISIBLE );
-
-
         final User chatRoom = this.listRoom.get(position);//lay phan tu trong mang
-
         holder.buttonChapNhap.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -117,6 +116,25 @@ public class FriendRequestAdapter extends BaseAdapter {
                 // holder.buttonKB.setEnabled( false );
                 holder.buttonTuchoi.setVisibility( View.INVISIBLE );
                 holder.buttonChapNhap.setVisibility( View.INVISIBLE );
+//                    Chat chat=new Chat( editTextContent.getText().toString(),formattedDate,true );
+//                    Map<String, Object> postValues = chat.toMap();
+//
+//                childUpdates.put("/chats/" + uidUser+"/"+uidFriend+"/"+key, postValues);
+//                databaseReference.updateChildren( childUpdates );
+//                    String key1=databaseReference.child( "chats" ).child( uidFriend ).child( uidUser ).push().getKey();
+//                    Chat chat1=new Chat( editTextContent.getText().toString(),formattedDate,false );
+//                    Map<String, Object> postValues1 = chat1.toMap();
+//                    Map<String, Object> childUpdates1 = new HashMap<>();
+//                childUpdates1.put("/chats/" + uidFriend+"/"+uidUser+"/"+key1, postValues1);
+//                databaseReference.updateChildren( childUpdates1 );
+                Map<String, Object> childUpdates = new HashMap<>();
+                childUpdates.put( "/friends/"+user.getUid()+"/"+chatRoom.uid,chatRoom.name );
+                databaseReference.updateChildren( childUpdates );
+
+                Map<String, Object> childUpdates1 = new HashMap<>();
+                childUpdates1.put( "/friends/"+chatRoom.getUid()+"/"+user.getUid(),user.getDisplayName() );
+                databaseReference.updateChildren( childUpdates1 );
+
                 databaseReference.child( "contacts" ).addValueEventListener( new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -125,13 +143,15 @@ public class FriendRequestAdapter extends BaseAdapter {
                         {
                             Contacts contact=data.getValue(Contacts.class);
                             String key=data.getKey();
-                            if(contact.contactID.equals(FirebaseAuth.getInstance().getUid()) && contact.userID.equals( chatRoom.getUid() ))
+                            if(contact.contactID.equals(user.getUid()) && contact.userID.equals( chatRoom.getUid() ))
                             {
+                               // contact.setStatus( true );
+                          //      databaseReference.child( "contacts" ).child( key ).setValue( contact );
+                                databaseReference.child( "contacts" ).child( key ).removeValue();
 
-                                contact.setStatus( true );
-                                databaseReference.child( "contacts" ).child( key ).setValue( contact );
                             }
                         }
+
                     }
 
                     @Override
@@ -162,7 +182,6 @@ public class FriendRequestAdapter extends BaseAdapter {
                             }
                         }
                     }
-
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {
 

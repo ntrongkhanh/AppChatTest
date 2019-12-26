@@ -69,8 +69,13 @@ public class ChatActivity extends AppCompatActivity {
 
                 for (DataSnapshot data:nodechild)
                 {
-                    Chat chat=data.getValue(Chat.class);
-                    listChat.add( chat );
+                    try {
+                        Chat chat=data.getValue(Chat.class);
+                        listChat.add( chat );
+                    }catch (Exception e)
+                    {
+                        
+                    }
 
                 }
                 if (!uidFriend.equals( "" ) && avatarFriend!=null)
@@ -83,6 +88,12 @@ public class ChatActivity extends AppCompatActivity {
             }
         } );
 
+        textViewBack.setOnClickListener( new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        finish();
+    }
+} );
 
         buttonSend.setOnClickListener( new View.OnClickListener() {
             @Override
@@ -97,12 +108,20 @@ public class ChatActivity extends AppCompatActivity {
                 Map<String, Object> postValues = chat.toMap();
                 Map<String, Object> childUpdates = new HashMap<>();
                 childUpdates.put("/chats/" + uidUser+"/"+uidFriend+"/"+key, postValues);
+                childUpdates.put( "/chats/"+uidUser+"/"+uidFriend+"/lastcontents/",editTextContent.getText().toString() );
                 databaseReference.updateChildren( childUpdates );
+
+
+                //-------------------------------------------//
+
+
                 String key1=databaseReference.child( "chats" ).child( uidFriend ).child( uidUser ).push().getKey();
                 Chat chat1=new Chat( editTextContent.getText().toString(),formattedDate,false );
                 Map<String, Object> postValues1 = chat1.toMap();
                 Map<String, Object> childUpdates1 = new HashMap<>();
+
                 childUpdates1.put("/chats/" + uidFriend+"/"+uidUser+"/"+key1, postValues1);
+                childUpdates.put( "/chats/"+uidFriend+"/"+uidUser+"/lastcontents/",editTextContent.getText().toString() );
                 databaseReference.updateChildren( childUpdates1 );
                 editTextContent.setText( "" );
 

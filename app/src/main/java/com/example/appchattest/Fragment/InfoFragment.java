@@ -81,11 +81,32 @@ public class InfoFragment extends Fragment implements ValueEventListener {
     private static final int CAMERA_REQUEST = 1888;
     private String imagePath;
 
+    public InfoFragment(User currentUser) {
+        this.userInfo=currentUser;
+    }
+
+    public InfoFragment() {
+
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view=  inflater.inflate( R.layout.fragment_info, container, false );
+
+        return view;
+
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate( savedInstanceState );
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated( view, savedInstanceState );
         addControls(view);
         firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -129,18 +150,6 @@ public class InfoFragment extends Fragment implements ValueEventListener {
                 logout();
             }
         } );
-        return view;
-
-    }
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate( savedInstanceState );
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated( view, savedInstanceState );
     }
 
     private void addControls(View view) {

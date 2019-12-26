@@ -9,6 +9,8 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import com.example.appchattest.Adapter.ListFriendsAdapter;
@@ -32,12 +34,19 @@ public class FriendFragment extends Fragment implements ValueEventListener {
     private ImageView imageViewFindFriend;
     private TextView textView;
     private DatabaseReference databaseReference;
-    private ArrayList<User> listUser=new ArrayList<>(  );
-    private ArrayList<String> listContacts=new ArrayList<>(  );
+    private ArrayList<User> listFriends=new ArrayList<>(  );
+
+
+    private ArrayList<String> listUidFriend=new ArrayList<>(  );
     private FirebaseUser user;
 
 
+    public FriendFragment(ArrayList<String> listuidFriends) {
+        this.listUidFriend=listuidFriends;
+    }
+
     public FriendFragment() {
+
     }
 
     @Override
@@ -67,6 +76,9 @@ public class FriendFragment extends Fragment implements ValueEventListener {
         databaseReference=FirebaseDatabase.getInstance().getReference();
         // Vấn đề nan giải
         databaseReference.addValueEventListener( this);
+        listView.setAdapter( new ListFriendsAdapter(getActivity(),listFriends ) );
+
+
 
         return rootView;
     }
@@ -81,40 +93,31 @@ public class FriendFragment extends Fragment implements ValueEventListener {
 
     @Override
     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-        listContacts.clear();
-        listUser.clear();
-        Iterable<DataSnapshot> nodechild=dataSnapshot.child( "contacts" ).getChildren();
-        for (DataSnapshot data: nodechild)
+
+        int x=0;
+        listFriends.clear();
+        listUidFriend.clear();
+        Iterable<DataSnapshot> nodechild=dataSnapshot.child( "friends" ).child( user.getUid() ).getChildren();
+        for (DataSnapshot data:nodechild)
         {
-            Contacts contact=data.getValue(Contacts.class);
-            if (contact.isStatus()==true)
-            {
-                if ((contact.userID.equals(user.getUid())))
-                {
-                    listContacts.add( contact.contactID );
-                }
-                else if (contact.contactID.equals( user.getUid() ))
-                {
-                    listContacts.add( contact.userID );
-                }
-            }
+
+            String uid=data.getKey();
+            listUidFriend.add( uid );
 
         }
         Iterable<DataSnapshot> nodechild1=dataSnapshot.child( "users" ).getChildren();
         for (DataSnapshot data:nodechild1)
         {
             User user=data.getValue(User.class);
-
-
-            for (String c: listContacts)
+            for (String c: listUidFriend)
             {
                 if (c.equals( user.getUid() ))
                 {
-                    listUser.add( user );
+                    listFriends.add( user );
                 }
             }
         }
-        listView.setAdapter( new ListFriendsAdapter(getActivity(),listUser ) );
+
     }
 
     @Override

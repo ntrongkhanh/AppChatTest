@@ -5,40 +5,23 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
-import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
 
 import com.example.appchattest.ChatActivity;
 import com.example.appchattest.Model.Contacts;
 import com.example.appchattest.Model.User;
 import com.example.appchattest.R;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -86,7 +69,7 @@ public class ListFriendsAdapter extends BaseAdapter {
         final ViewHolder holder; //su dung holder de giu lay view trong convertView
         if (convertView == null) //neu convertView = null thi tao moi view va view holder
         {
-            convertView = layoutInflater.inflate( R.layout.friend_item_layout, null);//lay layout tu xml sang convertView
+            convertView = layoutInflater.inflate( R.layout.item_friend_layout, null);//lay layout tu xml sang convertView
             holder = new ViewHolder();
             holder.avatarView = (ImageView) convertView.findViewById(R.id.imageView_avatar_friend);
             holder.roomNameView = (TextView) convertView.findViewById(R.id.textView_friendName);
