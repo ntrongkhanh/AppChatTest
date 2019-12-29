@@ -43,6 +43,8 @@
         android:layout_weight="2"
         android:stackFromBottom="true"
         android:layout_height="wrap_content"
+        android:divider="@null"
+        android:dividerHeight="3dp"
         android:transcriptMode="alwaysScroll"/>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
