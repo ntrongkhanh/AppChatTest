@@ -232,11 +232,6 @@ public class FriendRequestAdapter extends BaseAdapter {
         return context.getResources().getDrawable(resourceId, null);
     }
 
-
-
-
-
-
     static class ViewHolder
     {
         ImageView buttonTuchoi;

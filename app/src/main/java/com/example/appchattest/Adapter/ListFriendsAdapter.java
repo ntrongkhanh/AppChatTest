@@ -144,8 +144,6 @@ public class ListFriendsAdapter extends BaseAdapter {
 
         ImageView avatarView;
         TextView roomNameView;
-
         RelativeLayout relativeLayout_bg;
     }
-
 }

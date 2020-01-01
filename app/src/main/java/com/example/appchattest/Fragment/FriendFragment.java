@@ -35,10 +35,9 @@ public class FriendFragment extends Fragment implements ValueEventListener {
     private TextView textView;
     private DatabaseReference databaseReference;
     private ArrayList<User> listFriends=new ArrayList<>(  );
-
-
     private ArrayList<String> listUidFriend=new ArrayList<>(  );
     private FirebaseUser user;
+    private ListFriendsAdapter adapter;
 
 
     public FriendFragment(ArrayList<String> listuidFriends) {
@@ -76,9 +75,9 @@ public class FriendFragment extends Fragment implements ValueEventListener {
         databaseReference=FirebaseDatabase.getInstance().getReference();
         // Vấn đề nan giải
         databaseReference.addValueEventListener( this);
-        listView.setAdapter( new ListFriendsAdapter(getActivity(),listFriends ) );
 
-
+        adapter = new ListFriendsAdapter(getActivity(),listFriends );
+        listView.setAdapter( adapter );
 
         return rootView;
     }
@@ -100,11 +99,11 @@ public class FriendFragment extends Fragment implements ValueEventListener {
         Iterable<DataSnapshot> nodechild=dataSnapshot.child( "friends" ).child( user.getUid() ).getChildren();
         for (DataSnapshot data:nodechild)
         {
-
             String uid=data.getKey();
             listUidFriend.add( uid );
 
         }
+
         Iterable<DataSnapshot> nodechild1=dataSnapshot.child( "users" ).getChildren();
         for (DataSnapshot data:nodechild1)
         {
@@ -117,7 +116,7 @@ public class FriendFragment extends Fragment implements ValueEventListener {
                 }
             }
         }
-
+        adapter.notifyDataSetChanged();
     }
 
     @Override

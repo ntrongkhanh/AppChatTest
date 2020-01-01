@@ -62,6 +62,7 @@
             android:textColorHint="@color/colorNonText"
             android:textColor="@color/colorPrimaryDarkText"
             android:inputType="text"
+            android:cursorVisible="false"
             android:fontFamily="@font/reso"
             android:textSize="18sp"
             android:background="#fff"
