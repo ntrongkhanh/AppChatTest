@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import androidx.fragment.app.FragmentActivity;
 import com.example.appchattest.Model.Chat;
 import com.example.appchattest.Model.ChatRoom;
 import com.example.appchattest.Model.Contacts;
@@ -76,6 +77,7 @@ public class ChatAdapter extends BaseAdapter {
 //        databaseReference=FirebaseDatabase.getInstance().getReference().child( "chats" ).child( FirebaseAuth.getInstance().getUid() ).child( uidFriend );
 
     }
+
     @Override
     public int getCount()
     {

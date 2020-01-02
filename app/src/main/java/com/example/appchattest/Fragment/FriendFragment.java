@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.Adapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -14,7 +13,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-
 import com.example.appchattest.Adapter.ListFriendsAdapter;
 import com.example.appchattest.FindFriendsActivity;
 import com.example.appchattest.FriendRequestActivity;
@@ -37,15 +35,15 @@ public class FriendFragment extends Fragment implements ValueEventListener {
     private ImageView imageViewFindFriend;
     private TextView textView;
     private DatabaseReference databaseReference;
-    private ArrayList<User> listFriends = new ArrayList<>();
+    private ArrayList<User> listFriends=new ArrayList<>(  );
 
 
-    private ArrayList<String> listUidFriend = new ArrayList<>();
+    private ArrayList<String> listUidFriend=new ArrayList<>(  );
     private FirebaseUser user;
 
 
     public FriendFragment(ArrayList<String> listuidFriends) {
-        this.listUidFriend = listuidFriends;
+        this.listUidFriend=listuidFriends;
     }
 
     public FriendFragment() {
@@ -58,7 +56,7 @@ public class FriendFragment extends Fragment implements ValueEventListener {
 
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.fragment_friend, container, false);
+        View rootView=inflater.inflate( R.layout.fragment_friend, container, false );
         addControls(rootView);
 
         imageViewFindFriend.setOnClickListener(new View.OnClickListener() {
@@ -78,7 +76,7 @@ public class FriendFragment extends Fragment implements ValueEventListener {
         });
         databaseReference = FirebaseDatabase.getInstance().getReference();
         // Vấn đề nan giải
-        databaseReference.addValueEventListener(this);
+        databaseReference.addValueEventListener( this);
 
         listFriendsAdapter = new ListFriendsAdapter(getActivity(), listFriends);
 
@@ -86,6 +84,7 @@ public class FriendFragment extends Fragment implements ValueEventListener {
 
         return rootView;
     }
+
 
 
     private void addControls(View view) {
@@ -100,11 +99,12 @@ public class FriendFragment extends Fragment implements ValueEventListener {
         int x = 0;
         listFriends.clear();
         listUidFriend.clear();
-        Iterable<DataSnapshot> nodechild = dataSnapshot.child("friends").child(user.getUid()).getChildren();
-        for (DataSnapshot data : nodechild) {
+        Iterable<DataSnapshot> nodechild=dataSnapshot.child( "friends" ).child( user.getUid() ).getChildren();
+        for (DataSnapshot data:nodechild)
+        {
 
-            String uid = data.getKey();
-            listUidFriend.add(uid);
+            String uid=data.getKey();
+            listUidFriend.add( uid );
 
         }
         Iterable<DataSnapshot> nodechild1 = dataSnapshot.child("users").getChildren();
