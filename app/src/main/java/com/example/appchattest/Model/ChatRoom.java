@@ -10,17 +10,19 @@ public class ChatRoom {
     private String str_RoomName;
     private String str_Avatar;
     private String str_LastContent;
+
     private String str_State;
 
     public ChatRoom() {
 
     }
 
-    public ChatRoom(String uid, String str_RoomName, String str_Avatar, String str_LastContent, String str_State) {
+    public ChatRoom(String uid, String str_RoomName, String str_Avatar, String str_LastContent,String str_State) {
         this.uid = uid;
         this.str_RoomName = str_RoomName;
         this.str_Avatar = str_Avatar;
         this.str_LastContent = str_LastContent;
+
         this.str_State = str_State;
     }
 
@@ -55,6 +57,8 @@ public class ChatRoom {
     public void setStr_LastContent(String str_LastContent) {
         this.str_LastContent = str_LastContent;
     }
+
+
 
     public String getStr_State() {
         return str_State;
