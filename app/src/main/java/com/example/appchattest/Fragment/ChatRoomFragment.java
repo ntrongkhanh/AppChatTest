@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.example.appchattest.Adapter.ListChatRoomAdapter;
+
 import com.example.appchattest.Model.Chat;
 import com.example.appchattest.Model.ChatRoom;
 import com.example.appchattest.Model.User;
@@ -26,8 +27,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+
 import java.util.Collections;
 import java.util.List;
+
 
 
 public class ChatRoomFragment extends Fragment implements ValueEventListener {
@@ -121,8 +124,11 @@ public class ChatRoomFragment extends Fragment implements ValueEventListener {
         Iterable<DataSnapshot> nodechild = dataSnapshot.child( "chats" ).child( user.getUid() ).getChildren();
         for (DataSnapshot data : nodechild) {
             String uid = data.getKey();
+
             uids.add( uid );
             Log.d( "===================================", "LOGCAT" );
+            uids.add(uid);
+            Log.d("===================================", "CHAT ROOM DATACHANGE");
         }
 
         Iterable<DataSnapshot> nodechilduser = dataSnapshot.child( "users" ).getChildren();
@@ -132,11 +138,25 @@ public class ChatRoomFragment extends Fragment implements ValueEventListener {
                 if (str.equals( user_.getUid() )) {
                     ChatRoom chatRoom = new ChatRoom();
                     chatRoom.setUid( user_.getUid() );
-                    chatRoom.setStr_RoomName( user_.getName() );
-                    chatRoom.setStr_Avatar( user_.getAvatar() );
+
 
                     Log.d( "+++++++++++++++++++", "LOAG" );
                     chatRooms.add( chatRoom );
+                    chatRoom.setStr_RoomName(user_.getName());
+                    chatRoom.setStr_Avatar(user_.getAvatar());
+
+//                    Iterable<DataSnapshot> nodeFindLast = dataSnapshot.child( "chats" ).child(user.getUid()).child(user_.getUid())
+//                            .getChildren();
+//                    for(DataSnapshot datalast:nodeFindLast)
+//                    {
+//                        if (datalast.getKey().toString().equals("lastcontents"))
+//                        {
+//                            chatRoom.setLastContent(datalast.getValue().toString());
+//                            Log.d("=>=>=>=>=>=>=>=>=>=>=>=>", datalast.getKey().toString());
+//                        }
+//                        Log.d("||||||||||||||||||||", datalast.getKey().toString());
+//                    }
+                    chatRooms.add(chatRoom);
                 }
             }
         }
@@ -234,7 +254,7 @@ public class ChatRoomFragment extends Fragment implements ValueEventListener {
 
         // adapter.notifyDataSetChanged();
     }
-
+ 
     @Override
     public void onCancelled(@NonNull DatabaseError databaseError) {
 
