@@ -48,6 +48,7 @@ public class ChatRoom {
 
     public void setLastContent(String lastcontent) {
         str_LastContent = lastcontent;
+    }
 
     public String getUid() {
         return uid;

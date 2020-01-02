@@ -73,7 +73,7 @@ public class ChatRoomFragment extends Fragment implements ValueEventListener{
         {
             String uid = data.getKey();
             uids.add(uid);
-            Log.d("===================================", "LOGCAT");
+            Log.d("===================================", "CHAT ROOM DATACHANGE");
         }
 
         Iterable<DataSnapshot> nodechilduser = dataSnapshot.child( "users" ).getChildren();
@@ -87,17 +87,17 @@ public class ChatRoomFragment extends Fragment implements ValueEventListener{
                     chatRoom.setStr_RoomName(user_.getName());
                     chatRoom.setStr_Avatar(user_.getAvatar());
 
-                    Iterable<DataSnapshot> nodeFindLast = dataSnapshot.child( "chats" ).child(user.getUid()).child(user_.getUid())
-                            .getChildren();
-                    for(DataSnapshot datalast:nodeFindLast)
-                    {
-                        if (datalast.getKey().toString().equals("lastcontents"))
-                        {
-                            chatRoom.setLastContent(datalast.getValue().toString());
-                            Log.d("=>=>=>=>=>=>=>=>=>=>=>=>", datalast.getKey().toString());
-                        }
-                        Log.d("||||||||||||||||||||", datalast.getKey().toString());
-                    }             
+//                    Iterable<DataSnapshot> nodeFindLast = dataSnapshot.child( "chats" ).child(user.getUid()).child(user_.getUid())
+//                            .getChildren();
+//                    for(DataSnapshot datalast:nodeFindLast)
+//                    {
+//                        if (datalast.getKey().toString().equals("lastcontents"))
+//                        {
+//                            chatRoom.setLastContent(datalast.getValue().toString());
+//                            Log.d("=>=>=>=>=>=>=>=>=>=>=>=>", datalast.getKey().toString());
+//                        }
+//                        Log.d("||||||||||||||||||||", datalast.getKey().toString());
+//                    }
                     chatRooms.add(chatRoom);
                 }
             }
