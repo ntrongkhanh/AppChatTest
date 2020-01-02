@@ -63,49 +63,6 @@ public class ChatRoomFragment extends Fragment implements ValueEventListener {
         user = FirebaseAuth.getInstance().getCurrentUser();
         databaseReference.addValueEventListener( this );
 
-//        if (chatRooms.size() != 0) {
-//            listChat.clear();
-//            for (int i = 0; i < chatRooms.size(); i++) {
-//                Query lastQuery = databaseReference.child( "chats" ).child( FirebaseAuth.getInstance().getUid() ).child( chatRooms.get( i ).getUid() ).orderByKey().limitToLast( 1 );
-//                lastQuery.addListenerForSingleValueEvent( new ValueEventListener() {
-//                    @Override
-//                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                        for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
-//                            try {
-//                                Chat chat = dataSnapshot1.getValue( Chat.class );
-//                                listChat.add( chat );
-//
-//                            } catch (Exception e) {
-//
-//                            }
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//                    }
-//                } );
-//            }
-//            List<Chat> listChatTemp = null;
-//            listChatTemp.addAll( listChat );
-//            List<ChatRoom> listChatRoomTemp = null;
-//            listChatRoomTemp.addAll( chatRooms );
-//            ChatRoom chat=chatRooms.get( 0 );
-//            chatRooms.set( 0,chatRooms.get( 1 ) );
-//            chatRooms.set( 1,chat );
-//           // Collections.sort( listChat );
-////            for (int i = 0; i < chatRooms.size(); i++) {
-////                for (int j = 0; i < chatRooms.size(); i++) {
-////                    if (listChat.get( i ).getTime().equals( listChatTemp.get( i ).getTime() ) && listChat.get( i ).getContents().equals( listChatTemp.get( i ).getContents() )) {
-////                        chatRooms.set( i, listChatRoomTemp.get( j ) );
-////                    }
-////
-////
-////                }
-////            }
-//            adapter.notifyDataSetChanged();
-//        }
         adapter = new ListChatRoomAdapter( getActivity(), getActivity(), chatRooms );
 
 
@@ -125,8 +82,7 @@ public class ChatRoomFragment extends Fragment implements ValueEventListener {
         for (DataSnapshot data : nodechild) {
             String uid = data.getKey();
 
-            uids.add( uid );
-            Log.d( "===================================", "LOGCAT" );
+
             uids.add(uid);
             Log.d("===================================", "CHAT ROOM DATACHANGE");
         }
@@ -145,17 +101,6 @@ public class ChatRoomFragment extends Fragment implements ValueEventListener {
                     chatRoom.setStr_RoomName(user_.getName());
                     chatRoom.setStr_Avatar(user_.getAvatar());
 
-//                    Iterable<DataSnapshot> nodeFindLast = dataSnapshot.child( "chats" ).child(user.getUid()).child(user_.getUid())
-//                            .getChildren();
-//                    for(DataSnapshot datalast:nodeFindLast)
-//                    {
-//                        if (datalast.getKey().toString().equals("lastcontents"))
-//                        {
-//                            chatRoom.setLastContent(datalast.getValue().toString());
-//                            Log.d("=>=>=>=>=>=>=>=>=>=>=>=>", datalast.getKey().toString());
-//                        }
-//                        Log.d("||||||||||||||||||||", datalast.getKey().toString());
-//                    }
                     chatRooms.add(chatRoom);
                 }
             }
