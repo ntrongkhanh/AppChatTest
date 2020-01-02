@@ -4,13 +4,9 @@
     package="com.example.appchattest">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-
-
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
-
     <application
-
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -18,13 +14,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".ChangePassActivity"></activity>
+        <activity android:name=".FriendInfoActivity" />
         <activity android:name=".FriendRequestActivity" />
         <activity android:name=".ImageAvatarActivity" />
-        <activity android:name=".FindFriendsActivity"
-                  android:windowSoftInputMode="stateAlwaysHidden"/>
+        <activity
+            android:name=".FindFriendsActivity"
+            android:windowSoftInputMode="stateAlwaysHidden" />
         <activity android:name=".MainNavigationActivity" />
         <activity android:name=".SignUpActivity" />
-        <activity android:name=".ChatActivity"/>
+        <activity android:name=".ChatActivity" />
         <activity
             android:name=".SplashActivity"
             android:theme="@style/SplashTheme">
@@ -37,8 +36,6 @@
         <activity
             android:name=".LoginActivity"
             android:windowSoftInputMode="stateAlwaysHidden" />
-
-
     </application>
 
 </manifest>

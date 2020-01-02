@@ -24,4 +24,10 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="bt_message">Nhắn tin</string>
+    <string name="bt_unfriend">Hủy kết bạn</string>
+    <string name="change_password">Password</string>
+    <string name="change_new_password">New Password</string>
+    <string name="button_changePass">Đổi mật khẩu</string>
+    <string name="button_back_handle">Hủy</string>
 </resources>

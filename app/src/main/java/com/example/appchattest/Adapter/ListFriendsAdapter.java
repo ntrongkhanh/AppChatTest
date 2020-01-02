@@ -14,14 +14,17 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.appchattest.ChatActivity;
+import com.example.appchattest.FriendInfoActivity;
 import com.example.appchattest.Model.Contacts;
 import com.example.appchattest.Model.User;
 import com.example.appchattest.R;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,13 +36,15 @@ public class ListFriendsAdapter extends BaseAdapter {
     private DatabaseReference databaseReference;
     private ArrayList<Contacts> listContacts=new ArrayList<>();
 
+    private String idUnFriend = "";
+
+    public static final int MY_REQEST_CODE = 100;
+
     public ListFriendsAdapter(Context aContext, List<User> list)
     {
 
         this.context = aContext;
         this.listUser = list;
-
-
 
         layoutInflater  = LayoutInflater.from( context );
         databaseReference=FirebaseDatabase.getInstance().getReference();
@@ -104,10 +109,14 @@ public class ListFriendsAdapter extends BaseAdapter {
         holder.relativeLayout_bg.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent( context,ChatActivity.class );
+                Intent intent=new Intent( context, FriendInfoActivity.class );
 
-                intent.putExtra( "nameFriend",friend.name );
-                intent.putExtra( "uidFriend",friend.uid );
+                intent.putExtra("nameFriend",friend.name );
+                intent.putExtra("uidFriend",friend.uid );
+                intent.putExtra("emailFriend", friend.email);
+                intent.putExtra("sexFriend", friend.sex);
+                intent.putExtra("phoneFriend", friend.phone);
+                intent.putExtra("birthFriend", friend.birthday);
 //                 Bundle bundle=new Bundle(  );
 //
 //                bundle.putString( "nameFriend",friend.name );
@@ -115,10 +124,10 @@ public class ListFriendsAdapter extends BaseAdapter {
 //
 //                bundle.putString( "uidFriend",friend.uid );
                 //intent.putExtras( bundle );
-
-                context.startActivity( intent );
+                context.startActivity(intent);
             }
         } );
+
         return convertView;
     }
     //Tim ID cua anh avatar
@@ -141,10 +150,8 @@ public class ListFriendsAdapter extends BaseAdapter {
     }
     static class ViewHolder
     {
-
         ImageView avatarView;
         TextView roomNameView;
-
         RelativeLayout relativeLayout_bg;
     }
 

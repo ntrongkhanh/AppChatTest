@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorPrimaryDark">
 
-    <ScrollView android:id="@+id/scrollView_account_info"
+    <ScrollView android:id="@+id/scrollView_friend_info"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true"
@@ -15,27 +15,74 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/imageView_account_avatar1"
+                android:id="@+id/imageView_friend_avatar_info"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="25dp"
                 android:src="@drawable/avatar"
                 android:layout_marginBottom="25dp"
-
                 app:civ_border_width="2dp"
                 app:civ_border_color="@color/colorPrimaryLight"/>
-            <LinearLayout android:id="@+id/linearLayout_account_overView"
+
+            <LinearLayout
+                android:id="@+id/linearLayout_controller_friend"
+                android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/imageView_account_avatar1"
+                android:layout_below="@id/imageView_friend_avatar_info"
+                android:layout_marginStart="40dp"
+                android:layout_marginEnd="40dp"
+                android:layout_marginBottom="20dp"
+                android:gravity="center"
+                android:weightSum="9"
+                android:background="@color/colorPrimaryDark">
+                <Button
+                    android:id="@+id/bt_message"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:text="@string/bt_message"
+                    android:textColor="@color/colorPrimaryDarkText"
+                    android:fontFamily="@font/reso"
+                    android:background="@color/colorPrimaryLight">
+                </Button>
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:background="@color/colorPrimaryLight"
+                    android:layout_weight="3">
+                </Button>
+                <Button
+                    android:id="@+id/bt_unfriend"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:text= "@string/bt_unfriend"
+                    android:fontFamily="@font/reso"
+                    android:textColor="@color/colorPrimaryDarkText"
+                    android:background="@color/colorPrimaryLight"
+                    android:layout_weight="3">
+                </Button>
+
+            </LinearLayout>
+
+            <LinearLayout android:id="@+id/linearLayout_friend_overView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/linearLayout_controller_friend"
                 android:orientation="vertical"
                 android:background="@drawable/account_overview_background"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp">
 
                 <TextView android:layout_width="match_parent"
-                    android:id="@+id/textView_account_name"
+                    android:id="@+id/textView_friend_name"
                     android:layout_height="wrap_content"
                     android:paddingStart="10dp"
                     android:paddingEnd="10dp"
@@ -54,7 +101,7 @@
                     android:fontFamily="@font/reso"
                     android:paddingBottom="10dp"
                     android:gravity="center_horizontal"
-                    android:id="@+id/textView_account_email"/>
+                    android:id="@+id/textView_friend_email"/>
 
             </LinearLayout>
 
@@ -63,7 +110,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:layout_below="@id/linearLayout_account_overView">
+                android:layout_below="@id/linearLayout_friend_overView">
                 <TextView android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
@@ -74,7 +121,7 @@
                     android:textSize="20sp"
                     android:fontFamily="@font/reso"
                     android:background="@color/color30white"/>
-                <TextView android:id="@+id/textView_account_phone_number"
+                <TextView android:id="@+id/textView_friend_phone_number"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingStart="10dp"
@@ -95,12 +142,11 @@
                     android:textSize="20sp"
                     android:fontFamily="@font/reso"
                     android:background="@color/color30white"/>
-                <TextView android:id="@+id/textView_account_sex"
+                <TextView android:id="@+id/textView_friend_sex"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingStart="10dp"
                     android:paddingBottom="10dp"
-
                     android:textColor="@color/colorPrimaryLight"
                     android:textSize="20sp"
                     android:fontFamily="@font/reso"
@@ -116,45 +162,13 @@
                     android:textSize="20sp"
                     android:fontFamily="@font/reso"
                     android:background="@color/color30white"/>
-                <TextView android:id="@+id/textView_account_birthday"
+                <TextView android:id="@+id/textView_friend_birthday"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingStart="10dp"
                     android:paddingBottom="10dp"
 
                     android:textColor="@color/colorPrimaryLight"
-                    android:textSize="20sp"
-                    android:fontFamily="@font/reso"
-                    android:background="@color/color30white"/>
-
-                <Button
-                    android:id="@+id/button_changePassword"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:paddingStart="10dp"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp"
-                    android:text="@string/button_changePass"
-                    android:gravity="start|center_vertical"
-                    android:textAllCaps="false"
-                    android:textColor="@color/colorPrimaryDarkText"
-                    android:textSize="20sp"
-                    android:fontFamily="@font/reso"
-                    android:background="@color/color30white" />
-
-                <Button android:id="@+id/button_logout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp"
-                    android:paddingStart="10dp"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp"
-                    android:text="Đăng xuất"
-                    android:gravity="start|center_vertical"
-                    android:textAllCaps="false"
-                    android:textColor="@color/colorPrimaryDarkText"
                     android:textSize="20sp"
                     android:fontFamily="@font/reso"
                     android:background="@color/color30white"/>

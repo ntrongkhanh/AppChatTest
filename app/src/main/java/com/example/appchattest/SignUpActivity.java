@@ -289,16 +289,10 @@ public class SignUpActivity extends AppCompatActivity {
                     dialog.dismiss();
                    // Toast.makeText(getApplicationContext(),"Đăng kí thành công",Toast.LENGTH_LONG).show();
 
-
-
-
                     Intent intent=new Intent(SignUpActivity.this, LoginActivity.class);
                     startActivity(intent);
                     finish();
                  //   user=FirebaseAuth.getInstance().getCurrentUser();
-
-
-
 
                 }else {
                     dialog.dismiss();
@@ -341,7 +335,6 @@ public class SignUpActivity extends AppCompatActivity {
 
     private boolean validateForm() {
         if (!editTextHoten.getText().toString().trim().isEmpty()
-
                 && !editTextMatkhau.getText().toString().trim().isEmpty()
                 && !editTextMaukhau2.getText().toString().trim().isEmpty()
                 && !editTextSDT.getText().toString().trim().isEmpty()

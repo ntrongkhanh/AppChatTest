@@ -31,6 +31,7 @@ import androidx.loader.content.AsyncTaskLoader;
 
 import android.os.AsyncTask;
 
+import com.example.appchattest.ChangePassActivity;
 import com.example.appchattest.ImageAvatarActivity;
 import com.example.appchattest.LoginActivity;
 import com.example.appchattest.Model.User;
@@ -73,6 +74,7 @@ public class InfoFragment extends Fragment implements ValueEventListener {
     private TextView textViewNgaySinh;
     private TextView textViewGioiTinh;
     private Button buttonLogout;
+    private Button buttonChangePass;
 
     private FirebaseAuth firebaseAuth;
     private DatabaseReference mData;
@@ -149,7 +151,13 @@ public class InfoFragment extends Fragment implements ValueEventListener {
             public void onClick(View v) {
                 logout();
             }
-        } );
+        });
+        buttonChangePass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changePass();
+            }
+        });
     }
 
     private void addControls(View view) {
@@ -160,6 +168,7 @@ public class InfoFragment extends Fragment implements ValueEventListener {
         textViewNgaySinh=view.findViewById( R.id.textView_account_birthday  );
         textViewSDT=view.findViewById( R.id.textView_account_phone_number );
         buttonLogout=view.findViewById( R.id.button_logout );
+        buttonChangePass=view.findViewById(R.id.button_changePassword);
     }
 
 
@@ -324,7 +333,11 @@ public class InfoFragment extends Fragment implements ValueEventListener {
         FirebaseAuth.getInstance().signOut();
         Intent intent = new Intent( getActivity(), LoginActivity.class );
         startActivity(intent);
+    }
 
-
+    private void changePass()
+    {
+        Intent intent = new Intent(getActivity(), ChangePassActivity.class);
+        startActivity(intent);
     }
 }
