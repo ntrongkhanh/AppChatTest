@@ -14,7 +14,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ChangePassActivity"></activity>
+        <activity android:name=".ForgotPassActivity"></activity>
+        <activity android:name=".ChangePassActivity" />
         <activity android:name=".FriendInfoActivity" />
         <activity android:name=".FriendRequestActivity" />
         <activity android:name=".ImageAvatarActivity" />

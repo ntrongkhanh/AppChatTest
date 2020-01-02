@@ -31,6 +31,8 @@ public class LoginActivity extends AppCompatActivity implements ValueEventListen
     private EditText editTextLogin;
     private EditText editTextLoginPass;
     private TextView textViewCreateAcc;
+    private TextView textViewForgotPass;
+
     private FirebaseAuth firebaseAuth;
     private ArrayList<String> listMail=new ArrayList<>();
     private FirebaseDatabase database;
@@ -68,6 +70,14 @@ public class LoginActivity extends AppCompatActivity implements ValueEventListen
                 startActivity(intent);
             }
         } );
+
+        textViewForgotPass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, ForgotPassActivity.class);
+                startActivity(intent);
+            }
+        });
 
         buttonLogin.setOnClickListener( new View.OnClickListener() {
             @Override
@@ -154,6 +164,7 @@ public class LoginActivity extends AppCompatActivity implements ValueEventListen
         editTextLogin=findViewById( R.id.editText_Login );
         editTextLoginPass = findViewById(R.id.editText_Login_Pass);
         textViewCreateAcc=findViewById( R.id.textView_CreateAcc );
+        textViewForgotPass = findViewById(R.id.textView_forgot_pass);
         topIcon = findViewById(R.id.icon_major);
     }
 

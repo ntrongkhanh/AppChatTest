@@ -30,4 +30,8 @@
     <string name="change_new_password">New Password</string>
     <string name="button_changePass">Đổi mật khẩu</string>
     <string name="button_back_handle">Hủy</string>
+    <string name="textView_forgotPass">Nếu bạn quên mật khẩu thì nhấn vào dòng text này!</string>
+    <string name="button_ResetPass">Đặt lại mật khẩu</string>
+    <string name="textView_info_ResetPass">Mật khẩu sẽ được gửi đến email này:</string>
+    <string name="textView_Info_Location_Email">Nếu không tìm thấy email,\nvui lòng kiểm tra trong Spam hoặc Quảng cáo</string>
 </resources>
