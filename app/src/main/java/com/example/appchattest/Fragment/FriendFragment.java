@@ -76,7 +76,7 @@ public class FriendFragment extends Fragment implements ValueEventListener {
         // Vấn đề nan giải
         databaseReference.addValueEventListener( this);
 
-        adapter = new ListFriendsAdapter(getActivity(),listFriends );
+        adapter = new ListFriendsAdapter(getActivity(),getActivity(),listFriends );
         listView.setAdapter( adapter );
 
         return rootView;

@@ -92,6 +92,7 @@ public class ChatActivity extends AppCompatActivity {
     @Override
     public void onClick(View v) {
         finish();
+        overridePendingTransition( R.anim.slide_in_from_left, R.anim.slide_out_to_right );
     }
 } );
 
@@ -128,6 +129,13 @@ public class ChatActivity extends AppCompatActivity {
             }
         } );
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition( R.anim.slide_in_from_left, R.anim.slide_out_to_right );
+    }
+
     private void scrollMyListViewToBottom() {
         listView.post(new Runnable() {
             @Override

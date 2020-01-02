@@ -52,7 +52,8 @@ public class ChatRoomFragment extends Fragment implements ValueEventListener{
 
         databaseReference.addValueEventListener(this);
 
-        adapter = new ListChatRoomAdapter( getActivity(), chatRooms);
+        adapter = new ListChatRoomAdapter( getActivity(),getActivity(), chatRooms);
+
 
         //gắn adapter
         listView.setAdapter(adapter);
@@ -81,10 +82,10 @@ public class ChatRoomFragment extends Fragment implements ValueEventListener{
             User user_ = data.getValue(User.class);
             for(String str:uids) {
                 if (str.equals(user_.getUid())) {
-                    final ChatRoom chatRoom = new ChatRoom();
-                    chatRoom.setRoomName(user_.getName());
-                    chatRoom.setAvatar(user_.getAvatar());
-                    Log.d("+++++++++++++++++++", "LOAG");
+                    ChatRoom chatRoom = new ChatRoom();
+                    chatRoom.setUid( user_.getUid() );
+                    chatRoom.setStr_RoomName(user_.getName());
+                    chatRoom.setStr_Avatar(user_.getAvatar());
 
                     Iterable<DataSnapshot> nodeFindLast = dataSnapshot.child( "chats" ).child(user.getUid()).child(user_.getUid())
                             .getChildren();
@@ -96,20 +97,7 @@ public class ChatRoomFragment extends Fragment implements ValueEventListener{
                             Log.d("=>=>=>=>=>=>=>=>=>=>=>=>", datalast.getKey().toString());
                         }
                         Log.d("||||||||||||||||||||", datalast.getKey().toString());
-                    }
-//                    Query last = databaseReference.child("chats").child(user.getUid()).child(user_.getUid()).limitToLast(1);
-//                    last.addValueEventListener(new ValueEventListener() {
-//                        @Override
-//                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                            chatRoom.setLastContent(dataSnapshot.child("lastcontents").getValue().toString());
-//                            Log.d("||||||||||||||||||||", dataSnapshot.getValue().toString());
-//                        }
-//
-//                        @Override
-//                        public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//                        }
-//                    });
+                    }             
                     chatRooms.add(chatRoom);
                 }
             }
