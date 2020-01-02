@@ -22,29 +22,29 @@ public class ChatRoom {
         this.str_State = state;
     }
 
-    public String GetRoomName() {
+    public String getRoomName() {
         return str_RoomName;
     }
 
-    public String GetAvatar() {
+    public String getAvatar() {
         return str_Avatar;
     }
 
-    public String GetLastContent() {
+    public String getLastContent() {
         return str_LastContent;
     }
 
-    public String GetState() { return str_State; }
+    public String getState() { return str_State; }
 
-    public void SetRoomName(String name) {
+    public void setRoomName(String name) {
         str_RoomName = name;
     }
 
-    public void SetAvatar(String avatar) {
+    public void setAvatar(String avatar) {
         str_Avatar = avatar;
     }
 
-    public void SetLastContent(String lastcontent) {
+    public void setLastContent(String lastcontent) {
         str_LastContent = lastcontent;
     }
 }

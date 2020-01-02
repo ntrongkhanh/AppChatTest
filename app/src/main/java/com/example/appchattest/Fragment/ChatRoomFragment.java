@@ -2,19 +2,13 @@ package com.example.appchattest.Fragment;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.*;
 import android.widget.ListView;
-import android.widget.Toast;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.example.appchattest.Adapter.ChatAdapter;
 import com.example.appchattest.Adapter.ListChatRoomAdapter;
-import com.example.appchattest.MainNavigationActivity;
-import com.example.appchattest.Model.Chat;
 import com.example.appchattest.Model.ChatRoom;
 import com.example.appchattest.Model.User;
 import com.example.appchattest.R;
@@ -22,10 +16,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.*;
 
-import java.io.Console;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
 
 
 public class ChatRoomFragment extends Fragment implements ValueEventListener{
@@ -90,17 +81,59 @@ public class ChatRoomFragment extends Fragment implements ValueEventListener{
             User user_ = data.getValue(User.class);
             for(String str:uids) {
                 if (str.equals(user_.getUid())) {
-                    ChatRoom chatRoom = new ChatRoom();
-                    chatRoom.SetRoomName(user_.getName());
-                    chatRoom.SetAvatar(user_.getAvatar());
+                    final ChatRoom chatRoom = new ChatRoom();
+                    chatRoom.setRoomName(user_.getName());
+                    chatRoom.setAvatar(user_.getAvatar());
                     Log.d("+++++++++++++++++++", "LOAG");
+
+                    Iterable<DataSnapshot> nodeFindLast = dataSnapshot.child( "chats" ).child(user.getUid()).child(user_.getUid())
+                            .getChildren();
+                    for(DataSnapshot datalast:nodeFindLast)
+                    {
+                        if (datalast.getKey().toString().equals("lastcontents"))
+                        {
+                            chatRoom.setLastContent(datalast.getValue().toString());
+                            Log.d("=>=>=>=>=>=>=>=>=>=>=>=>", datalast.getKey().toString());
+                        }
+                        Log.d("||||||||||||||||||||", datalast.getKey().toString());
+                    }
+//                    Query last = databaseReference.child("chats").child(user.getUid()).child(user_.getUid()).limitToLast(1);
+//                    last.addValueEventListener(new ValueEventListener() {
+//                        @Override
+//                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                            chatRoom.setLastContent(dataSnapshot.child("lastcontents").getValue().toString());
+//                            Log.d("||||||||||||||||||||", dataSnapshot.getValue().toString());
+//                        }
+//
+//                        @Override
+//                        public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//                        }
+//                    });
                     chatRooms.add(chatRoom);
                 }
             }
         }
         adapter.notifyDataSetChanged();
     }
+    public String getLastContent(String uid)
+    {
+        final String[] strLast = new String[1];
+        Query last = databaseReference.child("chats").child(user.getUid()).child(uid).limitToLast(1);
+        last.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                strLast[0] = dataSnapshot.child("lastcontents").getValue().toString();
+                Log.d("||||||||||||||||||||", dataSnapshot.getValue().toString());
+            }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        return strLast[0];
+    }
     @Override
     public void onCancelled(@NonNull DatabaseError databaseError) {
 

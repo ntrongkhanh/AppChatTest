@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import androidx.fragment.app.FragmentActivity;
 import com.example.appchattest.Model.ChatRoom;
 import com.example.appchattest.R;
 import com.google.firebase.database.DatabaseReference;
@@ -68,8 +67,9 @@ public class ListChatRoomAdapter extends BaseAdapter{
         }
 
         final ChatRoom chatRoom = this.listChatRooms.get(i);
-        holder.textView_roomName.setText(chatRoom.GetRoomName());
-        final byte[] imgage= Base64.decode( chatRoom.GetAvatar(),Base64.DEFAULT );
+        holder.textView_roomName.setText(chatRoom.getRoomName());
+        holder.textView_lastContent.setText(chatRoom.getLastContent());
+        final byte[] imgage= Base64.decode( chatRoom.getAvatar(),Base64.DEFAULT );
         final Bitmap bitmap1= BitmapFactory.decodeByteArray( imgage,0,imgage.length );
         holder.imageView_avatar.setImageBitmap( bitmap1 );
 
