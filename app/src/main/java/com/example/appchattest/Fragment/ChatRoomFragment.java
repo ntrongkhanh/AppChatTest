@@ -94,10 +94,6 @@ public class ChatRoomFragment extends Fragment implements ValueEventListener {
                 if (str.equals( user_.getUid() )) {
                     ChatRoom chatRoom = new ChatRoom();
                     chatRoom.setUid( user_.getUid() );
-
-
-                    Log.d( "+++++++++++++++++++", "LOAG" );
-                    chatRooms.add( chatRoom );
                     chatRoom.setStr_RoomName(user_.getName());
                     chatRoom.setStr_Avatar(user_.getAvatar());
 
