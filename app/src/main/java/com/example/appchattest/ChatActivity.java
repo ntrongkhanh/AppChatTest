@@ -92,6 +92,7 @@ public class ChatActivity extends AppCompatActivity {
     @Override
     public void onClick(View v) {
         finish();
+        overridePendingTransition( R.anim.slide_in_from_left, R.anim.slide_out_to_right );
     }
 } );
 
@@ -121,13 +122,20 @@ public class ChatActivity extends AppCompatActivity {
                 Map<String, Object> childUpdates1 = new HashMap<>();
 
                 childUpdates1.put("/chats/" + uidFriend+"/"+uidUser+"/"+key1, postValues1);
-                childUpdates.put( "/chats/"+uidFriend+"/"+uidUser+"/lastcontents/",editTextContent.getText().toString() );
+                childUpdates1.put( "/chats/"+uidFriend+"/"+uidUser+"/lastcontents/",editTextContent.getText().toString() );
                 databaseReference.updateChildren( childUpdates1 );
                 editTextContent.setText( "" );
 
             }
         } );
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition( R.anim.slide_in_from_left, R.anim.slide_out_to_right );
+    }
+
     private void scrollMyListViewToBottom() {
         listView.post(new Runnable() {
             @Override

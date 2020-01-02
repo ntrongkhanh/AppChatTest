@@ -61,7 +61,8 @@ public class ChatRoomFragment extends Fragment implements ValueEventListener{
 
         databaseReference.addValueEventListener(this);
 
-        adapter = new ListChatRoomAdapter( getActivity(), chatRooms);
+        adapter = new ListChatRoomAdapter( getActivity(),getActivity(), chatRooms);
+
 
         //gắn adapter
         listView.setAdapter(adapter);
@@ -91,8 +92,9 @@ public class ChatRoomFragment extends Fragment implements ValueEventListener{
             for(String str:uids) {
                 if (str.equals(user_.getUid())) {
                     ChatRoom chatRoom = new ChatRoom();
-                    chatRoom.SetRoomName(user_.getName());
-                    chatRoom.SetAvatar(user_.getAvatar());
+                    chatRoom.setUid( user_.getUid() );
+                    chatRoom.setStr_RoomName(user_.getName());
+                    chatRoom.setStr_Avatar(user_.getAvatar());
                     Log.d("+++++++++++++++++++", "LOAG");
                     chatRooms.add(chatRoom);
                 }

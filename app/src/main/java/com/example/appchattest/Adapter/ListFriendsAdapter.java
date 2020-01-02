@@ -1,5 +1,6 @@
 package com.example.appchattest.Adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -30,37 +31,34 @@ public class ListFriendsAdapter extends BaseAdapter {
 
     private LayoutInflater layoutInflater;
     private Context context;
+    private Activity activity;
     private DatabaseReference databaseReference;
-    private ArrayList<Contacts> listContacts=new ArrayList<>();
+    private ArrayList<Contacts> listContacts = new ArrayList<>();
 
-    public ListFriendsAdapter(Context aContext, List<User> list)
-    {
+    public ListFriendsAdapter(Context aContext, Activity activity, List<User> list) {
 
         this.context = aContext;
         this.listUser = list;
+        this.activity = activity;
 
 
-
-        layoutInflater  = LayoutInflater.from( context );
-        databaseReference=FirebaseDatabase.getInstance().getReference();
+        layoutInflater = LayoutInflater.from( context );
+        databaseReference = FirebaseDatabase.getInstance().getReference();
     }
 
 
     @Override
-    public int getCount()
-    {
+    public int getCount() {
         return listUser.size();
     }
 
     @Override
-    public Object getItem(int position)
-    {
-        return listUser.get(position);
+    public Object getItem(int position) {
+        return listUser.get( position );
     }
 
     @Override
-    public long getItemId(int position)
-    {
+    public long getItemId(int position) {
         return position;
     }
 
@@ -69,21 +67,19 @@ public class ListFriendsAdapter extends BaseAdapter {
         final ViewHolder holder; //su dung holder de giu lay view trong convertView
         if (convertView == null) //neu convertView = null thi tao moi view va view holder
         {
-            convertView = layoutInflater.inflate( R.layout.item_friend_layout, null);//lay layout tu xml sang convertView
+            convertView = layoutInflater.inflate( R.layout.item_friend_layout, null );//lay layout tu xml sang convertView
             holder = new ViewHolder();
-            holder.avatarView = (ImageView) convertView.findViewById(R.id.imageView_avatar_friend);
-            holder.roomNameView = (TextView) convertView.findViewById(R.id.textView_friendName);
-            holder.relativeLayout_bg = (RelativeLayout) convertView.findViewById(R.id.relativeLayout_listItem_friend);
-            convertView.setTag(holder);// set convert view la holder
-        }
-        else
-        {
+            holder.avatarView = (ImageView) convertView.findViewById( R.id.imageView_avatar_friend );
+            holder.roomNameView = (TextView) convertView.findViewById( R.id.textView_friendName );
+            holder.relativeLayout_bg = (RelativeLayout) convertView.findViewById( R.id.relativeLayout_listItem_friend );
+            convertView.setTag( holder );// set convert view la holder
+        } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        final User friend = this.listUser.get(position);//lay phan tu trong mang
+        final User friend = this.listUser.get( position );//lay phan tu trong mang
 
 
-        holder.roomNameView.setText(friend.getName());
+        holder.roomNameView.setText( friend.getName() );
 //        StorageReference flieRef=FirebaseStorage.getInstance().getReference().child("avatar/"+friend.uid+"/avatar.png");
 //        long megabyte=1024*1024;
 //        flieRef.getBytes( megabyte ).addOnSuccessListener( new OnSuccessListener<byte[]>() {
@@ -98,16 +94,16 @@ public class ListFriendsAdapter extends BaseAdapter {
 //
 //            }
 //        } );
-        final byte[] imgage= Base64.decode( friend.avatar,Base64.DEFAULT );
-        final Bitmap bitmap1= BitmapFactory.decodeByteArray( imgage,0,imgage.length );
+        final byte[] imgage = Base64.decode( friend.avatar, Base64.DEFAULT );
+        final Bitmap bitmap1 = BitmapFactory.decodeByteArray( imgage, 0, imgage.length );
         holder.avatarView.setImageBitmap( bitmap1 );
         holder.relativeLayout_bg.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent( context,ChatActivity.class );
+                Intent intent = new Intent( context, ChatActivity.class );
 
-                intent.putExtra( "nameFriend",friend.name );
-                intent.putExtra( "uidFriend",friend.uid );
+                intent.putExtra( "nameFriend", friend.name );
+                intent.putExtra( "uidFriend", friend.uid );
 //                 Bundle bundle=new Bundle(  );
 //
 //                bundle.putString( "nameFriend",friend.name );
@@ -117,30 +113,31 @@ public class ListFriendsAdapter extends BaseAdapter {
                 //intent.putExtras( bundle );
 
                 context.startActivity( intent );
+                activity.overridePendingTransition( R.anim.slide_in_from_right, R.anim.slide_out_to_left );
             }
         } );
         return convertView;
     }
+
     //Tim ID cua anh avatar
     public int getResIdByName(String resName)//can chinh sua de phu hop voi database
     {
         String pkgName = context.getPackageName();
 
         //khong tim thay
-        int resID = context.getResources().getIdentifier(resName, "drawable", pkgName);
-        Log.i("Custom List View ", "Res Name:" + resName + "ResID = " + resID);
+        int resID = context.getResources().getIdentifier( resName, "drawable", pkgName );
+        Log.i( "Custom List View ", "Res Name:" + resName + "ResID = " + resID );
         return resID;
     }
 
-    public Drawable getResDrawable(String resName)
-    {
+    public Drawable getResDrawable(String resName) {
         String pkgName = context.getPackageName();
 
-        final int resourceId = context.getResources().getIdentifier(resName, "drawable", pkgName);
-        return context.getResources().getDrawable(resourceId, null);
+        final int resourceId = context.getResources().getIdentifier( resName, "drawable", pkgName );
+        return context.getResources().getDrawable( resourceId, null );
     }
-    static class ViewHolder
-    {
+
+    static class ViewHolder {
 
         ImageView avatarView;
         TextView roomNameView;
