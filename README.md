@@ -19,7 +19,7 @@ Mã số sinh viên | Họ tên
 - Rèn luyện tinh thần chịu áp lực.
 ### Xây dựng bởi ###
 - [FireBase](https://firebase.google.com/) cung cấp khả năng lưu trữ dữ liệu đám mây do Google cung cấp.
-- [IntelliJ IDEA](https://www.jetbrains.com/idea/) IDE cung cấp môi trường lập trường lập trình, được phát triển bởi JetBrains.
+- [IntelliJ IDEA](https://www.jetbrains.com/idea/) IDE cung cấp môi trường lập trình, được phát triển bởi JetBrains.
 - Android API tối thiểu 23 (Android 6.0)
 ### Trạng thái của ứng dụng ###
 - Ứng dụng đã đáp ứng được nhu cầu trò chuyện giữa hai tài khoản.
