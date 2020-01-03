@@ -61,4 +61,4 @@ Mã số sinh viên | Họ tên
 </p>
 
 ### Lời cảm ơn ###
-Nhóm chúng em xin cảm ơn thầy **Huỳnh Tuấn Anh** đã tạo điều kiện cho chúng em thực hiện ứng dụng này.
+Nhóm chúng em xin cảm ơn thầy **Huỳnh Tuấn Anh** đã tạo điều kiện cho chúng em thực hiện ứng dụng này. Chúng em xin cảm ơn!
