@@ -33,11 +33,11 @@
 </p>
 
 <p align="center">
-<img src="http://bit.ly/2tnn448"/>
+<img src="http://bit.ly/2FgeIy8"/>
 <p align="center" ><i> Tìm kiếm bạn bè </i></p>
 </p>
 
 <p align="center">
-<img src="http://bit.ly/2FgeIy8"/>
-<p align="center" ><i> Tìm kiếm bạn bè </i></p>
+<img width="720" src="http://bit.ly/2FemMz4"/>
+<p align="center" ><i> Các cuộc trò chuyện </i></p>
 </p>
