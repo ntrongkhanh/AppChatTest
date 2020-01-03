@@ -34,7 +34,7 @@
 
 <p align="center">
 <img src="http://bit.ly/2tnn448"/>
-<p align="center" ><i> Hiển thị bạn bè </i></p>
+<p align="center" ><i> Tìm kiếm bạn bè </i></p>
 </p>
 
 <p align="center">
