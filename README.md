@@ -31,22 +31,22 @@ Mã số sinh viên | Họ tên
 - **Ứng dụng đang gặp vấn đề lớn về hiệu suất.**
 ### Một số màn hình hiển thị trong ứng dụng ###
 <p align="center">
-<img src="https://lh3.googleusercontent.com/UOSQ0vta_Cn5THLnd-3X544wZpvkHhZodBeKnfF1aFZUqzy3ChJyKK55HQ54y4z0U__eeKgqK0j44zjF-qwbkLrdDLd9FYnS2P8fuNstZIevAWHg81GY8jF_sfU9WME0RKqYvadjjd9Y2XSVxqxLJjxVwrWEOrOheSBAzttGkaIlJncte1fXCxrj2ruA2xw-n948kczkZ8ix8mJRoovL3ZpgPsXZeDFLMUaPdP8ub0VwJ6ENPnbmX2XH4zQTHDRtAxpJlouk8-aM1BLyWaPf4zcVzjEW4FyOZJDJ7NjNhFWOAY_PTAmFhdHWsp-q9uzfZjaG2DepH4ODJOvb1Qy6QW0c_SPZDW5McxxbH-9heQfiO7ETVEiBI5MXCX40ql3mJEJC3NvWUltSvn9IhF5NjHvKvGIixUccTe_biYwoXL9pijfRc6AVTspeG8nWuzealoF60lgKJlgkYst6iX6zdU-ZzrKMoWTL8hUndjjLbGmfpKE1nRZeBmsJPwTVAOllz6fwCtOM-6eSdBkw_h7I1y5UtAZaizwdE4sxtzc2Pi2hOdyJfbd2EyWb45FMoLVINSZCimTj_wjB6frHhuonM3jXE932RL8Qd9YwdabhE0hZpQ6b7Kb9wcI2SI9iTUwyMo4tsy7fC3UvTyqpqki_t-zZQm8F6JnuvJDeH_toDszfrni_YDHiCQ=w304-h608-no?raw=true"/>
+<img width="304" src="https://scontent.fsgn1-1.fna.fbcdn.net/v/t1.15752-9/82029184_737336846757221_2089827075010592768_n.jpg?_nc_cat=106&_nc_ohc=n2SQssMiZZYAQmgcbHrlgu86BLmNjuTkGZOw22V-YpVBnU2igJk3_zZ1w&_nc_ht=scontent.fsgn1-1.fna&oh=5cc4f76d60b63ac284258cfde0dda9a7&oe=5EA45ECE"/>
 <p align="center" ><i> Màn hình đăng nhập sữ dụng email đăng kí tài khoản để đăng nhập. </i></p>
 </p>
 
 <p align="center">
-<img src="http://bit.ly/2MQigvc"/>
+<img width="304" src="https://scontent.fsgn1-1.fna.fbcdn.net/v/t1.15752-9/81636361_501510470479619_7427150403667492864_n.jpg?_nc_cat=100&_nc_ohc=JL0T87K-RfAAQn48NbdD1FtJhuRA1tMhkLVZ-GiNcvWjbDnKhCFWauAcA&_nc_ht=scontent.fsgn1-1.fna&oh=f7fd418e94a621a731013f51b022443d&oe=5EACA00D"/>
 <p align="center" ><i> Màn hình đăng kí tài khoản ứng dụng </i></p>
 </p>
 
 <p align="center">
-<img src="http://bit.ly/35kWupJ"/>
+<img width="304" src="https://scontent.fsgn1-1.fna.fbcdn.net/v/t1.15752-9/81749638_502696350364159_1897012837608325120_n.jpg?_nc_cat=107&_nc_ohc=guEY9teW_woAQmjgwQT9lsFHcV3__SmWpuGv3pwLKXRvjT4xG8i0oAjdg&_nc_ht=scontent.fsgn1-1.fna&oh=1348d6089325cf6c3c98cd1966b84e60&oe=5E986331"/>
 <p align="center" ><i> Thông tin tài khoản của người dùng </i></p>
 </p>
 
 <p align="center">
-<img src="http://bit.ly/2FgeIy8"/>
+<img width="304" src="https://scontent.fsgn1-1.fna.fbcdn.net/v/t1.15752-9/81176257_1214922128703901_3792734522148126720_n.jpg?_nc_cat=103&_nc_ohc=a4hocXnWIJ8AQkbR3EGa4cVjFAOtrk5ZoVBCwYdvZswZE46lyy8PLUwXA&_nc_ht=scontent.fsgn1-1.fna&oh=0e8840bcf12cbc7ebebade53fd7c7fba&oe=5E9807BF"/>
 <p align="center" ><i> Tìm kiếm bạn bè </i></p>
 </p>
 
