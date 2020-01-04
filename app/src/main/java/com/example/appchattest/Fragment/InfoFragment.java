@@ -82,7 +82,8 @@ public class InfoFragment extends Fragment implements ValueEventListener {
     private int PICK_IMAGE_REQUEST = 1;
     private static final int CAMERA_REQUEST = 1888;
     private String imagePath;
-
+    String filename;
+    Uri imageUri;
     public InfoFragment(User currentUser) {
         this.userInfo=currentUser;
     }
@@ -114,6 +115,8 @@ public class InfoFragment extends Fragment implements ValueEventListener {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         mData=  FirebaseDatabase.getInstance().getReference().child( "users" ).child( user.getUid() );
         mData.addValueEventListener( this );
+
+
         imageViewAvatar.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -194,9 +197,9 @@ public class InfoFragment extends Fragment implements ValueEventListener {
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult( requestCode, resultCode, data );
-
+        Uri uriImage = data.getData();
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == getActivity().RESULT_OK && data != null && data.getData() != null) {
-            Uri uriImage = data.getData();
+
             try {
                 final Bitmap photo = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), uriImage);
                 // Log.d(TAG, String.valueOf(bitmap));
@@ -207,8 +210,11 @@ public class InfoFragment extends Fragment implements ValueEventListener {
         }else
         if (requestCode == CAMERA_REQUEST && resultCode == getActivity().RESULT_OK )
         {
+
+
              Bitmap photo = (Bitmap) data.getExtras().get("data");
                     imageViewAvatar.setImageBitmap( photo );
+          // imageViewAvatar.setImageURI( uriImage );
        }
         uploadAvatar();
     }
@@ -278,6 +284,8 @@ public class InfoFragment extends Fragment implements ValueEventListener {
         if (takePictureIntent.resolveActivity(getActivity().getPackageManager()) != null) {
             startActivityForResult(takePictureIntent, CAMERA_REQUEST);
         }
+
+// start default camera
 
 
 

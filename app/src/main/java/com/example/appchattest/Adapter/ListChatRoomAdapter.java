@@ -101,12 +101,20 @@ public class ListChatRoomAdapter extends BaseAdapter {
                 for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
                     try {
                         Chat chat = dataSnapshot1.getValue( Chat.class );
-                        holder.textView_lastContent.setText( chat.getContents() );
-                        if (chat.isSender()) {
-                            holder.textView_name.setText( "Bạn:" );
-                        } else holder.textView_name.setText( chatRoom.getStr_RoomName() + ":" );
+                        if (chat.isImage()==true)
+                        {
+                            if (chat.isSender())
+                            holder.textView_name.setText( "Ban:" );
+                            else holder.textView_name.setText( chatRoom.getStr_RoomName()+ ":");
 
+                            holder.textView_lastContent.setText( "[Hình ảnh]" );
+                        }else {
 
+                            if (chat.isSender()) {
+                                holder.textView_name.setText( "Bạn:" );
+                            } else holder.textView_name.setText( chatRoom.getStr_RoomName() + ":" );
+                            holder.textView_lastContent.setText( chat.getContents() );
+                        }
 
                         Date c = Calendar.getInstance().getTime();
                         SimpleDateFormat df = new SimpleDateFormat( "dd-MM-yyyy HH:mm:s" );

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeLayout_chat_image_receiver"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/textView_time_chat_image_receiver"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="Thời gian"
+        android:fontFamily="@font/reso"
+        android:layout_centerHorizontal="true"/>
+
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="50dp"
+        android:layout_below="@id/textView_time_chat_image_receiver">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/imageView_avatar_chat_image_receiver"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="5dp"
+            android:src="@drawable/avatar"
+            app:civ_border_width="1dp"
+            app:civ_border_color="#7f000000"/>
+       <ImageView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:id="@+id/imageView_chat_receiver"
+           android:src="@drawable/avatar"
+           android:layout_toRightOf="@id/imageView_avatar_chat_image_receiver"
+           android:paddingLeft="10dp"
+
+           />
+    </RelativeLayout>
+</RelativeLayout>
