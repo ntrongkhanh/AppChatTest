@@ -74,8 +74,8 @@ private  ChatAdapter adapter;
         textViewNameFriend.setText( nameFriend );
         editTextContent.setText( "" );
         databaseReference = FirebaseDatabase.getInstance().getReference();
-        adapter=new ChatAdapter( getApplicationContext(), listChat, uidFriend, avatarFriend );
-        listView.setAdapter( adapter );
+        //adapter=new ChatAdapter( getApplicationContext(), listChat, uidFriend, avatarFriend );
+
 
 
 
@@ -127,7 +127,7 @@ private  ChatAdapter adapter;
 
                 }
                 if (!uidFriend.equals( "" ) && avatarFriend != null)
-                    adapter.notifyDataSetChanged();
+                    listView.setAdapter( new ChatAdapter( getApplicationContext(), listChat, uidFriend, avatarFriend ) );
                 scrollMyListViewToBottom();
             }
 
