@@ -37,6 +37,7 @@ import com.example.appchattest.LoginActivity;
 import com.example.appchattest.Model.User;
 import com.example.appchattest.R;
 import com.example.appchattest.SignUpActivity;
+import com.example.appchattest.UpdateProfileActivity;
 import com.google.android.gms.common.util.Clock;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -75,6 +76,7 @@ public class InfoFragment extends Fragment implements ValueEventListener {
     private TextView textViewGioiTinh;
     private Button buttonLogout;
     private Button buttonChangePass;
+    private Button buttonUpdateProfile;
 
     private FirebaseAuth firebaseAuth;
     private DatabaseReference mData;
@@ -162,6 +164,12 @@ public class InfoFragment extends Fragment implements ValueEventListener {
                 changePass();
             }
         });
+        buttonUpdateProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                UpdateProfileUser();
+            }
+        });
     }
 
     private void addControls(View view) {
@@ -173,6 +181,7 @@ public class InfoFragment extends Fragment implements ValueEventListener {
         textViewSDT=view.findViewById( R.id.textView_account_phone_number );
         buttonLogout=view.findViewById( R.id.button_logout );
         buttonChangePass=view.findViewById(R.id.button_changePassword);
+        buttonUpdateProfile=view.findViewById(R.id.button_changeProfile);
     }
 
 
@@ -347,6 +356,11 @@ public class InfoFragment extends Fragment implements ValueEventListener {
     private void changePass()
     {
         Intent intent = new Intent(getActivity(), ChangePassActivity.class);
+        startActivity(intent);
+    }
+    private void UpdateProfileUser()
+    {
+        Intent intent = new Intent(getContext(), UpdateProfileActivity.class);
         startActivity(intent);
     }
 }

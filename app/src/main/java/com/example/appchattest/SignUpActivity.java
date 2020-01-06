@@ -51,7 +51,6 @@ public class SignUpActivity extends AppCompatActivity {
     private DatePicker datePicker;
 
 
-
     private Uri uriImage;
     private boolean flagImage=false;
 
@@ -67,8 +66,6 @@ public class SignUpActivity extends AppCompatActivity {
         firebaseAuth=FirebaseAuth.getInstance();
         addControl();
 
-
-
         // chọn ảnh
         imageView.setOnClickListener( new View.OnClickListener() {
 
@@ -79,15 +76,11 @@ public class SignUpActivity extends AppCompatActivity {
             }
         } );
 
-
         buttonDangki.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-
-
                 if (validateForm()){
-
 
                         String pass1=editTextMatkhau.getText().toString().trim();
                         String pass2=editTextMaukhau2.getText().toString().trim( );
@@ -98,7 +91,7 @@ public class SignUpActivity extends AppCompatActivity {
                         //Toast.makeText( getApplicationContext(),calendar.getTime().toString(),Toast.LENGTH_LONG ).show();
                             calendar=Calendar.getInstance();
                             calendar.set( datePicker.getYear(),datePicker.getMonth(),datePicker.getDayOfMonth() );
-                            //calendar.set( 12,11,1999 );
+
                             String ten=editTextHoten.getText().toString().trim();
                             String gioitinh;
                             String email=editTextEmail.getText().toString().trim();
@@ -110,23 +103,15 @@ public class SignUpActivity extends AppCompatActivity {
                             //uploadFile( uriImage );
 
                             signUp(ten,gioitinh,calendar,pass1,email,sdt);
-
-
-
                         }
                         else {
                             Toast.makeText( getApplicationContext(),pass1
                                     +" "+pass2,Toast.LENGTH_LONG ).show();
-
                         }
-
-
                 }
                 else {
                     Toast.makeText( getApplicationContext(),"Vui lòng điền đầy đủ thông tin",Toast.LENGTH_LONG ).show();
                 }
-
-
             }
         } );
 
@@ -307,7 +292,9 @@ public class SignUpActivity extends AppCompatActivity {
     {
         FirebaseUser user=FirebaseAuth.getInstance().getCurrentUser();
         DatabaseReference mData= FirebaseDatabase.getInstance().getReference();
+
         String date=ngaysinh.get( Calendar.DATE)+"/"+(ngaysinh.get(Calendar.MONTH)+1)+"/"+ngaysinh.get(Calendar.YEAR);
+
         Bitmap bitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bitmap.compress( Bitmap.CompressFormat.JPEG , 100, baos);
@@ -318,8 +305,10 @@ public class SignUpActivity extends AppCompatActivity {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
+
         ten=vietHoa( ten );
         User user2=new User(user.getUid(),ten,email,gioitinh,date,sdt,avatar);
+
         mData.child("users").child( user.getUid()).setValue( user2).addOnSuccessListener( new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
