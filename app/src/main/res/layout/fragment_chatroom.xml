@@ -45,10 +45,10 @@
         android:src="@drawable/icon_search"/>
     <ProgressBar
         android:id="@+id/progress_fragment_chatroom"
-        android:layout_below="@id/editText_search_chat"
+        android:layout_centerInParent="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
+        android:indeterminateTint="#FFF"
         />
     <ListView
         android:id="@+id/listView_chatroom"
