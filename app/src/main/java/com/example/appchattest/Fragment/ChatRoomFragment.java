@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -40,7 +41,7 @@ public class ChatRoomFragment extends Fragment implements ValueEventListener {
     private ArrayList<ChatRoom> chatRooms = new ArrayList<>();
     ListChatRoomAdapter adapter;
     List<Chat> listChat;
-
+    private ProgressBar progressBar;
     //list name of friend have chat
     private ArrayList<String> uids = new ArrayList<>();
 
@@ -101,6 +102,7 @@ public class ChatRoomFragment extends Fragment implements ValueEventListener {
                 }
             }
         }
+        progressBar.setVisibility( View.INVISIBLE );
 
 //        List<Chat> listChatTemp = null;
 //        listChatTemp.addAll( listChat );
@@ -203,5 +205,6 @@ public class ChatRoomFragment extends Fragment implements ValueEventListener {
 
     public void addControls(View view) {
         listView = view.findViewById( R.id.listView_chatroom );
+        progressBar=view.findViewById( R.id.progress_fragment_chatroom  );
     }
 }
