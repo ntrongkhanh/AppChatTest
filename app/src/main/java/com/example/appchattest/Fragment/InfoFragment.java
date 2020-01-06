@@ -203,9 +203,9 @@ public class InfoFragment extends Fragment implements ValueEventListener {
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult( requestCode, resultCode, data );
-        Uri uriImage = data.getData();
-        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data.getData() != null && data!=null) {
 
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode ==getActivity().RESULT_OK && data != null && data.getData() != null) {
+            Uri uriImage = data.getData();
             try {
                 final Bitmap photo = MediaStore.Images.Media.getBitmap( getActivity().getContentResolver(), uriImage );
                 // Log.d(TAG, String.valueOf(bitmap));
@@ -245,47 +245,8 @@ public class InfoFragment extends Fragment implements ValueEventListener {
         databaseReference.child( userInfo.uid ).setValue( userInfo );
     }
 
-    //chọn ảnh
-//    String currentPhotoPath;
-//
-//    String imageFilePath;
-//    private File createImageFile() throws IOException {
-//        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-//        String imageFileName = "IMG_" + timeStamp + "_";
-//        File storageDir =getActivity().getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-//        File image = File.createTempFile(
-//                imageFileName,  /* prefix */
-//                ".jpg",         /* suffix */
-//                storageDir      /* directory */
-//        );
-//
-//        imageFilePath = image.getAbsolutePath();
-//        return image;
-//    }
-//
-//
-//    private void dispatchTakePictureIntent() {
-//        Intent pictureIntent = new Intent(
-//                MediaStore.ACTION_IMAGE_CAPTURE);
-//        if(pictureIntent.resolveActivity(getActivity().getPackageManager()) != null){
-//            //Create a file to store the image
-//            File photoFile = null;
-//            try {
-//                photoFile = createImageFile();
-//            } catch (IOException ex) {
-//                // Error occurred while creating the File
-//
-//            }
-//            if (photoFile != null) {
-//                Uri photoURI = FileProvider.getUriForFile(getActivity(),                                                                                                    "com.example.android.provider", photoFile);
-//                pictureIntent.putExtra(MediaStore.EXTRA_OUTPUT,
-//                        photoURI);
-//                startActivityForResult(pictureIntent,
-//                        CAMERA_REQUEST);
-//            }
-//        }
-//    }
-    private Uri imageToUploadUri;
+
+
 
     private void dispatchTakePictureIntent() {
         Intent takePictureIntent = new Intent( MediaStore.ACTION_IMAGE_CAPTURE );
@@ -293,35 +254,6 @@ public class InfoFragment extends Fragment implements ValueEventListener {
             startActivityForResult( takePictureIntent, CAMERA_REQUEST );
         }
 
-// start default camera
-
-
-//        Intent takePictureIntent = new Intent( MediaStore.ACTION_IMAGE_CAPTURE);
-//        if (takePictureIntent.resolveActivity(getActivity().getPackageManager()) != null) {
-//            startActivityForResult(takePictureIntent, CAMERA_REQUEST);
-//        }
-//        Date c = Calendar.getInstance().getTime();
-//        SimpleDateFormat df = new SimpleDateFormat("dd_MMM_yyyy_HH_mm_s");
-//        String formattedDate = df.format(c);
-//
-//        String fileName = "Food_Shot_" + formattedDate + ".jpeg";
-//        imagePath = Environment.getExternalStorageDirectory() + "/images/" + fileName;
-//
-//        File file = new File(imagePath);
-//        file.getParentFile().mkdirs();
-//
-//        try {
-//            file.createNewFile();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-
-//        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-//
-//        intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
-////        intent.putExtra(MediaStore.EXTRA_VIDEO_QUALITY, 1);
-//
-//        startActivityForResult(intent, CAMERA_REQUEST);
     }
 
     private void dispatchPickImage() {
