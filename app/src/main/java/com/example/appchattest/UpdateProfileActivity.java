@@ -88,7 +88,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
 
                 editText_ChangeHoten.setText(userInfo.name);
                 editTextSDT.setText(userInfo.phone);
-                editTextEmail.setText(userInfo.email);
+
                 sex_s = userInfo.sex;
                 if (sex_s.equals("Nam"))
                     radioButtonNam.toggle();
@@ -113,24 +113,23 @@ public class UpdateProfileActivity extends AppCompatActivity {
                     calendar.set(datePicker.getYear(), datePicker.getMonth(), datePicker.getDayOfMonth());
 
                     String name = editText_ChangeHoten.getText().toString().trim();
-                    String email = editTextEmail.getText().toString().trim();
                     String phone = editTextSDT.getText().toString().trim();
                     String sex_s;
                     if (radioButtonNam.isChecked())
                         sex_s = "Nam";
                     else sex_s = "Nữ";
 
-                    Update(name, sex_s, calendar, email, phone);
+                    Update(name, sex_s, calendar, phone);
                 }
             }
         });
     }
 
-    private void Update(final String name, final String sex, final Calendar birth, final String email, final String phone){
-        Write(name, email, sex, birth, phone);
+    private void Update(final String name, final String sex, final Calendar birth, final String phone){
+        Write(name, sex, birth, phone);
     }
 
-    private void Write(String name,String email,String sex,Calendar birth,String phone){
+    private void Write(String name,String sex,Calendar birth,String phone){
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         DatabaseReference mData= FirebaseDatabase.getInstance().getReference();
@@ -139,19 +138,14 @@ public class UpdateProfileActivity extends AppCompatActivity {
 
         name = UpperCase(name);
 
-        User user2 = new User(user.getUid(),name,email,sex,date,phone,userInfo.avatar);
+        mData.child("users").child(user.getUid()).child("birthday").setValue(date);
+        mData.child("users").child(user.getUid()).child("name").setValue(name);
+        mData.child("users").child(user.getUid()).child("phone").setValue(phone);
+        mData.child("users").child(user.getUid()).child("sex").setValue(sex);
+        mData.child("users").child(user.getUid()).child("avatar").setValue(userInfo.avatar);
 
-        mData.child("users").child( user.getUid()).setValue( user2).addOnSuccessListener( new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void aVoid) {
-                Toast.makeText(getApplicationContext(),"Đổi thông tin thành công",Toast.LENGTH_LONG).show();
-            }
-        } ).addOnFailureListener( new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(getApplicationContext(),"Đổi thông tin thất bại",Toast.LENGTH_LONG).show();
-            }
-        } );
+        Toast.makeText(getApplicationContext(), "Đổi thông tin thành công", Toast.LENGTH_SHORT).show();
+        finish();
     }
 
     private String UpperCase(String str)
@@ -190,7 +184,6 @@ public class UpdateProfileActivity extends AppCompatActivity {
     {
         button_ChangeProfile = findViewById(R.id.button_Update_Profile);
         editText_ChangeHoten = findViewById(R.id.editText_updateHoten);
-        editTextEmail = findViewById(R.id.editText_email_Update);
         editTextSDT = findViewById(R.id.editText_SDT_Update);
         radioButtonNam = findViewById(R.id.radioButton_nam_Update);
         radioButtonNu = findViewById(R.id.radioButton_nu_Update);
