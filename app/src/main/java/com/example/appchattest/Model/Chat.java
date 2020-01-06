@@ -9,15 +9,35 @@ import java.util.Map;
 public class Chat implements Comparable<Chat> {
     public String contents;
     public String time;
+    public boolean image;
+    public String contentsImage;
     public boolean sender;
 
     public Chat() {
     }
 
-    public Chat(String contents, String time, boolean sender) {
+    public Chat(String contents, String time, boolean image, String contentsImage, boolean sender) {
         this.contents = contents;
         this.time = time;
+        this.image = image;
+        this.contentsImage = contentsImage;
         this.sender = sender;
+    }
+
+    public boolean isImage() {
+        return image;
+    }
+
+    public void setImage(boolean image) {
+        this.image = image;
+    }
+
+    public String getContentsImage() {
+        return contentsImage;
+    }
+
+    public void setContentsImage(String contentsImage) {
+        this.contentsImage = contentsImage;
     }
 
     public String getContents() {
@@ -49,6 +69,8 @@ public class Chat implements Comparable<Chat> {
         result.put( "contents", contents );
         result.put( "time", time );
         result.put( "sender", sender );
+        result.put( "image",image );
+        result.put( "contentsImage",contentsImage );
         return result;
     }
 

@@ -3,17 +3,23 @@ package com.example.appchattest;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Base64;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.appchattest.Adapter.ChatAdapter;
@@ -26,6 +32,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -43,11 +52,13 @@ public class ChatActivity extends AppCompatActivity  {
     private TextView textViewNameFriend, textViewBack;
     private ListView listView;
     private EditText editTextContent;
-    private ImageView buttonSend;
+    private ImageButton buttonSend,buttonImage,buttonCamera;
     private ArrayList<Chat> listChat = new ArrayList<>();
     private float x1, x2, y1,y2;
     private DatabaseReference databaseReference;
-
+    private int PICK_IMAGE_REQUEST = 1;
+    private static final int CAMERA_REQUEST = 1888;
+private  ChatAdapter adapter;
 
 
     @Override
@@ -57,13 +68,36 @@ public class ChatActivity extends AppCompatActivity  {
         addControls();
 
         uidUser = FirebaseAuth.getInstance().getUid();
-        Intent intent = getIntent();
+        final Intent intent = getIntent();
         uidFriend = intent.getStringExtra( "uidFriend" );
         nameFriend = intent.getStringExtra( "nameFriend" );
         textViewNameFriend.setText( nameFriend );
         editTextContent.setText( "" );
         databaseReference = FirebaseDatabase.getInstance().getReference();
+        //adapter=new ChatAdapter( getApplicationContext(), listChat, uidFriend, avatarFriend );
+
+
+
+
+        listView.setOnItemClickListener( new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if (listChat.get( position ).isImage()==true)
+                {
+                    byte[] a= Base64.decode( listChat.get( position ).contentsImage,Base64.DEFAULT );
+
+
+
+                    Intent intent = new Intent(ChatActivity.this,ImageAvatarActivity.class);
+                    intent.putExtra( "image",a );
+                    startActivity(intent);
+
+                }
+            }
+        } );
         scrollMyListViewToBottom();
+
+
         databaseReference.child( "users" ).child( uidFriend ).addValueEventListener( new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -110,7 +144,21 @@ public class ChatActivity extends AppCompatActivity  {
                 overridePendingTransition( R.anim.slide_in_from_left, R.anim.slide_out_to_right );
             }
         } );
-
+        buttonImage.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dispatchPickImage();
+            }
+        } );
+        buttonCamera.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+                    startActivityForResult(takePictureIntent, CAMERA_REQUEST);
+                }
+            }
+        } );
         buttonSend.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -120,7 +168,7 @@ public class ChatActivity extends AppCompatActivity  {
                 Date c = Calendar.getInstance().getTime();
                 SimpleDateFormat df = new SimpleDateFormat( "dd-MM-yyyy HH:mm:s" );
                 String formattedDate = df.format( c );
-                Chat chat = new Chat( editTextContent.getText().toString(), formattedDate, true );
+                Chat chat = new Chat( editTextContent.getText().toString(), formattedDate,false,null, true );
                 Map<String, Object> postValues = chat.toMap();
                 Map<String, Object> childUpdates = new HashMap<>();
                 childUpdates.put( "/chats/" + uidUser + "/" + uidFriend + "/" + key, postValues );
@@ -131,7 +179,7 @@ public class ChatActivity extends AppCompatActivity  {
 
 
                 String key1 = databaseReference.child( "chats" ).child( uidFriend ).child( uidUser ).push().getKey();
-                Chat chat1 = new Chat( editTextContent.getText().toString(), formattedDate, false );
+                Chat chat1 = new  Chat( editTextContent.getText().toString(), formattedDate,false,null, false );
                 Map<String, Object> postValues1 = chat1.toMap();
                 Map<String, Object> childUpdates1 = new HashMap<>();
 
@@ -141,6 +189,7 @@ public class ChatActivity extends AppCompatActivity  {
 
             }
         } );
+
     }
 
     @Override
@@ -148,7 +197,12 @@ public class ChatActivity extends AppCompatActivity  {
         super.onBackPressed();
         overridePendingTransition( R.anim.slide_in_from_left, R.anim.slide_out_to_right );
     }
-
+    private  void dispatchPickImage()
+    {
+        Intent photoPickerIntent = new Intent( Intent.ACTION_PICK);
+        photoPickerIntent.setType("image/*");
+        startActivityForResult( photoPickerIntent,PICK_IMAGE_REQUEST );
+    }
 
     private void scrollMyListViewToBottom() {
         listView.post( new Runnable() {
@@ -160,12 +214,49 @@ public class ChatActivity extends AppCompatActivity  {
         } );
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult( requestCode, resultCode, data );
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == this.RESULT_OK && data != null && data.getData() != null) {
+            Uri uriImage = data.getData();
+            try {
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), uriImage);
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                bitmap.compress( Bitmap.CompressFormat.JPEG , 100, baos);
+                byte[] bbitmap = baos.toByteArray();
+                Intent intent=new Intent(this, SendImageActivity.class);
+
+                intent.putExtra( "image",bbitmap );
+                intent.putExtra( "uidUser",uidUser );
+                intent.putExtra( "uidFriend",uidFriend );
+                startActivity( intent );
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }else
+        if (requestCode == CAMERA_REQUEST && resultCode == this.RESULT_OK )
+        {
+            Bitmap photo = (Bitmap) data.getExtras().get("data");
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            photo.compress( Bitmap.CompressFormat.JPEG , 100, baos);
+            byte[] bbitmap = baos.toByteArray();
+            Intent intent=new Intent(this, SendImageActivity.class);
+
+            intent.putExtra( "image",bbitmap );
+            intent.putExtra( "uidUser",uidUser );
+            intent.putExtra( "uidFriend",uidFriend );
+            startActivity( intent );
+        }
+    }
+
     private void addControls() {
         editTextContent = findViewById( R.id.editText_content_chat );
         buttonSend = findViewById( R.id.button_send_chat );
         textViewBack = findViewById( R.id.imageView_back_chat );
         textViewNameFriend = findViewById( R.id.title_name_chat );
         listView = findViewById( R.id.listView_chat );
+        buttonImage=findViewById( R.id.button_image_chat );
+        buttonCamera=findViewById( R.id.button_camera_chat );
     }
 
 }

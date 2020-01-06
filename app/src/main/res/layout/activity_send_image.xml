@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout_send_image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/action_bar_background">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hủy"
+            android:textSize="20dp"
+            android:paddingLeft="10dp"
+            android:textColor="#fff"
+            android:id="@+id/textView_cancel_send_image"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Gửi"
+            android:textSize="20dp"
+            android:layout_alignParentEnd="true"
+            android:paddingRight="10dp"
+            android:textColor="#fff"
+            android:id="@+id/textView_send_image"/>
+    </RelativeLayout>
+    <ImageView
+        android:layout_below="@id/relativeLayout_send_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/image_send"/>
+
+</RelativeLayout>
