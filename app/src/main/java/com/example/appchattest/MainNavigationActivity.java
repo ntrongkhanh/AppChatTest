@@ -24,7 +24,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class MainNavigationActivity extends AppCompatActivity {
+public class MainNavigationActivity extends AppCompatActivity{
 
     private ChatRoomFragment chatRoomFragment;
     private InfoFragment infoFragment;
@@ -37,6 +37,7 @@ public class MainNavigationActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
+
         user_FireBase = FirebaseAuth.getInstance().getCurrentUser();
         setContentView( R.layout.navigation );
         bottomNavigationView=findViewById( R.id.Bottom_nagivition);
@@ -83,6 +84,21 @@ public class MainNavigationActivity extends AppCompatActivity {
                 Log.w("TAGGG", "Listener was cancelled");
             }
         });
+
+        final DatabaseReference authStatus = FirebaseDatabase.getInstance().getReference().child("users").child(user_FireBase.getUid());
+        authStatus.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                authStatus.child("status").onDisconnect().setValue("Offline");
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
         chatRoomFragment=new ChatRoomFragment();
         bottomNavigationView.setOnNavigationItemSelectedListener(navigationItemSelectedListener );
         getSupportFragmentManager().beginTransaction().replace(R.id.frament,chatRoomFragment).commit();

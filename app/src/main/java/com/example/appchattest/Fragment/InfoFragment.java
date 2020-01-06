@@ -112,7 +112,7 @@ public class InfoFragment extends Fragment implements ValueEventListener {
         super.onViewCreated( view, savedInstanceState );
         addControls(view);
         firebaseAuth = FirebaseAuth.getInstance();
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         mData=  FirebaseDatabase.getInstance().getReference().child( "users" ).child( user.getUid() );
         mData.addValueEventListener( this );
 
@@ -152,6 +152,7 @@ public class InfoFragment extends Fragment implements ValueEventListener {
         buttonLogout.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mData.child("status").setValue("Offline");
                 logout();
             }
         });
