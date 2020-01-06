@@ -104,7 +104,7 @@ public class ListChatRoomAdapter extends BaseAdapter {
                         if (chat.isImage()==true)
                         {
                             if (chat.isSender())
-                            holder.textView_name.setText( "Ban:" );
+                            holder.textView_name.setText( "Bạn:" );
                             else holder.textView_name.setText( chatRoom.getStr_RoomName()+ ":");
 
                             holder.textView_lastContent.setText( "[Hình ảnh]" );
