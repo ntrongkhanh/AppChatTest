@@ -143,6 +143,22 @@
                     android:fontFamily="@font/reso"
                     android:background="@color/color30white" />
 
+                <Button
+                    android:id="@+id/button_changeProfile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="1dp"
+                    android:paddingStart="10dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:text="Đổi thông tin"
+                    android:gravity="start|center_vertical"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorPrimaryDarkText"
+                    android:textSize="20sp"
+                    android:fontFamily="@font/reso"
+                    android:background="@color/color30white" />
+
                 <Button android:id="@+id/button_logout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
