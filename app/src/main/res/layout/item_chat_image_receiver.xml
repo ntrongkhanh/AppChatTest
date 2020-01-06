@@ -36,6 +36,7 @@
            android:layout_height="wrap_content"
            android:id="@+id/imageView_chat_receiver"
            android:src="@drawable/avatar"
+           android:layout_alignParentTop="true"
            android:layout_toRightOf="@id/imageView_avatar_chat_image_receiver"
            android:paddingLeft="10dp"
 

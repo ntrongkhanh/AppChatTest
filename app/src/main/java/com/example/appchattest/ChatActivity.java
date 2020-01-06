@@ -119,7 +119,7 @@ public class ChatActivity extends AppCompatActivity {
         scrollMyListViewToBottom();
 
 
-        databaseReference.child( "users" ).child( uidFriend ).addValueEventListener( new ValueEventListener() {
+        databaseReference.child( "users" ).child( uidFriend ).addListenerForSingleValueEvent( new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 friend = dataSnapshot.getValue( User.class );
