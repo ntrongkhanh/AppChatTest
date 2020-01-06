@@ -48,10 +48,16 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.io.ByteArrayOutputStream;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 public class ChatAdapter extends BaseAdapter {
     private Bitmap avatarFriend;
@@ -169,7 +175,27 @@ public class ChatAdapter extends BaseAdapter {
         }
         Chat chat = this.listChat.get(position);//lay phan tu trong mang
 
-        holder.time.setText(chat.getTime());
+        Date c = Calendar.getInstance().getTime();
+        SimpleDateFormat df = new SimpleDateFormat( "dd-MM-yyyy HH:mm:s" );
+        String formattedDate = df.format( c );
+        try {
+            if (sosanhDate( chat.getTime(),formattedDate )==1)
+            {
+                holder.time.setText(chat.getTime());
+
+            }
+            else {
+                DateFormat simpleDateFormat = new SimpleDateFormat( " HH:mm:s" );
+
+                holder.time.setText( chat.getTime().substring( chat.getTime().length()-8 ) );
+//               holder.time.setText( simpleDateFormat.format( chat.getTime() ) );
+
+            }
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
         if (listViewItemType==0 || listViewItemType==1){
             holder.content.setText( chat.getContents() );
         }
@@ -233,5 +259,20 @@ public class ChatAdapter extends BaseAdapter {
         TextView content;
         ImageView image;
     }
+    private int sosanhDate(String dateChat, String currDate) throws ParseException {
+        DateFormat simpleDateFormat = new SimpleDateFormat( "dd-MM-yyyy HH:mm:s" );
 
+        Date date1 = simpleDateFormat.parse( dateChat );
+        Date date2 = simpleDateFormat.parse( currDate );
+
+        long getDiff = date2.getTime() - date1.getTime();
+
+        long getDaysDiff = TimeUnit.MILLISECONDS.toDays( getDiff );
+        if (getDaysDiff == 0) {
+            return 0;
+
+        }
+
+        return 1;
+    }
 }

@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,7 +37,7 @@ public class FriendFragment extends Fragment implements ValueEventListener {
     private TextView textView;
     private DatabaseReference databaseReference;
     private ArrayList<User> listFriends=new ArrayList<>(  );
-
+    private ProgressBar progressBar;
 
     private ArrayList<String> listUidFriend=new ArrayList<>(  );
     private FirebaseUser user;
@@ -91,6 +92,7 @@ public class FriendFragment extends Fragment implements ValueEventListener {
         imageViewFindFriend = view.findViewById(R.id.imageView_addfriend);
         textView = view.findViewById(R.id.button_item_Loimoiketban);
         listView = view.findViewById(R.id.listView_friend);
+        progressBar=view.findViewById( R.id.progressBar_fragment_friend );
     }
 
     @Override
@@ -113,7 +115,9 @@ public class FriendFragment extends Fragment implements ValueEventListener {
                     listFriends.add(user);
                 }
             }
+
         }
+        progressBar.setVisibility( View.INVISIBLE );
         listFriendsAdapter.notifyDataSetChanged();
     }
 
