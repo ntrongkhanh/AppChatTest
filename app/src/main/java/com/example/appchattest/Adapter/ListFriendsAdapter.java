@@ -1,9 +1,11 @@
 package com.example.appchattest.Adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.util.Base64;
 import android.util.Log;
@@ -16,16 +18,17 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import com.example.appchattest.ChatActivity;
 import com.example.appchattest.FriendInfoActivity;
 import com.example.appchattest.Model.Contacts;
 import com.example.appchattest.Model.User;
 import com.example.appchattest.R;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.*;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class ListFriendsAdapter extends BaseAdapter {
@@ -76,12 +79,12 @@ public class ListFriendsAdapter extends BaseAdapter {
             holder.avatarView = (ImageView) convertView.findViewById( R.id.imageView_avatar_friend );
             holder.roomNameView = (TextView) convertView.findViewById( R.id.textView_friendName );
             holder.relativeLayout_bg = (RelativeLayout) convertView.findViewById( R.id.relativeLayout_listItem_friend );
+            holder.status = (TextView) convertView.findViewById(R.id.textView_state_friend);
             convertView.setTag( holder );// set convert view la holder
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
         final User friend = this.listUser.get( position );//lay phan tu trong mang
-
 
         holder.roomNameView.setText( friend.getName() );
 //        StorageReference flieRef=FirebaseStorage.getInstance().getReference().child("avatar/"+friend.uid+"/avatar.png");
@@ -122,6 +125,35 @@ public class ListFriendsAdapter extends BaseAdapter {
                 context.startActivity(intent);
             }
         } );
+
+        final DatabaseReference hasStatus = FirebaseDatabase.getInstance().getReference().child("users").child(friend.uid);
+        hasStatus.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (!dataSnapshot.hasChild("status"))
+                {
+                    hasStatus.child("status").setValue("Offline");
+                }
+
+                holder.status.setText(dataSnapshot.child("status").getValue().toString());
+
+                if (holder.status.getText().toString().equals("Offline"))
+                {
+                    holder.status.setTextColor(Color.parseColor("#7fffffff"));
+                }
+                else if (holder.status.getText().toString().equals("Online"))
+                {
+                    holder.status.setTextColor(Color.parseColor("#9eff3d"));
+                }
+                Log.d("DEBUG sTATUS", dataSnapshot.child("status").getValue().toString());
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
         return convertView;
     }
     //Tim ID cua anh avatar
@@ -146,8 +178,7 @@ public class ListFriendsAdapter extends BaseAdapter {
 
         ImageView avatarView;
         TextView roomNameView;
-
         RelativeLayout relativeLayout_bg;
+        TextView status;
     }
-
 }
