@@ -1,5 +1,6 @@
 package com.example.appchattest;
 
+import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -31,10 +32,12 @@ public class MainNavigationActivity extends AppCompatActivity {
     private BottomNavigationView bottomNavigationView;
     private DatabaseReference databaseReference;
     private User currentUser;
+    private FirebaseUser user_FireBase;
     private  ArrayList<String> listFriends=new ArrayList<>(  );
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
+        user_FireBase = FirebaseAuth.getInstance().getCurrentUser();
         setContentView( R.layout.navigation );
         bottomNavigationView=findViewById( R.id.Bottom_nagivition);
         databaseReference= FirebaseDatabase.getInstance().getReference();
@@ -50,48 +53,6 @@ public class MainNavigationActivity extends AppCompatActivity {
                         break;
                     }
                 }
-
-
-
-//                Iterable<DataSnapshot> nodechild1=dataSnapshot.child( "friends" ).child( FirebaseAuth.getInstance().getUid() ).getChildren();
-//                for (DataSnapshot data1:nodechild1)
-//                {
-//                    listFriends.add( data1.getKey() );
-//                }
-
-
-     //           listFriends.clear();
-//                Iterable<DataSnapshot> nodechild1=dataSnapshot.child( "contacts" ).getChildren();
-//                for (DataSnapshot data: nodechild1)
-//                {
-//                    Contacts contact=data.getValue(Contacts.class);
-//                    if (contact.isStatus()==true)
-//                    {
-//                        if ((contact.userID.equals(currentUser.getUid())))
-//                        {
-//                            listContacts.add( contact.contactID );
-//                        }
-//                        else if (contact.contactID.equals( currentUser.getUid() ))
-//                        {
-//                            listContacts.add( contact.userID );
-//                        }
-//                    }
-//
-//                }
-//                Iterable<DataSnapshot> nodechild2=dataSnapshot.child( "users" ).getChildren();
-//                for (DataSnapshot data:nodechild2)
-//                {
-//                    User user=data.getValue(User.class);
-//
-//
-//                    for (String c: listContacts)
-//                    {
-//                        if (c.equals( user.getUid() ))
-//                        {
-//                            listFriends.add( user );
-//                        }
-//                    }
-//                }
             }
 
             @Override
@@ -100,6 +61,28 @@ public class MainNavigationActivity extends AppCompatActivity {
             }
         } );
 
+        DatabaseReference connectedRef = FirebaseDatabase.getInstance().getReference(".info/connected");
+        connectedRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                boolean connected = snapshot.getValue(Boolean.class);
+                if (connected) {
+                    Log.d("TAG", "connected");
+                    if (user_FireBase != null)
+                    {
+                        databaseReference.child("users").child(user_FireBase.getUid()).child("status").setValue("Online");
+                    }
+                } else {
+                    Log.d("TAG", "not connected");
+                    databaseReference.child("users").child(user_FireBase.getUid()).child("status").setValue("Offline");
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.w("TAGGG", "Listener was cancelled");
+            }
+        });
         chatRoomFragment=new ChatRoomFragment();
         bottomNavigationView.setOnNavigationItemSelectedListener(navigationItemSelectedListener );
         getSupportFragmentManager().beginTransaction().replace(R.id.frament,chatRoomFragment).commit();
