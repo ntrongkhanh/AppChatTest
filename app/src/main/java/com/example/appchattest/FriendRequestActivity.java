@@ -1,7 +1,10 @@
 package com.example.appchattest;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ListView;
+import android.widget.ProgressBar;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.appchattest.Adapter.FriendRequestAdapter;
@@ -19,11 +22,13 @@ public class FriendRequestActivity extends AppCompatActivity {
     private ArrayList<User> listUser=new ArrayList<>(  );
     private DatabaseReference databaseReference;
     private FirebaseUser user;
+    private ProgressBar progressBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_friend_request );
         listView=findViewById( R.id.listVewLoimoiketban );
+        progressBar=findViewById( R.id.progress_friend_request );
         databaseReference= FirebaseDatabase.getInstance().getReference();
         user= FirebaseAuth.getInstance().getCurrentUser();
 
@@ -51,6 +56,7 @@ public class FriendRequestActivity extends AppCompatActivity {
                             listUser.add( user );
                     }
                 }
+                progressBar.setVisibility( View.INVISIBLE );
                 listView.setAdapter(new FriendRequestAdapter(getApplicationContext(), listUser));
             }
 
