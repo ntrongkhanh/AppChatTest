@@ -27,6 +27,12 @@ import com.example.appchattest.ImageAvatarActivity;
 import com.example.appchattest.LoginActivity;
 import com.example.appchattest.Model.User;
 import com.example.appchattest.R;
+
+import com.example.appchattest.SignUpActivity;
+import com.example.appchattest.UpdateProfileActivity;
+import com.google.android.gms.common.util.Clock;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -54,6 +60,7 @@ public class InfoFragment extends Fragment implements ValueEventListener {
     private TextView textViewGioiTinh;
     private Button buttonLogout;
     private Button buttonChangePass;
+    private Button buttonUpdateProfile;
 
     private FirebaseAuth firebaseAuth;
     private DatabaseReference mData;
@@ -150,18 +157,27 @@ public class InfoFragment extends Fragment implements ValueEventListener {
             public void onClick(View v) {
                 changePass();
             }
-        } );
+
+        });
+        buttonUpdateProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                UpdateProfileUser();
+            }
+        });
     }
 
     private void addControls(View view) {
-        imageViewAvatar = view.findViewById( R.id.imageView_account_avatar1 );
-        textViewName = view.findViewById( R.id.textView_account_name );
-        textViewEmail = view.findViewById( R.id.textView_account_email );
-        textViewGioiTinh = view.findViewById( R.id.textView_account_sex );
-        textViewNgaySinh = view.findViewById( R.id.textView_account_birthday );
-        textViewSDT = view.findViewById( R.id.textView_account_phone_number );
-        buttonLogout = view.findViewById( R.id.button_logout );
-        buttonChangePass = view.findViewById( R.id.button_changePassword );
+        imageViewAvatar=view.findViewById( R.id.imageView_account_avatar1 );
+        textViewName=view.findViewById( R.id.textView_account_name );
+        textViewEmail=view.findViewById( R.id.textView_account_email );
+        textViewGioiTinh=view.findViewById( R.id.textView_account_sex ) ;
+        textViewNgaySinh=view.findViewById( R.id.textView_account_birthday  );
+        textViewSDT=view.findViewById( R.id.textView_account_phone_number );
+        buttonLogout=view.findViewById( R.id.button_logout );
+        buttonChangePass=view.findViewById(R.id.button_changePassword);
+        buttonUpdateProfile=view.findViewById(R.id.button_changeProfile);
+
     }
 
 
@@ -334,5 +350,10 @@ public class InfoFragment extends Fragment implements ValueEventListener {
     private void changePass() {
         Intent intent = new Intent( getActivity(), ChangePassActivity.class );
         startActivity( intent );
+    }
+    private void UpdateProfileUser()
+    {
+        Intent intent = new Intent(getContext(), UpdateProfileActivity.class);
+        startActivity(intent);
     }
 }

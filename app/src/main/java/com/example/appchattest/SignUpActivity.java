@@ -62,7 +62,6 @@ public class SignUpActivity extends AppCompatActivity {
     private DatePicker datePicker;
     private Dialog dialog;
 
-
     private Uri uriImage;
     private boolean flagImage = false;
 
@@ -77,6 +76,7 @@ public class SignUpActivity extends AppCompatActivity {
         firebaseStorage = FirebaseStorage.getInstance().getReference();
         firebaseAuth = FirebaseAuth.getInstance();
         addControl();
+
 
 
         // chọn ảnh
@@ -128,50 +128,42 @@ public class SignUpActivity extends AppCompatActivity {
             }
         } );
 
-
         buttonDangki.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+                if (validateForm()){
 
-                if (validateForm()) {
+                        String pass1=editTextMatkhau.getText().toString().trim();
+                        String pass2=editTextMaukhau2.getText().toString().trim( );
 
-
-                    String pass1 = editTextMatkhau.getText().toString().trim();
-                    String pass2 = editTextMaukhau2.getText().toString().trim();
-
-                    if (checkPassword( pass1, pass2 )) {
+                        if (checkPassword(pass1,pass2)){
 //                        calendar= Calendar.getInstance();
 //                        calendar.set(Integer.parseInt(editTextNam.getText().toString()),Integer.parseInt(editTextThang.getText().toString()),Integer.parseInt(editTextNgay.getText().toString()) );
                         //Toast.makeText( getApplicationContext(),calendar.getTime().toString(),Toast.LENGTH_LONG ).show();
-                        calendar = Calendar.getInstance();
-                        calendar.set( datePicker.getYear(), datePicker.getMonth(), datePicker.getDayOfMonth() );
-                        //calendar.set( 12,11,1999 );
-                        String ten = editTextHoten.getText().toString().trim();
-                        String gioitinh;
-                        String email = editTextEmail.getText().toString().trim();
-                        String sdt = editTextSDT.getText().toString().trim();
-                        if (radioButtonNam.isChecked())
-                            gioitinh = "Nam";
-                        else gioitinh = "Nữ";
-                        //Toast.makeText( getApplicationContext(),"đăng kí",Toast.LENGTH_LONG ).show();
-                        //uploadFile( uriImage );
+                            calendar=Calendar.getInstance();
+                            calendar.set( datePicker.getYear(),datePicker.getMonth(),datePicker.getDayOfMonth() );
 
-                        signUp( ten, gioitinh, calendar, pass1, email, sdt );
+                            String ten=editTextHoten.getText().toString().trim();
+                            String gioitinh;
+                            String email=editTextEmail.getText().toString().trim();
+                            String sdt=editTextSDT.getText().toString().trim();
+                            if (radioButtonNam.isChecked())
+                               gioitinh="Nam";
+                            else gioitinh="Nữ";
+                            //Toast.makeText( getApplicationContext(),"đăng kí",Toast.LENGTH_LONG ).show();
+                            //uploadFile( uriImage );
 
-
-                    } else {
-                        Toast.makeText( getApplicationContext(), pass1
-                                + " " + pass2, Toast.LENGTH_LONG ).show();
-
-                    }
-
-
-                } else {
-                    Toast.makeText( getApplicationContext(), "Vui lòng điền đầy đủ thông tin", Toast.LENGTH_LONG ).show();
+                            signUp(ten,gioitinh,calendar,pass1,email,sdt);
+                        }
+                        else {
+                            Toast.makeText( getApplicationContext(),pass1
+                                    +" "+pass2,Toast.LENGTH_LONG ).show();
+                        }
                 }
-
-
+                else {
+                    Toast.makeText( getApplicationContext(),"Vui lòng điền đầy đủ thông tin",Toast.LENGTH_LONG ).show();
+                }
             }
         } );
 
@@ -342,10 +334,13 @@ public class SignUpActivity extends AppCompatActivity {
         firebaseAuth.signOut();
     }
 
-    private void writeUser(String ten, String email, String gioitinh, Calendar ngaysinh, String sdt) {
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        DatabaseReference mData = FirebaseDatabase.getInstance().getReference();
-        String date = ngaysinh.get( Calendar.DATE ) + "/" + (ngaysinh.get( Calendar.MONTH ) + 1) + "/" + ngaysinh.get( Calendar.YEAR );
+    private void writeUser(String ten,String email,String gioitinh,Calendar ngaysinh,String sdt)
+    {
+        FirebaseUser user=FirebaseAuth.getInstance().getCurrentUser();
+        DatabaseReference mData= FirebaseDatabase.getInstance().getReference();
+
+        String date=ngaysinh.get( Calendar.DATE)+"/"+(ngaysinh.get(Calendar.MONTH)+1)+"/"+ngaysinh.get(Calendar.YEAR);
+
         Bitmap bitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bitmap.compress( Bitmap.CompressFormat.JPEG, 100, baos );
@@ -356,9 +351,11 @@ public class SignUpActivity extends AppCompatActivity {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-        ten = vietHoa( ten );
-        User user2 = new User( user.getUid(), ten, email, gioitinh, date, sdt, avatar );
-        mData.child( "users" ).child( user.getUid() ).setValue( user2 ).addOnSuccessListener( new OnSuccessListener<Void>() {
+
+        ten=vietHoa( ten );
+        User user2=new User(user.getUid(),ten,email,gioitinh,date,sdt,avatar);
+
+        mData.child("users").child( user.getUid()).setValue( user2).addOnSuccessListener( new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
                 Toast.makeText( getApplicationContext(), "Đăng kí thành công...........", Toast.LENGTH_LONG ).show();

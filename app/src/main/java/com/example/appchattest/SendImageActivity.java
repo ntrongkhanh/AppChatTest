@@ -48,22 +48,11 @@ public class SendImageActivity extends AppCompatActivity {
         Bitmap bmp = BitmapFactory.decodeByteArray(imageInByte, 0, imageInByte.length);
         imageView.setImageBitmap(bmp);
 
-
-
-
-
-
-
-
-
         try {
             sImage = new String( Base64.encode(imageInByte,Base64.DEFAULT), "UTF-8");
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-
-
-
 
         databaseReference= FirebaseDatabase.getInstance().getReference();
         textViewCancel.setOnClickListener( new View.OnClickListener() {
@@ -75,8 +64,6 @@ public class SendImageActivity extends AppCompatActivity {
         textViewSend.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
                 try {
                     sImage = new String( Base64.encode(imageInByte,Base64.DEFAULT), "UTF-8");
                 }  catch (UnsupportedEncodingException e) {

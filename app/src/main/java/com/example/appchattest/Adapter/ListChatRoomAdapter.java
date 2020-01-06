@@ -126,8 +126,6 @@ public class ListChatRoomAdapter extends BaseAdapter {
 
                     }
                 }
-
-
                 //  holder.textView_lastContent.setText( x );
             }
 

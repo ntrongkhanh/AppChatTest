@@ -7,38 +7,39 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
-            android:name=".VNMe"
-            android:allowBackup="true"
-            android:icon="@mipmap/ic_launcher"
-            android:label="@string/app_name"
-            android:roundIcon="@mipmap/ic_launcher_round"
-            android:supportsRtl="true"
-            android:theme="@style/AppTheme"
-            tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".SendImageActivity"></activity>
-        <activity android:name=".ForgotPassActivity"/>
-        <activity android:name=".ChangePassActivity"/>
-        <activity android:name=".FriendInfoActivity"/>
-        <activity android:name=".FriendRequestActivity"/>
-        <activity android:name=".ImageAvatarActivity"/>
+        android:name=".VNMe"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".UpdateProfileActivity"/>
+        <activity android:name=".SendImageActivity" />
+        <activity android:name=".ForgotPassActivity" />
+        <activity android:name=".ChangePassActivity" />
+        <activity android:name=".FriendInfoActivity" />
+        <activity android:name=".FriendRequestActivity" />
+        <activity android:name=".ImageAvatarActivity" />
         <activity
-                android:name=".FindFriendsActivity"
-                android:windowSoftInputMode="stateAlwaysHidden"/>
-        <activity android:name=".MainNavigationActivity"/>
-        <activity android:name=".SignUpActivity"/>
-        <activity android:name=".ChatActivity"/>
+            android:name=".FindFriendsActivity"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity android:name=".MainNavigationActivity" />
+        <activity android:name=".SignUpActivity" />
+        <activity android:name=".ChatActivity" />
         <activity
-                android:name=".SplashActivity"
-                android:theme="@style/SplashTheme">
+            android:name=".SplashActivity"
+            android:theme="@style/SplashTheme">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-                android:name=".LoginActivity"
-                android:windowSoftInputMode="stateAlwaysHidden"/>
+            android:name=".LoginActivity"
+            android:windowSoftInputMode="stateAlwaysHidden" />
     </application>
 
 </manifest>

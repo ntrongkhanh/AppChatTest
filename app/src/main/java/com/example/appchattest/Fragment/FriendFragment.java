@@ -104,10 +104,8 @@ public class FriendFragment extends Fragment implements ValueEventListener {
         Iterable<DataSnapshot> nodechild=dataSnapshot.child( "friends" ).child( user.getUid() ).getChildren();
         for (DataSnapshot data:nodechild)
         {
-
             String uid=data.getKey();
             listUidFriend.add( uid );
-
         }
         Iterable<DataSnapshot> nodechild1 = dataSnapshot.child("users").getChildren();
         for (DataSnapshot data : nodechild1) {

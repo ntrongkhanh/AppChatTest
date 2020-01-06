@@ -34,4 +34,5 @@
     <string name="button_ResetPass">Đặt lại mật khẩu</string>
     <string name="textView_info_ResetPass">Mật khẩu sẽ được gửi đến email này:</string>
     <string name="textView_Info_Location_Email">Nếu không tìm thấy email,\nvui lòng kiểm tra trong Spam hoặc Quảng cáo</string>
+    <string name="changeProfileButton">Đổi thông tin</string>
 </resources>
