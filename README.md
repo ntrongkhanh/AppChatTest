@@ -1,4 +1,4 @@
-## Lập trình trên thiết bị di động - Ứng dụng chat trực tuyến VNMe ##
+## Nhập môn ứng dụng di động - Ứng dụng chat trực tuyến VNMe ##
 <p align="center">
 <img width="100" height="100" src="https://scontent.fsgn1-1.fna.fbcdn.net/v/t1.15752-9/81991762_2685382598245657_5862212862449025024_n.png?_nc_cat=108&_nc_ohc=8gwcqntA9e4AQnb-gBN5ZzJ_bnKti0vVlh9s4NGXO5hXGs5YVuwM55XlA&_nc_ht=scontent.fsgn1-1.fna&oh=9827a82e8a3f243b98c0f4bc987fc645&oe=5EAF57D1"/>
 
@@ -8,7 +8,7 @@ Nhóm thực hiện:
 
 Mã số sinh viên | Họ tên
 --------------- | ----------
-17520567 | Dương Nhật Huy
+17520627 | Nguyễn Trọng Khanh
 17520722 | Nguyễn Thành Luân
 17520720 | Nguyễn Song Luân
 
@@ -61,4 +61,4 @@ Mã số sinh viên | Họ tên
 </p>
 
 ### Lời cảm ơn ###
-Nhóm chúng em xin cảm ơn thầy **Huỳnh Tuấn Anh** đã tạo điều kiện cho chúng em thực hiện ứng dụng này. Chúng em xin cảm ơn!
+Nhóm chúng em xin cảm ơn cô **Phan Nguyệt Minh** điều kiện cho chúng em thực hiện ứng dụng này. Chúng em xin cảm ơn!
