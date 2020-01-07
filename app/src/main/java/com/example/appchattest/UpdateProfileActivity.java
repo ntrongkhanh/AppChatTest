@@ -38,7 +38,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
 
     private Button button_ChangeProfile;
     private EditText editText_ChangeHoten;
-    private EditText editTextEmail,editTextSDT;
+    private EditText editTextSDT;
     private RadioButton radioButtonNam,radioButtonNu;
     private ImageView imageViewAvatar;
     private Calendar calendar;
@@ -46,14 +46,8 @@ public class UpdateProfileActivity extends AppCompatActivity {
     private DatabaseReference mData;
     private StorageReference firebaseStorage;
     private FirebaseUser user;
-    private String uidUser;
 
-    private int PICK_IMAGE_REQUEST = 1;
-    private static final int CAMERA_REQUEST = 1888;
     private DatePicker datePicker;
-
-    private Uri uriImage;
-    private boolean flagImage=false;
 
     private User userInfo;
     @Override
@@ -151,7 +145,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
     private String UpperCase(String str)
     {
         String kq = "";
-        str = str.toLowerCase();//
+        str = str.toLowerCase();
         for (int i = 0; i < str.length(); i++)
         {
             if (i == 0)

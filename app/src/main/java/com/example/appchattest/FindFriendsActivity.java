@@ -79,7 +79,6 @@ public class FindFriendsActivity extends AppCompatActivity implements ValueEvent
                     User user=data.getValue(User.class);
                     if(textSearch != "")
                     {
-
                         if ((user.name.toUpperCase()).contains(textSearch.toUpperCase()) && !user.uid.equals(FirebaseAuth.getInstance().getUid()))
                         {
                             listUser.add( user );

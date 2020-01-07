@@ -148,7 +148,6 @@ public class FriendRequestAdapter extends BaseAdapter {
                                // contact.setStatus( true );
                           //      databaseReference.child( "contacts" ).child( key ).setValue( contact );
                                 databaseReference.child( "contacts" ).child( key ).removeValue();
-
                             }
                         }
 

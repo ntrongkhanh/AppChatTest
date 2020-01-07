@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.appchattest.Model.Contacts;
 import com.example.appchattest.Model.User;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
@@ -30,6 +31,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.io.ByteArrayOutputStream;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 
 public class FriendInfoActivity extends AppCompatActivity {
 
@@ -109,6 +111,7 @@ public class FriendInfoActivity extends AppCompatActivity {
             public void onClick(View v) {
                 mData.child("friends").child(uidUser).child(uidFriend).removeValue();
                 mData.child("friends").child(uidFriend).child(uidUser).removeValue();
+
                 finish();
             }
         });

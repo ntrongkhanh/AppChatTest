@@ -140,7 +140,8 @@ public class ListSearchFriendAdapter extends BaseAdapter{
         for (Contacts c:listContacts)
         {
 
-            if((c.userID.equals( chatRoom.getUid())&& c.contactID.equals( FirebaseAuth.getInstance().getUid() ))||(c.contactID.equals( chatRoom.getUid())&& c.userID.equals( FirebaseAuth.getInstance().getUid()))) {
+            if((c.userID.equals( chatRoom.getUid())&& c.contactID.equals( FirebaseAuth.getInstance().getUid() ))
+                    || (c.contactID.equals( chatRoom.getUid())&& c.userID.equals( FirebaseAuth.getInstance().getUid()))) {
                 holder.buttonKB.setEnabled( false );
                 if (c.status==false)
                     holder.buttonKB.setText( "Đã gửi lời mời kết bạn" );
