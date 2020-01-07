@@ -17,10 +17,12 @@
         android:elevation="3dp"/>
     <ProgressBar
         android:id="@+id/progress_friend_request"
-        android:layout_below="@+id/action_bar_request"
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
+       android:layout_centerInParent="true"
+
+        android:indeterminateTint="#FFF"
         />
     <ListView
         android:id="@+id/listVewLoimoiketban"
