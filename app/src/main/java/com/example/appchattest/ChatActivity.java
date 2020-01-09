@@ -243,7 +243,7 @@ public class ChatActivity extends AppCompatActivity {
             try {
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap( this.getContentResolver(), uriImage );
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                bitmap.compress( Bitmap.CompressFormat.JPEG, 100, baos );
+                bitmap.compress( Bitmap.CompressFormat.JPEG, 50, baos );
                 byte[] bbitmap = baos.toByteArray();
                 Intent intent = new Intent( this, SendImageActivity.class );
 

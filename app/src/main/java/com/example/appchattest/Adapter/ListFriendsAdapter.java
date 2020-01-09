@@ -130,11 +130,6 @@ public class ListFriendsAdapter extends BaseAdapter {
         hasStatus.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (!dataSnapshot.hasChild("status"))
-                {
-                    hasStatus.child("status").setValue("Offline");
-                }
-
                 holder.status.setText(dataSnapshot.child("status").getValue().toString());
 
                 if (holder.status.getText().toString().equals("Offline"))
