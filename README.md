@@ -6,11 +6,11 @@
 
 Nhóm thực hiện:
 
-Mã số sinh viên | Họ tên
---------------- | ----------
-17520627 | Nguyễn Trọng Khanh
-17520722 | Nguyễn Thành Luân
-17520720 | Nguyễn Song Luân
+Mã số sinh viên | Họ tên     | Email
+--------------- | ---------- | --------- 
+17520627 | Nguyễn Trọng Khanh |17520627@gm.uit.edu.vn
+17520722 | Nguyễn Thành Luân  |17520722@gm.uit.edu.vn
+17520720 | Nguyễn Song Luân   |17520720@gm.uit.edu.vn
 
 ### Động lực, ý tưởng ###
 - Do muốn thử sức bản thân.
