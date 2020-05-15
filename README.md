@@ -1,6 +1,6 @@
 ## Nhập môn ứng dụng di động - Ứng dụng chat trực tuyến VNMe ##
 <p align="center">
-<img width="100" height="100" src="https://photos.app.goo.gl/iFSS1Gwbx1aRfNms5"/>
+<img width="100" height="100" src="https://www.upsieutoc.com/image/QESPIK"/>
 
 Ứng dụng giúp cho người dùng trò chuyện, tán gẫu trực tuyến.
 
