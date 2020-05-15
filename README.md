@@ -61,4 +61,4 @@ Mã số sinh viên | Họ tên     | Email
 </p>
 
 ### Lời cảm ơn ###
-Nhóm chúng em xin cảm ơn cô **Phan Nguyệt Minh** điều kiện cho chúng em thực hiện ứng dụng này. Chúng em xin cảm ơn!
+Nhóm chúng em xin cảm ơn cô **Phan Nguyệt Minh** và thầy **Huỳnh Tuấn Anh** điều kiện cho chúng em thực hiện ứng dụng này. Chúng em xin cảm ơn!
