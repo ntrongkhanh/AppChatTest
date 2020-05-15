@@ -31,7 +31,7 @@ Mã số sinh viên | Họ tên     | Email
 - **Ứng dụng đang gặp vấn đề lớn về hiệu suất.**
 ### Một số màn hình hiển thị trong ứng dụng ###
 <p align="center">
-<img width="304" src="https://www.upsieutoc.com/images/2020/05/15/login.jpg"/>
+<img width="304" src="https://www.upsieutoc.com/images/2020/05/15/82029184_737336846757221_2089827075010592768_n.jpg"/>
 <p align="center" ><i> Màn hình đăng nhập sữ dụng email đăng kí tài khoản để đăng nhập. </i></p>
 </p>
 
